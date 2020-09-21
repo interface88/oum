@@ -1,0 +1,401 @@
+<style>
+body {
+ background-color: #ffffff;
+ background-image: url("<?php echo base_url('themes/unity/img/bg-body.jpg')?>");
+ background-position: left top;
+ background-size: auto;
+ background-repeat: repeat;
+ background-attachment: scroll;
+}
+
+    .fundpress-icon-with-square-service-v2 {
+  text-align: center;
+  margin-bottom: 50px; }
+  .fundpress-icon-with-square-service-v2 i {
+    font-size: 4.28571em;
+    color: #050C24;
+    display: inline-block;
+    margin-bottom: 40px;
+    position: relative; }
+    .fundpress-icon-with-square-service-v2 i:after {
+      position: absolute;
+      content: '\e93f';
+      font-family: "iconfont";
+      background-color: #1B70F0;
+      width: 38px;
+      height: 38px;
+      border-radius: 100%;
+      font-size: 0.21429em;
+      color: #FFFFFF;
+      line-height: 34px;
+      border: 3px solid #FFFFFF;
+      right: -16px;
+      bottom: -12px; }
+  .fundpress-icon-with-square-service-v2 h4 {
+    font-size: 1.57143em;
+    font-weight: 700;
+    color: #050C24;
+    margin-bottom: 20px; }
+  .fundpress-icon-with-square-service-v2 p {
+    margin-bottom: 0;
+    color: #615F5F;
+    line-height: 1.7; }
+
+.fundpress-cause-matters-v2.xs-section-padding {
+  padding-bottom: 70px; }
+
+.fundpress-grid-item-content-v2 {
+  background-color: #FFFFFF; }
+  .fundpress-grid-item-content-v2 .xs-item-header-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px; }
+  .fundpress-grid-item-content-v2 .fundpress-item-content p {
+    margin-bottom: 0;
+    color: #666666;
+    font-size: 0.85714em;
+    line-height: 2; }
+  .fundpress-grid-item-content-v2 .fundpress-post-title {
+    color: #050C24;
+    font-size: 1.85714em;
+    line-height: 1.3; }
+    .fundpress-grid-item-content-v2 .fundpress-post-title:hover {
+      color: #1B70F0; }
+  .fundpress-grid-item-content-v2 .xs-avatar-title a {
+    color: #999999; }
+  .fundpress-grid-item-content-v2 .xs-avatar-title span {
+    color: #050C24; }
+  .fundpress-grid-item-content-v2 .xs-separetor {
+    border-color: #EEEEEE;
+    margin-bottom: 16px;
+    margin-top: 30px; }
+  .fundpress-grid-item-content-v2 .fundpress-list-cat i,
+  .fundpress-grid-item-content-v2 .fundpress-list-cat a {
+    color: #666666;
+    font-size: 0.85714em;
+    line-height: 1; }
+  .fundpress-grid-item-content-v2 .fundpress-list-cat i {
+    font-size: 1em;
+    padding-right: 8px; }
+  .fundpress-grid-item-content-v2 .fundpress-list-cat span {
+    margin-right: 12px; }
+    .fundpress-grid-item-content-v2 .fundpress-list-cat span:last-child {
+      margin-right: 0; }
+  .fundpress-grid-item-content-v2 .border {
+    border-color: #EEEEEE !important; }
+  .fundpress-grid-item-content-v2:hover {
+    -webkit-box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); }
+   .fundpress-grid-item-content-v2 .fundpress-item-header{
+            overflow: hidden;
+   }         
+    .fundpress-grid-item-content-v2 .fundpress-item-header img {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.give-wrap .give-card:hover .fundpress-item-header > img {
+	-webkit-transform: scale(1.3);
+	transform: scale(1.3);
+}
+
+
+ .give-card__progress {
+    margin-top: 0;
+    width: 100%;
+    border-bottom: 1px solid #d7d7d7;
+}
+ .give-card__progress .raised {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}   
+
+.give-goal-progress .raised {
+    margin-bottom: 0;
+    display: flex;
+    text-align: center;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}
+
+.give-goal-progress .raised > div {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+.give-goal-progress .raised > div:not(:last-child) {
+    border-right: 1px solid #d7d7d7;
+}   
+.give-goal-progress .raised .label {
+    color: #b9b9b9;
+    line-height: 1.4;
+    display: block;
+    font-size: 14px;
+    font-size: .875rem;
+}
+.give-goal-progress .raised .value {
+    font-size: 18px;
+    font-size: 1.125rem;
+    line-height: 1.5;
+    color: #000;
+}   
+.give-goal-progress .percentage {
+    color: #000;
+    font-size: 30px;
+    font-size: 1.875rem;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.give-wrap .give-card:hover .opal-popup-wrapper>div,.give-wrap .give-card:focus .opal-popup-wrapper>div {
+    opacity: 1;
+    visibility: visible;
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    -ms-transition: all .2s ease 0s;
+    -o-transition: all .2s ease 0s;
+    -moz-transition: all .2s ease 0s;
+    -webkit-transition: all .2s ease 0s;
+    transition: all .2s ease 0s
+}
+
+.give-wrap .give-card:hover .opal-popup-wrapper>div:last-child,.give-wrap .give-card:focus .opal-popup-wrapper>div:last-child {
+    -ms-transition: all .3s ease .1s;
+    -o-transition: all .3s ease .1s;
+    -moz-transition: all .3s ease .1s;
+    -webkit-transition: all .3s ease .1s;
+    transition: all .3s ease .1s
+}
+ .give-wrap .give-card:hover .give-card__progress .raised,.give-wrap .give-card:focus .give-card__progress, .give-wrap .give-card:focus .give-card__progress .raised .percentage {
+    background-color: #2a2a2a;
+    color: #fff;
+}
+
+.give-wrap .give-card:hover .give-card__progress .raised .label,.give-wrap .give-card:hover .give-card__progress .raised .value,.give-wrap .give-card:focus .give-card__progress .raised .label,.give-wrap .give-card:focus .give-card__progress .raised .value {
+    color: #fff;
+}
+
+</style>
+<section id="hero" class="d-flex align-items-center">
+	<div class="container position-relative text-center text-lg-left"
+		data-aos="zoom-in" data-aos-delay="100">
+		<div class="row">
+			<div class="col-lg-8">
+				<h1>
+					Welcome to <span>OUM</span>
+				</h1>
+				<h2>Better world for Children!</h2>
+
+				<div class="btns">
+					<a href="#menu" class="btn-menu animated fadeInUp scrollto">camapign</a> <a href="#book-a-table"
+						class="btn-book animated fadeInUp scrollto">Donate</a>
+				</div>
+			</div>
+			<div
+				class="col-lg-4 d-flex align-items-center justify-content-center"
+				data-aos="zoom-in" data-aos-delay="200">
+				<a href="https://www.youtube.com/watch?v=GlrxcuEDyF8"
+					class="venobox play-btn" data-vbtype="video" data-autoplay="true"></a>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="container">
+
+<div class="row">
+	<div class="col-lg-4 give-wrap">
+		<div class="fundpress-grid-item-content-v2 give-card">
+			<div class="fundpress-item-header">
+				<img src="<?php echo base_url('themes/unity/img/campaign_1.jpg')?>"
+					class="img-thumbnail" />
+			</div>
+			<!-- .fundpress-item-header END -->
+
+			<div class="fundpress-item-content text-center">
+				<a href="#" class="d-block color-navy-blue fundpress-post-title">New American Riders </a>
+				<p>We the People nurtures the leaders of tomorrow by cultivating civic engagement and an appreciation for our diversity!	.</p>
+
+				<span class="xs-separetor"></span>
+				<div class="give-card__progress">
+					<div class="give-goal-progress">
+						<div class="raised">
+							<div class="income">
+								<span class="label">Current</span><span class="value">$4,090</span>
+							</div>
+							<div class="percentage">41%</div>
+							<div class="goal">
+								<span class="label">Target</span> <span class="value">$10,000</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- .fundpress-item-content END -->
+		</div>
+	</div>
+	<div class="col-lg-4 give-wrap">
+		<div class="fundpress-grid-item-content-v2 give-card">
+			<div class="fundpress-item-header">
+				<img src="<?php echo base_url('themes/unity/img/campaign_6.jpg')?>"
+					class="img-thumbnail" />
+			</div>
+			<!-- .fundpress-item-header END -->
+
+			<div class="fundpress-item-content text-center">
+				<a href="#" class="d-block color-navy-blue fundpress-post-title">Mountain Bikes</a>
+				<p>What adventures do you get yourself into everyday, but people
+					with disability gets into some pretty seriously.</p>
+
+				<span class="xs-separetor"></span>
+				<div class="give-card__progress">
+					<div class="give-goal-progress">
+						<div class="raised">
+							<div class="income">
+								<span class="label">Current</span><span class="value">$4,090</span>
+							</div>
+							<div class="percentage">41%</div>
+							<div class="goal">
+								<span class="label">Target</span> <span class="value">$10,000</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- .fundpress-item-content END -->
+		</div>
+	</div>
+	<div class="col-lg-4 give-wrap">
+		<div class="fundpress-grid-item-content-v2 give-card">
+			<div class="fundpress-item-header">
+				<img src="<?php echo base_url('themes/unity/img/campaign_2.jpg')?>"
+					class="img-thumbnail" />
+			</div>
+			<!-- .fundpress-item-header END -->
+
+			<div class="fundpress-item-content text-center">
+				<a href="#" class="d-block color-navy-blue fundpress-post-title">Minivan Build Match	</a>
+				<p>What adventures do you get yourself into everyday, but people
+					with disability gets into some pretty seriously.</p>
+
+				<span class="xs-separetor"></span>
+				<div class="give-card__progress">
+					<div class="give-goal-progress">
+						<div class="raised">
+							<div class="income">
+								<span class="label">Current</span><span class="value">$4,090</span>
+							</div>
+							<div class="percentage">41%</div>
+							<div class="goal">
+								<span class="label">Target</span> <span class="value">$10,000</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- .fundpress-item-content END -->
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-4 give-wrap">
+		<div class="fundpress-grid-item-content-v2 give-card">
+			<div class="fundpress-item-header">
+				<img src="<?php echo base_url('themes/unity/img/campaign_3.jpg')?>"
+					class="img-thumbnail" />
+			</div>
+			<!-- .fundpress-item-header END -->
+
+			<div class="fundpress-item-content text-center">
+				<a href="#" class="d-block color-navy-blue fundpress-post-title">The “Young Ones”</a>
+				<p>What adventures do you get yourself into everyday, but people
+					with disability gets into some pretty seriously.</p>
+
+				<span class="xs-separetor"></span>
+				<div class="give-card__progress">
+					<div class="give-goal-progress">
+						<div class="raised">
+							<div class="income">
+								<span class="label">Current</span><span class="value">$4,090</span>
+							</div>
+							<div class="percentage">41%</div>
+							<div class="goal">
+								<span class="label">Target</span> <span class="value">$10,000</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- .fundpress-item-content END -->
+		</div>
+	</div>
+	<div class="col-lg-4 give-wrap">
+		<div class="fundpress-grid-item-content-v2 give-card">
+			<div class="fundpress-item-header">
+				<img src="<?php echo base_url('themes/unity/img/campaign_4.jpg')?>"
+					class="img-thumbnail" />
+			</div>
+			<!-- .fundpress-item-header END -->
+
+			<div class="fundpress-item-content text-center">
+				<a href="#" class="d-block color-navy-blue fundpress-post-title">Rolling
+					framing toy</a>
+				<p>What adventures do you get yourself into everyday, but people
+					with disability gets into some pretty seriously.</p>
+
+				<span class="xs-separetor"></span>
+				<div class="give-card__progress">
+					<div class="give-goal-progress">
+						<div class="raised">
+							<div class="income">
+								<span class="label">Current</span><span class="value">$4,090</span>
+							</div>
+							<div class="percentage">41%</div>
+							<div class="goal">
+								<span class="label">Target</span> <span class="value">$10,000</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- .fundpress-item-content END -->
+		</div>
+	</div>
+	<div class="col-lg-4 give-wrap">
+		<div class="fundpress-grid-item-content-v2 give-card">
+			<div class="fundpress-item-header">
+				<img src="<?php echo base_url('themes/unity/img/campaign_5.jpg')?>"
+					class="img-thumbnail" />
+			</div>
+			<!-- .fundpress-item-header END -->
+
+			<div class="fundpress-item-content text-center">
+				<a href="#" class="d-block color-navy-blue fundpress-post-title">New American Riders</a>
+				<p>What adventures do you get yourself into everyday, but people
+					with disability gets into some pretty seriously.</p>
+
+				<span class="xs-separetor"></span>
+				<div class="give-card__progress">
+					<div class="give-goal-progress">
+						<div class="raised">
+							<div class="income">
+								<span class="label">Current</span><span class="value">$4,090</span>
+							</div>
+							<div class="percentage">41%</div>
+							<div class="goal">
+								<span class="label">Target</span> <span class="value">$10,000</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- .fundpress-item-content END -->
+		</div>
+	</div>
+</div>
+</div>
