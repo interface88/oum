@@ -38,11 +38,8 @@ class Campaign extends Front_Controller
         parent::__construct();
         $this->load->helper('form');
         $this->load->library('form_validation');
-
         $this->load->model('users/user_model');
-
         $this->load->library('users/auth');
-
         //  $this->lang->load('users');
         $this->siteSettings = $this->settings_lib->find_all();
         if ($this->siteSettings['auth.password_show_labels'] == 1) {
@@ -60,7 +57,20 @@ class Campaign extends Front_Controller
      *
      * @return void
      */
-    public function view()
+     public function new()
+     {
+        $this->form_validation->set_rules('title','Title','required|trim');
+        if($this->form_validation->run()===FALSE)
+        {
+            Template::set_view('campaign/new');        
+            Template::render();
+        }
+        else{
+                $_POST['title'];
+           }
+     } 
+   
+     public function view()
     {
         /*
         $this->auth->restrict($this->permissionEdit);

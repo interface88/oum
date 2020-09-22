@@ -1,8 +1,23 @@
-<?php
+<!--<?php
 	$site_open = $this->settings_lib->item('auth.allow_register');
 ?>
-<p><br/><a href="<?php echo site_url(); ?>">&larr; <?php echo lang('us_back_to') . $this->settings_lib->item('site.title'); ?></a></p>
+<p><br/><a href="<?php echo site_url(); ?>">&larr; <?php echo lang('us_back_to') . $this->settings_lib->item('site.title'); ?></a></p>-->
 
+<main id="main">
+<section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Login</h2>
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>Login</li>
+          </ol>
+        </div>
+
+      </div>
+    </section>
+<section class="inner-page">
 <div id="login">
 	<h2><?php echo lang('us_login'); ?></h2>
 
@@ -72,5 +87,6 @@
 
 		<br/><?php echo anchor('/forgot_password', lang('us_forgot_your_password')); ?>
 	</p>
-
 </div>
+</section>
+</main>
