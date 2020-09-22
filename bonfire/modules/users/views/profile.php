@@ -27,8 +27,22 @@ if (isset($user)) {
 if (empty($renderPayload) && isset($this->auth)) {
     $renderPayload = $this->auth->user();
 }
-
 ?>
+<main id="main">
+<section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Profile</h2>
+          <ol>
+            <li><a href="<?php echo base_url();?>">Login</a></li>
+            <li>Profile</li>
+          </ol>
+        </div>
+
+      </div>
+    </section>
+<section class="inner-page">
 <section id="profile">
     <h1 class="page-header"><?php echo lang('us_edit_profile'); ?></h1>
     <?php if (validation_errors()) : ?>
@@ -74,3 +88,5 @@ if (empty($renderPayload) && isset($this->auth)) {
         </div>
     </div>
 </section>
+</section>
+</main>

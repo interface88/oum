@@ -68,7 +68,7 @@ class CI_Profiler
         // Default all sections to display.
         foreach ($this->_available_sections as $section) {
             if (! isset($config[$section])) {
-                $this->_compile_{$section} = true;
+                $this->_compile_[$section] = true;
             }
         }
 
@@ -91,7 +91,7 @@ class CI_Profiler
     {
         foreach ($config as $method => $enable) {
             if (in_array($method, $this->_available_sections)) {
-                $this->_compile_{$method} = ($enable !== false);
+                $this->_compile_[$method] = ($enable !== false);
             }
         }
     }
@@ -455,7 +455,7 @@ class CI_Profiler
 
         // Run each _compile_* method and add the results to the $_sections array.
         foreach ($this->_available_sections as $section) {
-            if ($this->_compile_{$section} !== false) {
+            if ($this->_compile_[$section] !== false) {
                 $func = "_compile_{$section}";
                 if ($section == 'http_headers') {
                     $section = 'headers';
