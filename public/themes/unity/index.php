@@ -3,6 +3,7 @@
 Assets::add_css(array(
     'vendor/bootstrap/css/bootstrap.min.css',
     'vendor/icofont/icofont.min.css',
+    'vendor/boxicons/css/boxicons.min.css',
     'vendor/venobox/venobox.css',
     'vendor/aos/aos.css',
      'style.css'
@@ -63,6 +64,8 @@ Assets::add_js($inline, 'inline');
 
   <!-- Template Main JS File -->
 <?php echo Assets::js(); ?>
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
 </body>
 
 </html>
