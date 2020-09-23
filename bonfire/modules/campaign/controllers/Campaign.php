@@ -36,9 +36,10 @@ class Campaign extends Front_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->helper('form');
+        $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-        $this->load->model('users/user_model');
+        $this->load->model('campaign/Campaign_model');
+        $this->load->model('users/User_model');
         $this->load->library('users/auth');
         //  $this->lang->load('users');
         $this->siteSettings = $this->settings_lib->find_all();
@@ -60,18 +61,144 @@ class Campaign extends Front_Controller
      public function new()
      {
         $this->form_validation->set_rules('title','Title','required|trim');
-        if($this->form_validation->run()===FALSE)
-        {
-            Template::set_view('campaign/new');        
-            Template::render();
-        }
-        else{
-                $_POST['title'];
-           }
+        $this->form_validation->set_rules('subtitle','Sub Title','required|trim');
+        $this->form_validation->set_rules('category','Category','required|trim');
+        $this->form_validation->set_rules('txtEditor','Description','required|trim');
+        $this->form_validation->set_rules('launched','Target launch date','required|trim');
+        $this->form_validation->set_rules('fixed_day_value','Campaign duration','required|trim');  
+        $this->form_validation->set_rules('goal','Target Amount','required|trim');  
+         $config['upload_path']          = './assets/Campaign/';
+         $config['allowed_types']        = 'gif|jpeg|jpg|png';
+         $this->load->library('upload', $config);
+         if($this->form_validation->run()==FALSE)
+            {
+                    $error=array('error' =>'');
+                    Template::set_view('campaign/new');        
+                    Template::render();
+            }
+            else{
+                    if (isset($_POST['save']))
+                    {
+                        if($this->upload->do_upload())
+                        {
+                            $upload_data=$this->upload->data();
+                            $data=array(
+                                            'user_id'=>'4',
+                                            'title'=>$_POST['title'],
+                                            'slug'=>url_title($_POST['title'], 'dash', true),
+                                            'subtitle'=>$_POST['subtitle'],
+                                            'category'=>$_POST['category'],
+                                            'location'=>$_POST['location'],
+                                            'image'=>$upload_data['file_name'],
+                                            'video_url'=>$_POST['video_url'],
+                                            'description'=>$_POST['txtEditor'],
+                                            'goal'=>$_POST['goal'],
+                                            'launched'=>$_POST['launched'],
+                                            'deadline'=>$_POST['fixed_day_value'],
+                                            'status'=>'D',
+                                            'is_active'=>1,
+                                            'created_on'=>date("Y-m-d H:i:s"),
+                                            'created_by'=>''
+                                        );
+                            if($this->Campaign_model->insert($data)==true)
+                            {
+                                Template::set_message(lang('us_user_created_success'), 'success');
+                                Template::render();
+                                redirect('Campaign/views');
+                   
+                            }   
+                        }  
+                        else
+                        {
+                            $error = array('error' => $this->upload->display_errors());
+                            Template::set_view('campaign/new');        
+                            Template::set('error', $error);
+                            Template::render();
+        
+                        }
+                    
+                    }
+                }
+            
+     }
+     public function Edit()
+     {
+        $slug=$this->uri->segment(3); 
+        $this->form_validation->set_rules('title','Title','required|trim');
+        $this->form_validation->set_rules('subtitle','Sub Title','required|trim');
+        $this->form_validation->set_rules('category','Category','required|trim');
+        $this->form_validation->set_rules('txtEditor','Description','required|trim');
+        $this->form_validation->set_rules('launched','Target launch date','required|trim');
+        $this->form_validation->set_rules('fixed_day_value','Campaign duration','required|trim');  
+        $this->form_validation->set_rules('goal','Target Amount','required|trim');  
+         $config['upload_path']          = './assets/Campaign/';
+         $config['allowed_types']        = 'gif|jpeg|jpg|png';
+         $this->load->library('upload', $config);  
+         if($this->form_validation->run()==FALSE)
+            {
+                $data=$this->Campaign_model->get_view($slug);
+                $error=array('error' =>'');
+                Template::set_view('campaign/edit');
+                Template::set('list_item', $data);
+                Template::set('error', $error);
+                Template::render();          
+            }
+            else{
+                    if (isset($_POST['save']))
+                    {
+                       if($this->upload->do_upload('userfile'))
+                        {
+                            $upload_data=$this->upload->data();
+                            $data=array(
+                                        'user_id'=>'4',
+                                        'title'=>$_POST['title'],
+                                        'slug'=>url_title($_POST['title'], 'dash', true),
+                                        'subtitle'=>$_POST['subtitle'],
+                                        'category'=>$_POST['category'],
+                                        'location'=>$_POST['location'],
+                                        'image'=>$upload_data['file_name'],
+                                        'video_url'=>$_POST['video_url'],
+                                        'description'=>$_POST['txtEditor'],
+                                        'goal'=>$_POST['goal'],
+                                        'launched'=>$_POST['launched'],
+                                        'deadline'=>$_POST['fixed_day_value'],
+                                        'status'=>'D',
+                                        'is_active'=>1,
+                                        'created_on'=>date("Y-m-d H:i:s"),
+                                        'created_by'=>''
+                                    );
+                                if($this->Campaign_model->update_campaign($slug,$data)==true)
+                                {
+                                    Template::set_message(lang('us_user_created_success'), 'success');
+                                    redirect('Campaign/views');
+                                }   
+                        }
+                        else
+                        {
+                            $error = array('error' => $this->upload->display_errors());
+                            Template::set_view('campaign/Edit/'.$slug.'');        
+                            Template::set('error', $error);
+                            Template::render();
+                        }
+                    }
+                }
      } 
-   
+     public function  views()
+     {
+        $data=$this->Campaign_model->get_view();
+        Template::set_view('campaign/view');
+        Template::set('list_item', $data);
+        Template::render();        
+     }
+    
      public function view()
     {
+        $slug=$this->uri->segment(3);
+        $data=$this->Campaign_model->get_views($slug);
+        Template::set_view('campaign/index');
+        Template::set('campaign_item', $data);
+        Template::render();        
+
         /*
         $this->auth->restrict($this->permissionEdit);
         
@@ -106,12 +233,13 @@ class Campaign extends Front_Controller
         $title = lang('bf_action_edit') . ' ' . lang('matrix_role');
         $role = $this->role_model->find($id);
         */
-        Template::set_view('campaign/index');
+      
+  //      Template::set_view('campaign/index');
         //Template::set('contexts', Contexts::getContexts(true));
         //Template::set('role', $role);
       //  Template::set('toolbar_title', isset($role->role_name) ? "{$title}: {$role->role_name}" : $title);
         
-        Template::render();
+//        Template::render();
     }
 }
 /* End of file /bonfire/modules/users/controllers/users.php */

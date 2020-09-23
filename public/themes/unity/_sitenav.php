@@ -2,7 +2,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="index.html">Restaurantly</a></h1>
+      <h1 class="logo mr-auto"><a href="index.html">OUM</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -17,7 +17,8 @@
           <li><a href="#chefs">Chefs</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="<?php echo base_url('login');?>">Login</a></li>
-          <li class="book-a-table text-center"><a href="#book-a-table">Book a table</a></li>
+          <li><a href="<?php echo base_url('campaign/new');?>">Start Project</a></li>
+          <li class="book-a-table text-center"><a href="#book-a-table">Donate</a></li>
         </ul>
       </nav><!-- .nav-menu -->
 

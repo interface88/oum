@@ -85,7 +85,7 @@ body {
   </div>
 <?php
 	$attributes = array('class' => 'form-horizontal', 'method' => 'post', 'id' => 'myform', 'accept-charset'=>'utf-8');
-	echo form_open_multipart('Campaign/new', $attributes);
+	echo  form_open_multipart('Campaign/Edit/'.$list_item->campaign_id.'', $attributes);
 ?> 
 <!--step1-->
 <div class="row setup-content" id="step-1">
@@ -98,11 +98,11 @@ body {
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="control-label">Title</label>
-                    <?php echo form_input(array('class' =>'form-control', 'id'=>'title', 'name'=>'title', 'type'=>'text', 'value'=>set_value('title'),)); echo '<div class="error">'.form_error('title').'</div>';?>    
+                    <?php echo form_input(array('class' =>'form-control', 'id'=>'title', 'name'=>'title', 'type'=>'text', 'value'=>$list_item->title,)); echo '<div class="error">'.form_error('title').'</div>';?>    
                 </div>
                 <div class="form-group">
                     <label class="control-label">Subtitle</label>
-                    <?php echo form_input(array('class' =>'form-control', 'id'=>'subtitle', 'name'=>'subtitle', 'type'=>'text', 'value'=>set_value('subtitle'),)); echo '<div class="error">'.form_error('subtitle').'</div>';?>    
+                    <?php echo form_input(array('class' =>'form-control', 'id'=>'subtitle', 'name'=>'subtitle', 'type'=>'text', 'value'=>$list_item->subtitle,)); echo '<div class="error">'.form_error('subtitle').'</div>';?>    
                 </div>
             </div>	
 		</div>           
@@ -117,7 +117,7 @@ body {
 	          <div class="form-group">
 	           <?php $category_list=array('Art'=>'Art','Comics'=>'Comics','Crafts'=>'Crafts','Dance'=>'Dance','Design'=>'Design','Fashion'=>'Fashion','Film & Video'=>'Film & Video','Food'=>'Food','Games'=>'Games','Journalism'=>'Journalism','Music'=>'Music','Photography'=>'Photography','Publishing'=>'Publishing','Technology'=>'Technology','Theater'=>'Theater');?>
                <?php
-                echo form_dropdown('category', $category_list, set_value('category'), '','class="form-control"');
+                echo form_dropdown('category', $category_list, $list_item->category, '','class="form-control"');
                 echo '<div class="error">'.form_error('category').'</div>';
               ?>    
 	          </div>
@@ -130,7 +130,7 @@ body {
           </div>      
 		  <div class="col-md-6">
 	          <div class="form-group">
-	            <?php echo form_input(array('class' =>'form-control', 'id'=>'location', 'name'=>'location', 'type'=>'text', 'value'=>set_value('location'), 'placeholder'=>"Start typing your location...")); echo '<div class="error">'.form_error('location').'</div>';?>    
+	            <?php echo form_input(array('class' =>'form-control', 'id'=>'location', 'name'=>'location', 'type'=>'text', 'value'=>$list_item->location, 'placeholder'=>"Start typing your location...")); echo '<div class="error">'.form_error('location').'</div>';?>    
 	          </div>
 	       </div>	    
         </div>
@@ -164,7 +164,7 @@ body {
         </div>
         <div class="col-md-6">
           <div class="form-group">
-      	      <?php echo form_input(array('class' =>'form-control', 'id'=>'video_url', 'name'=>'video_url', 'type'=>'text', 'value'=>set_value('video_url'), 'placeholder'=>"Youtube Video Url")); echo '<div class="error">'.form_error('video_url').'</div>';?>    
+      	      <?php echo form_input(array('class' =>'form-control', 'id'=>'video_url', 'name'=>'video_url', 'type'=>'text', 'value'=>$list_item->video_url, 'placeholder'=>"Youtube Video Url")); echo '<div class="error">'.form_error('video_url').'</div>';?>    
 	      </div>
         </div>
     </div>
@@ -175,7 +175,7 @@ body {
       </div>
         <div class="col-md-6">
           <div class="form-group">
-               <textarea class="form-control" id="txtEditor" name="txtEditor"></textarea>
+               <textarea class="form-control" id="txtEditor" name="txtEditor"><?php echo $list_item->description;?></textarea>
                <?php echo '<div class="error">'.form_error('txtEditor').'</div>';?>
   	      </div>
         </div> 
@@ -195,8 +195,8 @@ body {
             </div>
 	        <div class="col-md-6">
 	          <div class="form-group">
-              <?php echo form_input(array('class' =>'form-control', 'id'=>'launched', 'name'=>'launched', 'type'=>'text', 'value'=>set_value('launched'), 'placeholder'=>"")); echo '<div class="error">'.form_error('launched').'</div>';?>    
-  	      </div>
+              <?php echo form_input(array('class' =>'form-control', 'id'=>'launched', 'name'=>'launched', 'type'=>'text', 'value'=>$list_item->launched, 'placeholder'=>"")); echo '<div class="error">'.form_error('launched').'</div>';?>    
+	        </div>
 		      <div class="form-group">
 	          		We'll recommend when you should:
 			    <ul>
@@ -207,16 +207,16 @@ body {
 	        </div>  
         </div>
         <div class="row common">
-          <div class="col-md-6">
-        	<p>Campaign duration</p>
-        	<p>Set a time limit for your campaign. You won’t be able to change this after you launch.</p>
-          </div>
-          <div class="col-md-6">
-          	<div class="form-group">
-          	    <label for="">Fixed number of days(1-60)</label>
-                <?php echo form_input(array('class' =>'form-control', 'id'=>'fixed_day_value', 'name'=>'fixed_day_value', 'type'=>'text', 'value'=>set_value('fixed_day_value'), 'placeholder'=>"")); echo '<div class="error">'.form_error('fixed_day_value').'</div>';?>    
-            </div>
-          </div>  
+              <div class="col-md-6">
+              	<p>Campaign duration</p>
+              	<p>Set a time limit for your campaign. You won’t be able to change this after you launch.</p>
+              </div>
+              <div class="col-md-6">
+              	<div class="form-group">
+              	   <label for="">Fixed number of days(1-60)</label>
+        			     <?php echo form_input(array('class' =>'form-control', 'id'=>'fixed_day_value', 'name'=>'fixed_day_value', 'type'=>'text', 'value'=>$list_item->deadline, 'placeholder'=>"")); echo '<div class="error">'.form_error('fixed_day_value').'</div>';?>    
+                </div>
+              </div>  
         </div>
         <div class="row common">
           <div class="col-md-6">
@@ -224,7 +224,7 @@ body {
           </div>
           <div class="col-md-6">
             <div class="form-group">
-                <?php echo form_input(array('class' =>'form-control', 'id'=>'goal', 'name'=>'goal', 'type'=>'text', 'value'=>set_value('goal'), 'placeholder'=>"2000.00")); echo '<div class="error">'.form_error('goal').'</div>';?>    
+                <?php echo form_input(array('class' =>'form-control', 'id'=>'goal', 'name'=>'goal', 'type'=>'text', 'value'=>$list_item->goal, 'placeholder'=>"2000.00")); echo '<div class="error">'.form_error('goal').'</div>';?>    
             </div>
           </div>  
         </div>

@@ -202,7 +202,8 @@ class Settings extends Admin_Controller
         $metaFields = config_item('user_meta_fields');
         Template::set('meta_fields', $metaFields);
 
-        if (isset($_POST['save'])) {
+        if (isset($_POST['save'])) 
+        {
             if ($id = $this->saveUser('insert', null, $metaFields)) {
                 $user = $this->user_model->find($id);
                 $logName = empty($user->display_name) ? ($this->settings_lib->item('auth.use_usernames') ? $user->username : $user->email) : $user->display_name;
@@ -212,7 +213,6 @@ class Settings extends Admin_Controller
                     'users'
                 );
                 Template::set_message(lang('us_user_created_success'), 'success');
-
                 redirect(SITE_AREA . '/settings/users');
             }
         }

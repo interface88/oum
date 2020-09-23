@@ -63,7 +63,9 @@ class Home extends MX_Controller
 	{
 		$this->load->library('users/auth');
 		$this->set_current_user();
-
+		$this->load->model('campaign/Campaign_model');
+		$data=$this->Campaign_model->get_view();
+		Template::set('campaign_item',$data);
 		Template::render();
 	}//end index()
 

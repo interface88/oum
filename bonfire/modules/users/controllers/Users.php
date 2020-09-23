@@ -219,16 +219,16 @@ class Users extends Front_Controller
 
         $this->load->model('roles/role_model');
         $this->load->helper('date');
-
         $this->load->config('address');
         $this->load->helper('address');
-
         $this->load->config('user_meta');
         $meta_fields = config_item('user_meta_fields');
         Template::set('meta_fields', $meta_fields);
 
-        if (isset($_POST['register'])) {
-            if ($userId = $this->saveUser('insert', 0, $meta_fields)) {
+        if (isset($_POST['register'])) 
+        {
+            if ($userId = $this->saveUser('insert', 0, $meta_fields)) 
+            {
                 // User Activation
                 $activation = $this->user_model->set_activation($userId);
                 $message = $activation['message'];
