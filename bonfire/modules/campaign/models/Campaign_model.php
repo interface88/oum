@@ -253,6 +253,20 @@ class Campaign_model extends BF_Model
       return  $this->db->update($this->table_name, $data);
     } 
 
+
+/*this funtion used to front user to belong data fetch user_id accourding*/ 
+public function get_view_user_id_campaign($slug = FALSE)
+{ 
+      if ($slug === FALSE)
+                {
+                    $query = $this->db->where('deleted',0);
+                    $query = $this->db->get($this->table_name);
+                    return $query->result();
+                }
+        $query = $this->db->get_where($this->table_name, array('user_id' => $slug, 'deleted'=>0));
+        return $query->result();
+}
+
 /*this function used to front user fetch project*/
 public function get_view($slug = FALSE)
 { 

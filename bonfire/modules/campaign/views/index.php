@@ -118,10 +118,10 @@ background-color: #FFF;
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Inner Page</h2>
+          <h2><?php echo $campaign_item->title;?></h2>
           <ol>
             <li><a href="#">Home</a></li>
-            <li>Inner Page</li>
+            <li><?php echo $campaign_item->title;?></li>
           </ol>
         </div>
 
@@ -133,7 +133,7 @@ background-color: #FFF;
     		<div class="col-lg-9">
     			<div class="row">
     				<div class="col-lg-12">
-    					<img class="img-fluid" src="<?php echo base_url('themes/unity/img/campaign_1.jpg')?>" >
+    					<img class="img-fluid" src="<?php echo base_url('assets/Campaign/'.$campaign_item->image.'')?>" >
     				</div>
     			</div>
     			<div class="row">
@@ -151,7 +151,7 @@ background-color: #FFF;
                             </ul>
                             <div class="tab-content" id="campaignDetailTabContent">
                               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                              	The Northwest Arkansas Children’s Shelter (NWACS) is a private, non-profit organization that provides 24-hour residential, emergency triage care for children throughout Arkansas who are victims of abandonment, abuse or neglect.With support from the Walton Family Foundation, Rogue Trails LLC recently completed trail construction at the Northwest Arkansas Children’s Shelter that includes accessible mountain bike trails and a skills course for children who find themselves in need of a safe haven.The NWACS Staff has identified a significant need for quality, teen and adult sized mountain bikes for their older children to have the opportunity to experience the trails. For those that know the mental and physical benefits associated with trail riding, helping gift the mountain bike experience to these kids is something our community must deliver on.There will be no flashy photos. No testimonies or stories. Just know that by supporting this campaign you will be gifting experience to children when they may need it most.The Bike Alliance of Northwest Arkansas is composed of BikeNWA, The Friends of Arkansas Single Track (FAST), the Ozark Off-Road Cyclists (OORC), Breakaway Cycling, NWA Trailblazers, Rogers Cycling Festival, and Pedal it Forward NWA. They are partnering together to help raise $6500 towards the purchase of a permanent fleet of quality Trek Marlin 6 mountain bikes (12 total), tubes, and accessories from Phat Tire Bike Shop for the Northwest Arkansas Children’s Shelter. In support, Phat Tire Bike Shop is absorbing 40% of the retail cost.Pedal it Forward NWA has committed to assist the NWACS in the annual maintenance of the fleet, ensuring several years of quality experience for the hundreds of children that rely on the shelters high-quality care.The Northwest Arkansas Children’s Shelter is a member of our trail community and they need our assistance.
+                              	<?php echo $campaign_item->description;?>
                               </div>
                               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                   <div class="accordion" id="faqAccordion">
@@ -232,7 +232,7 @@ background-color: #FFF;
                       </li>
                       <li class="list-group-item d-flex justify-content-between align-items-center">
                         Target
-                        <span class="badge badge-primary badge-pill">$7500</span>
+                        <span class="badge badge-primary badge-pill"><?php echo $campaign_item->goal;?></span>
                       </li>
                       <li class="list-group-item d-flex justify-content-between align-items-center">
                         Backers

@@ -34,7 +34,7 @@ class Campaign extends Front_Controller
      * @retun void
      */
     public function __construct()
-    {
+    { 
         parent::__construct();
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
@@ -42,6 +42,7 @@ class Campaign extends Front_Controller
         $this->load->model('users/User_model');
         $this->load->library('users/auth');
         //  $this->lang->load('users');
+    
         $this->siteSettings = $this->settings_lib->find_all();
         if ($this->siteSettings['auth.password_show_labels'] == 1) {
             Assets::add_module_js('users', 'password_strength.js');
@@ -60,6 +61,9 @@ class Campaign extends Front_Controller
      */
      public function new()
      {
+
+    /*this function check user login*/
+    $this->auth->restrict();
         $this->form_validation->set_rules('title','Title','required|trim');
         $this->form_validation->set_rules('subtitle','Sub Title','required|trim');
         $this->form_validation->set_rules('category','Category','required|trim');
@@ -83,7 +87,7 @@ class Campaign extends Front_Controller
                         {
                             $upload_data=$this->upload->data();
                             $data=array(
-                                            'user_id'=>'4',
+                                            'user_id'=>$this->session->user_id,
                                             'title'=>$_POST['title'],
                                             'slug'=>url_title($_POST['title'], 'dash', true),
                                             'subtitle'=>$_POST['subtitle'],
@@ -123,6 +127,9 @@ class Campaign extends Front_Controller
      }
      public function Edit()
      {
+
+    /*this function check user login*/
+    $this->auth->restrict();
         $slug=$this->uri->segment(3); 
         $this->form_validation->set_rules('title','Title','required|trim');
         $this->form_validation->set_rules('subtitle','Sub Title','required|trim');
@@ -150,7 +157,7 @@ class Campaign extends Front_Controller
                         {
                             $upload_data=$this->upload->data();
                             $data=array(
-                                        'user_id'=>'4',
+                                        'user_id'=>$this->session->user_id,
                                         'title'=>$_POST['title'],
                                         'slug'=>url_title($_POST['title'], 'dash', true),
                                         'subtitle'=>$_POST['subtitle'],
@@ -183,6 +190,19 @@ class Campaign extends Front_Controller
                     }
                 }
      } 
+
+/*this function used to user_id to fetch data by the user belong the data*/
+public function front_view_user()
+{
+    /*this function check user login*/
+    $this->auth->restrict();
+        $slug=$this->session->user_id;
+        $data=$this->Campaign_model->get_view_user_id_campaign($slug);
+        Template::set_view('campaign/view');
+        Template::set('list_item', $data);
+        Template::render();      
+}
+
      public function  views()
      {
         $data=$this->Campaign_model->get_view();
