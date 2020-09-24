@@ -181,6 +181,43 @@ body {
     color: #fff;
 }
 
+#banner {
+  width: 100%;
+  height: 100vh;
+  background: url("../img/hero-bg.jpg") top center;
+  background-size: cover;
+  position: relative;
+  padding: 0;
+}
+
+.brandImage {
+
+}
+
+
+/* ----- brand image section -----*/
+.elementor-brand-item {
+    text-align: center;
+    padding: 30px 0;
+}
+
+
+.elementor-brand-item img {
+    -webkit-filter: contrast(0);
+    filter: contrast(0);
+    opacity: .6;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease
+}
+
+.elementor-brand-item:hover img {
+    -webkit-filter: contrast(1);
+    filter: contrast(1);
+    opacity: 1
+}
 </style>
 <section id="hero" class="d-flex align-items-center">
 	<div class="container position-relative text-center text-lg-left"
@@ -248,4 +285,64 @@ foreach($campaign_item as $row)
 ?>
 </div>
 </div>
+      
+ <section id="banner2" class="d-flex align-items-center">
+	<div class="container position-relative text-center text-lg-left"
+		data-aos="zoom-in" data-aos-delay="100">
+		<div class="row">
+			<div class="col-lg-4">
+			</div>
+			<div class="col-lg-8">
+				<h1>We always see hope</h1>
+				<h2>To contribute to the structural improvement of the health of disadvantaged groups in South East Asia</h2>
 
+			</div>
+		</div>
+	</div>
+</section>	
+<div class="container">
+	<div class="row">
+		<div class="col-lg-3">
+			<div class="elementor-brand-item">
+				<a><img alt="brand1" src="<?php echo base_url('themes/unity/img/brand_image/brand-1.png')?>"></a>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="elementor-brand-item">
+				<a><img alt="brand1" src="<?php echo base_url('themes/unity/img/brand_image/brand-2.png')?>"></a>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="elementor-brand-item">
+				<a><img alt="brand1" src="<?php echo base_url('themes/unity/img/brand_image/brand-3.png')?>"></a>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="elementor-brand-item">
+				<a><img alt="brand1" src="<?php echo base_url('themes/unity/img/brand_image/brand-4.png')?>"></a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-3">
+			<div class="elementor-brand-item">
+				<a><img alt="brand1" src="<?php echo base_url('themes/unity/img/brand_image/brand-5.png')?>"></a>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="elementor-brand-item">
+				<a><img alt="brand1" src="<?php echo base_url('themes/unity/img/brand_image/brand-6.png')?>"></a>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="elementor-brand-item">
+				<a><img alt="brand1" src="<?php echo base_url('themes/unity/img/brand_image/brand-7.png')?>"></a>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="elementor-brand-item">
+				<a><img alt="brand1" src="<?php echo base_url('themes/unity/img/brand_image/brand-8.png')?>"></a>
+			</div>
+		</div>
+	</div>
+</div>

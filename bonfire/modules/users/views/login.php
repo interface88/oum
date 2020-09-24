@@ -4,7 +4,7 @@
 <p><br/><a href="<?php echo site_url(); ?>">&larr; <?php echo lang('us_back_to') . $this->settings_lib->item('site.title'); ?></a></p>-->
 
 <main id="main">
-<section class="breadcrumbs">
+	<section class="breadcrumbs">
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
@@ -18,6 +18,9 @@
       </div>
     </section>
 <section class="inner-page">
+    <div class="container">
+    	
+    </div>
 <div id="login">
 	<h2><?php echo lang('us_login'); ?></h2>
 

@@ -46,6 +46,13 @@ Assets::add_js($inline, 'inline');
     #hero h1 , #hero h2{
         font-family: 'Permanent Marker', cursive;   
     }
+    body {
+     background-image: url("<?php echo base_url('themes/unity/img/bg-body.jpg')?>");
+     background-position: left top;
+     background-size: auto;
+     background-repeat: repeat;
+     background-attachment: scroll;
+     }
     </style>
 </head>
 <body>
