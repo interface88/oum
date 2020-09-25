@@ -1,7 +1,7 @@
 <?php
 
 $errorClass   = empty($errorClass) ? ' error' : $errorClass;
-$controlClass = empty($controlClass) ? 'span6' : $controlClass;
+$controlClass = empty($controlClass) ? 'form-control' : $controlClass;
 $fieldData = array(
     'errorClass'   => $errorClass,
     'controlClass' => $controlClass,

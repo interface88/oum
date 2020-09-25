@@ -6,7 +6,8 @@ Assets::add_css(array(
     'vendor/boxicons/css/boxicons.min.css',
     'vendor/venobox/venobox.css',
     'vendor/aos/aos.css',
-     'style.css'
+     'style.css',
+     'custom.css'
 ));
 
 Assets::add_js(  array(
@@ -44,12 +45,6 @@ Assets::add_js($inline, 'inline');
     <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet"> 
     <style>
-    #hero h1 , #hero h2{
-        font-family:'Edo SZ';font-weight:normal;font-size:4em;
-    }
-     #banner2 h1{
-        font-family:'Edo SZ';font-weight:normal;font-size:80px;
-    }
     
     </style>
 </head>

@@ -5,19 +5,18 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="index.html">OUM</a></h1>
+      <h1 class="logo mr-auto">	<?php echo anchor(base_url(), 'OUM'); ?></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="<?php echo base_url('Home/About');?>">About Us</a></li>
-          <li class="active"><a href="<?php echo base_url('Home/Campaign');?>">Campaigns</a></li>
-          <li class="active"><a href="<?php echo base_url('Home/Contactus');?>">Contact Us</a></li>
-          
+        	<li><?php echo anchor(base_url('home/about'), 'About Us'); ?></li>
+        	<li><?php echo anchor(base_url('home/campaign'), 'Campaigns'); ?></li>
+        	<li><?php echo anchor(base_url('home/contactus'), 'Contact Us'); ?></li>
           <?php
-   if ($this->auth->is_logged_in() !== false)
-      {
+        if ($this->auth->is_logged_in() !== false)
+              {
                 echo '<li class="dropdown book-a-table text-center">
                         <a type="button" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
                         <ul class="dropdown-menu">

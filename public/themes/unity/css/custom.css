@@ -1,0 +1,21 @@
+#hero h1, #hero h2 {
+	font-family: 'Edo SZ';
+	font-weight: normal;
+	font-size: 4em;
+}
+
+#banner2 h1 {
+	font-family: 'Edo SZ';
+	font-weight: normal;
+	font-size: 80px;
+}
+
+#main .inner-page{
+	background-color: #ffffff;
+	background-image: url("../img/bg-body.jpg");
+	background-position: left top;
+	background-size: auto;
+	background-repeat: repeat;
+	background-attachment: scroll;
+	color: #333 !important;
+}

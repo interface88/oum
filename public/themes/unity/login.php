@@ -5,7 +5,8 @@ Assets::add_css(array(
     'vendor/icofont/icofont.min.css',
     'vendor/venobox/venobox.css',
     'vendor/aos/aos.css',
-     'style.css'
+     'style.css',
+    'custom.css'
 ));
 
 Assets::add_js(  array(
@@ -42,18 +43,6 @@ Assets::add_js($inline, 'inline');
     <?php echo Assets::css(); ?>
     <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet"> 
-    <style>
-    #hero h1 , #hero h2{
-        font-family: 'Permanent Marker', cursive;   
-    }
-    body {
-     background-image: url("<?php echo base_url('themes/unity/img/bg-body.jpg')?>");
-     background-position: left top;
-     background-size: auto;
-     background-repeat: repeat;
-     background-attachment: scroll;
-     }
-    </style>
 </head>
 <body>
 

@@ -1,7 +1,7 @@
 <?php
 
 $errorClass = ' error';
-$controlClass = 'span6';
+$controlClass = 'form-control';
 $fieldData = array(
     'errorClass'    => $errorClass,
     'controlClass'  => $controlClass,
