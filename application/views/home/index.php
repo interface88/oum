@@ -218,6 +218,26 @@ body {
     filter: contrast(1);
     opacity: 1
 }
+
+#banner3{
+color:#333;
+}
+#banner3 .card{
+    background-color: transparent;
+    border: none;
+    padding: 30px 0;
+    
+}
+#banner3 .card .card-body{
+    text-align: center;
+}
+.image-box-decor{
+background-color: #fed857;
+margin :20px 0 10px;
+display: inline-block;
+    width: 60px;
+    height: 3px;
+}
 </style>
 <section id="hero" class="d-flex align-items-center">
 	<div class="container position-relative text-center text-lg-left"
@@ -243,7 +263,42 @@ body {
 		</div>
 	</div>
 </section>
-
+<div class="container">
+	<div id="banner3">
+        <div class="row">
+        	<div class="col-lg-4">
+                <div class="card">
+                  <img class="card-img-top" src="<?php echo base_url('themes/unity/img/story/h1_our-event.jpg')?>" alt="Card image cap">
+                  <div class="card-body">
+                  	<h5 class="card-title">Our stories</h5>
+                  	<span class="image-box-decor"></span>
+                    <p class="card-text">We do believe that every family has the potential to contribute to improvements in their own lives</p>
+                  </div>
+                </div>
+        	</div>
+        	<div class="col-lg-4">
+                <div class="card">
+                  <img class="card-img-top" src="<?php echo base_url('themes/unity/img/story/h1_our-story.jpg')?>" alt="Card image cap">
+                  <div class="card-body">
+                  	<h5 class="card-title">Our events & programs</h5>
+                  	<span class="image-box-decor"></span>
+                    <p class="card-text">We now runs a number of programmes in Africa to address a broad range of issues.</p>
+                  </div>
+                </div>
+        	</div>
+        	<div class="col-lg-4">
+                <div class="card">
+                  <img class="card-img-top" src="<?php echo base_url('themes/unity/img/story/h1_our-team.jpg')?>" alt="Card image cap">
+                  <div class="card-body">
+                  	<h5 class="card-title">Our team</h5>
+                  	<span class="image-box-decor"></span>
+                    <p class="card-text">We pays special attention to reducing marginalisation in its partner countries and to documenting</p>
+                  </div>
+                </div>
+        	</div>
+        </div>
+	</div>
+</div>
 
 <div class="container">
 <div class="row">
