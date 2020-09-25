@@ -64,11 +64,31 @@ class Home extends MX_Controller
 		$this->load->library('users/auth');
 		$this->set_current_user();
 		$this->load->model('campaign/Campaign_model');
-		$data=$this->Campaign_model->get_view();
+		$data=$this->Campaign_model->view_all();
 		Template::set('campaign_item',$data);
 		Template::render();
 	}//end index()
-
+	public function Campaign()
+	{
+	    $this->load->library('users/auth');
+	    $this->set_current_user();
+	    $this->load->model('campaign/Campaign_model');
+	    $data=$this->Campaign_model->view_all();
+	    Template::set_view('campaign/view_campaign');
+	    Template::set('campaign_item',$data);
+	    Template::render();
+	}
+	public function Campaign_view()
+	{
+	    $this->load->library('users/auth');
+	    $this->set_current_user();
+	    $this->load->model('campaign/Campaign_model');
+	    $slug=$this->uri->segment(2);
+	    $data=$this->Campaign_model->view_all($slug);
+	    Template::set_view('campaign/index');
+	    Template::set('campaign_item',$data);
+	    Template::render();
+	}
 	//--------------------------------------------------------------------
 
 	/**

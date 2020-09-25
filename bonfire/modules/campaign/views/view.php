@@ -8,7 +8,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <h2>Campaign</h2>
           <ol>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="<?php echo base_url('');?>">Home</a></li>
             <li>Project List</li>
           </ol>
         </div>
@@ -40,6 +40,18 @@
         if('D'==$row->status)
         {
           echo 'Draft';
+        }
+        elseif('A'==$row->status)
+        {
+            echo 'Approval';
+        }
+        elseif('R'==$row->status)
+        {
+            echo 'Reject';
+        }
+        elseif('P'==$row->status)
+        {
+            echo 'Pending';
         }
       echo'</td><td><a href="'.base_url('Campaign/Edit/'.$row->campaign_id.'').'">Edit</a></td></tr>';
     }

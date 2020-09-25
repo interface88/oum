@@ -152,6 +152,7 @@ body {
         <div class="col-md-6">
           <div class="form-group">
           <?php echo form_upload(array('class'=>'form-control','name'=>'userfile','id'=>'userfile')); ?>
+          <img width="50%" class="img-thumbnail" src="<?php echo base_url('assets/Campaign/'.$list_item->image.'');?>"/>
           </div>
         </div>  
     </div>

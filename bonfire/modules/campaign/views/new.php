@@ -92,9 +92,8 @@ body {
     <div class="col-xs-12">
         <div class="row common">
            <div class="col-md-6">
-           	<p>Project title</p>
-           	<p>Write a clear, brief title that helps people quickly understand the gist of your project.</p>
-           </div>
+           	<p>Title</p>
+          </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="control-label">Title</label>
@@ -108,10 +107,7 @@ body {
 		</div>           
         <div class="row common">
           <div class="col-md-6">
-          	<p>Project category</p>
-			<p>Choose the category that most closely aligns with your project.</p>
-			<p>Think of where backers may look to find it. Reach a more specific community by also choosing a subcategory.</p>
-			<p>You’ll be able to change the category and subcategory even after your project is live.</p>   
+          	<p>Category</p>
           </div>
           <div class="col-md-6">
 	          <div class="form-group">
@@ -142,12 +138,19 @@ body {
 <div class="row setup-content" id="step-2">
   <div class="col-xs-12">
     <div class="row common">
+      <div class="col-md-6">
+      <p>Project description</p>
+      </div>
         <div class="col-md-6">
-    		<p>Project image</p>
-			<p>Add an image that clearly represents your project.</p>
-			<p>Choose one that looks good at different sizes. It will appear in different sizes in different places: on your project page, across the Kickstarter website and mobile apps, and (when shared) on social channels.</p>
-			<p>You may want to avoid including banners, badges, and text because they may not be legible at smaller sizes.</p>
-			<p>Your image should be at least 1024x576 pixels. It will be cropped to a 16:9 ratio.</p>
+          <div class="form-group">
+               <textarea class="form-control" id="txtEditor" name="txtEditor"></textarea>
+               <?php echo '<div class="error">'.form_error('txtEditor').'</div>';?>
+          </div>
+        </div> 
+    </div>    
+    <div class="row common">
+        <div class="col-md-6">
+    		<p>Image</p>
         </div>
         <div class="col-md-6">
           <div class="form-group">
@@ -157,29 +160,17 @@ body {
     </div>
     <div class="row common">
         <div class="col-md-6">
-		 <p>Project video (optional)</p>
-		 <p>Add a video that describes your project.</p>
-		 <p>Tell people what you’re raising funds to do, how you plan to make it happen, who you are, and why you care about this project.</p>
-		 <p>After you’ve uploaded your video, use our editor to add captions and subtitles so your project is more accessible to everyone.</p>
-        </div>
+		 <p>Video</p>
+		 <p>If you add the video you have a better chance of getting noticed</p>
+     <p></p>
+		    </div>
         <div class="col-md-6">
           <div class="form-group">
       	      <?php echo form_input(array('class' =>'form-control', 'id'=>'video_url', 'name'=>'video_url', 'type'=>'text', 'value'=>set_value('video_url'), 'placeholder'=>"Youtube Video Url")); echo '<div class="error">'.form_error('video_url').'</div>';?>    
 	      </div>
         </div>
     </div>
-    <div class="row common">
-      <div class="col-md-6">
-			<p>Project description</p>
-			<p>Describe what you're raising funds to do, why you care about it, how you plan to make it happen, and who you are. Your description should tell backers everything they need to know. If possible, include images to show them what your project is all about and what rewards look like.</p>
-      </div>
-        <div class="col-md-6">
-          <div class="form-group">
-               <textarea class="form-control" id="txtEditor" name="txtEditor"></textarea>
-               <?php echo '<div class="error">'.form_error('txtEditor').'</div>';?>
-  	      </div>
-        </div> 
-    </div>    
+
     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
   </div>  
 </div>

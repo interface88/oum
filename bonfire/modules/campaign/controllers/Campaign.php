@@ -42,7 +42,8 @@ class Campaign extends Front_Controller
         $this->load->model('users/User_model');
         $this->load->library('users/auth');
         //  $this->lang->load('users');
-    
+        $this->load->model('roles/role_model');
+        
         $this->siteSettings = $this->settings_lib->find_all();
         if ($this->siteSettings['auth.password_show_labels'] == 1) {
             Assets::add_module_js('users', 'password_strength.js');
@@ -59,11 +60,10 @@ class Campaign extends Front_Controller
      *
      * @return void
      */
-     public function new()
+     public function Create()
      {
-
-    /*this function check user login*/
-    $this->auth->restrict();
+        /*this function check user login*/
+        $this->auth->restrict();
         $this->form_validation->set_rules('title','Title','required|trim');
         $this->form_validation->set_rules('subtitle','Sub Title','required|trim');
         $this->form_validation->set_rules('category','Category','required|trim');
@@ -143,7 +143,7 @@ class Campaign extends Front_Controller
          $this->load->library('upload', $config);  
          if($this->form_validation->run()==FALSE)
             {
-                $data=$this->Campaign_model->get_view($slug);
+                $data=$this->Campaign_model->user_id_data_fetch($slug);
                 $error=array('error' =>'');
                 Template::set_view('campaign/edit');
                 Template::set('list_item', $data);
@@ -191,75 +191,67 @@ class Campaign extends Front_Controller
                 }
      } 
 
-/*this function used to user_id to fetch data by the user belong the data*/
-public function front_view_user()
+/*this function used to user_id to fetch data by the user wise the data*/
+public function view()
 {
-    /*this function check user login*/
-    $this->auth->restrict();
-        $slug=$this->session->user_id;
-        $data=$this->Campaign_model->get_view_user_id_campaign($slug);
+   /*this function check user login*/
+        $this->auth->restrict();
+        $slug=$this->uri->segment(3);
+        $data=$this->Campaign_model->user_id_data_fetch($slug);
         Template::set_view('campaign/view');
         Template::set('list_item', $data);
         Template::render();      
 }
-
-     public function  views()
-     {
-        $data=$this->Campaign_model->get_view();
-        Template::set_view('campaign/view');
-        Template::set('list_item', $data);
-        Template::render();        
-     }
+public function view_top_limit()
+{
     
-     public function view()
+}
+public function views()
+{   
+   /*this function check user login*/
+    $this->auth->restrict();
+    if($this->session->role_id==1)
     {
         $slug=$this->uri->segment(3);
-        $data=$this->Campaign_model->get_views($slug);
-        Template::set_view('campaign/index');
-        Template::set('campaign_item', $data);
-        Template::render();        
-
-        /*
-        $this->auth->restrict($this->permissionEdit);
-        
-        $id = (int) $this->uri->segment(5);
-        if (empty($id)) {
-            Template::set_message(lang('role_invalid_id'), 'error');
-            redirect(SITE_AREA . '/settings/roles');
-        }
-        
-        if (isset($_POST['save'])) {
-            if ($this->saveRole('update', $id)) {
-                Template::set_message(lang('role_edit_success'), 'success');
-                redirect(SITE_AREA . '/settings/roles');
-            }
-             if (! empty($this->role_model->error)) {
-                Template::set_message(lang('role_edit_error') . $this->role_model->error, 'error');
-            }
-        } elseif (isset($_POST['delete'])) {
-            if ($this->role_model->delete($id)) {
-                Template::set_message(lang('role_delete_success'), 'success');
-                redirect(SITE_AREA . '/settings/roles');
-            }
-            if (! empty($this->role_model->error)) {
-                Template::set_message(lang('role_delete_error') . $this->role_model->error, 'error');
-            }
-        }
-        
-        if (! class_exists('Contexts', false)) {
-            $this->load->library('ui/contexts');
-        }
-        
-        $title = lang('bf_action_edit') . ' ' . lang('matrix_role');
-        $role = $this->role_model->find($id);
-        */
-      
-  //      Template::set_view('campaign/index');
-        //Template::set('contexts', Contexts::getContexts(true));
-        //Template::set('role', $role);
-      //  Template::set('toolbar_title', isset($role->role_name) ? "{$title}: {$role->role_name}" : $title);
-        
-//        Template::render();
+        $data=$this->Campaign_model->get_view_all($slug);
+        Template::set_view('campaign/admin_view');
+        Template::set('list_item', $data);
+        Template::render();
     }
+    else{
+         Template::set_message('Cannot Access this page.', 'error');
+         Template::render();
+        }
 }
+
+/*function used to status changes*/
+public function status_change()
+{
+    $id = $this->input->get('id');
+    $data=array('status'=>$this->input->get('status'));
+    $result =$this->Campaign_model->campaign_status($id,$data);
+    echo $result;
+}
+/*function used to status changes*/
+public function active()
+{
+    $id = $this->input->get('id');
+    $data=array('is_active'=>$this->input->get('status'));
+    $result =$this->Campaign_model->campaign_status($id,$data);
+    echo $result;
+}
+
+/*function used to status changes*/
+public function delete()
+{
+    $id = $this->input->get('id');
+    $data=array('deleted'=>1);
+    $result =$this->Campaign_model->campaign_status($id,$data);
+    echo $result;
+}
+
+
+
+}
+
 /* End of file /bonfire/modules/users/controllers/users.php */

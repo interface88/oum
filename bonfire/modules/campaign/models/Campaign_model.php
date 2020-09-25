@@ -74,16 +74,6 @@ class Campaign_model extends BF_Model
             'rules' => 'required|trim|max_length[40]',
         ),
         array(
-            'field' => 'username',
-            'label' => 'lang:bf_username',
-            'rules' => 'trim|max_length[30]',
-        ),
-        array(
-            'field' => 'email',
-            'label' => 'lang:bf_email',
-            'rules' => 'required|trim|valid_email|max_length[254]',
-        ),
-        array(
             'field' => 'role_id',
             'label' => 'lang:us_role',
             'rules' => 'trim|max_length[2]|is_numeric',
@@ -253,6 +243,57 @@ class Campaign_model extends BF_Model
       return  $this->db->update($this->table_name, $data);
     } 
 
+/*this function used to user wise data fetch database*/    
+public function user_id_data_fetch($slug = Null)
+{
+     if ($slug === NULL)
+     { 
+         $query = $this->db->get_where($this->table_name, array('user_id' =>$this->session->user_id, 'deleted'=>0));
+         return $query->result();
+     }
+     $query = $this->db->get_where($this->table_name, array('campaign_id' => $slug, 'deleted'=>0));
+     return $query->row();
+}
+/*this function used to user wise data fetch database end*/   
+/*this function used to fronted data fetch database*/
+public function view_all($slug = Null)
+{
+    if ($slug === NULL)
+    {
+        $query = $this->db->get_where($this->table_name, array('status'=>'A','deleted'=>0));
+        return $query->result();
+    }
+    $query = $this->db->get_where($this->table_name, array('status'=>'A','slug' => $slug, 'deleted'=>0));
+    return $query->row();
+}
+/*this function used to fronted data fetch database end*/
+
+/*this function used to backend data admin fetch database*/
+public function get_view_all($slug = Null)
+{
+    if ($slug === NULL)
+    {
+        $query = $this->db->get_where($this->table_name, array('deleted'=>0));
+        return $query->result();
+    }
+    $query = $this->db->get_where($this->table_name, array('slug' => $slug, 'deleted'=>0));
+    return $query->row();
+}
+/*this function used to backend data admin fetch database end*/
+/*this function used to backend data in status changes on database*/
+public function campaign_status($id = null,$data = array())
+{
+    $this->db->where('campaign_id', $id);
+    return  $this->db->update($this->table_name, $data);
+}
+
+
+    
+    
+    
+    
+    
+    
 
 /*this funtion used to front user to belong data fetch user_id accourding*/ 
 public function get_view_user_id_campaign($slug = FALSE)

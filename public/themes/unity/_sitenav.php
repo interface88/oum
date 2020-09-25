@@ -1,3 +1,6 @@
+<style>
+  .dropdown-menu{background-color: #000000;}
+</style>
 <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
@@ -8,17 +11,31 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="<?php echo base_url();?>">Home</a></li>
+          <li class="active"><a href="<?php echo base_url('Home/About');?>">About Us</a></li>
+          <li class="active"><a href="<?php echo base_url('Home/Campaign');?>">Campaigns</a></li>
+          <li class="active"><a href="<?php echo base_url('Home/Contactus');?>">Contact Us</a></li>
+          
           <?php
-     if ($this->auth->is_logged_in() !== false)
+   if ($this->auth->is_logged_in() !== false)
       {
-              echo '<li><a href="'.base_url('users/logout').'">Logout</a></li>';
-              echo '<li><a href="'.base_url('campaign/front_view_user').'">View Campaign</a></li>';
-              echo '<li class="book-a-table text-center"><a href="'.base_url('campaign/new').'">Start Campaign</a></li>';
-      }
-  else{
-            echo '<li><a href="'.base_url('login').'">Login</a></li>';
-            echo '<li><a href="'.base_url('register').'">Create Account</a></li>';
+                echo '<li class="dropdown book-a-table text-center">
+                        <a type="button" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
+                        <ul class="dropdown-menu">
+                        <li><a href="'.base_url('users/profile').'">Profile</a></li>
+                        <li><a href="'.base_url('campaign/Create').'">Start Campaign</a></li>';
+               if($this->session->role_id==1)
+                {
+                  echo '<li><a href="'.base_url('campaign/Views').'">My Campaign</a></li>';
+                }
+                else{
+                    echo '<li><a href="'.base_url('campaign/View').'">My Campaign</a></li>';
+                }
+                 echo '<li><a href="'.base_url('users/logout').'">Logout</a></li>
+                        </ul>
+                    </li>';
+     /* $user_id = $this->session->userdata(); 
+              print_r($user_id);
+   */              
       }
           ?>
           <li class="book-a-table text-center"><a href="#book-a-table">Donate</a></li>

@@ -54,7 +54,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
-
+$route['Campaign_view/(:any)'] = 'Home/Campaign_view';
+$route['Campaign/(:any)'] = 'Home/Campaign';
 // Authentication
 Route::any(LOGIN_URL, 'users/login', array('as' => 'login'));
 Route::any(REGISTER_URL, 'users/register', array('as' => 'register'));

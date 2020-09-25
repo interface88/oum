@@ -45,7 +45,7 @@ Assets::add_js($inline, 'inline');
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet"> 
     <style>
     #hero h1 , #hero h2{
-        font-family:'Edo SZ';font-weight:normal;font-size:100px;
+        font-family:'Edo SZ';font-weight:normal;font-size:4em;
     }
      #banner2 h1{
         font-family:'Edo SZ';font-weight:normal;font-size:80px;
