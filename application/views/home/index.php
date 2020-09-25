@@ -23,6 +23,46 @@ body {
       font-family: "iconfont";
       background-color: #1B70F0;
       width: 38px;
+
+<div class="container">
+<div class="row">
+<?php
+foreach($campaign_item as $row)
+{
+?>	
+	<div class="col-lg-4 give-wrap">
+		<div class="fundpress-grid-item-content-v2 give-card">
+			<div class="fundpress-item-header">
+				<img src="<?php echo base_url('assets/Campaign/'.$row->image.'')?>"
+					class="img-thumbnail" />
+			</div>
+			<!-- .fundpress-item-header END -->
+
+			<div class="fundpress-item-content text-center">
+				<a href="<?php echo base_url('Campaign/view/'.$row->slug.'')?>" class="d-block color-navy-blue fundpress-post-title"><?php echo $row->title;?></a>
+				<p><?php echo $row->description;?></p>
+				<span class="xs-separetor"></span>
+				<div class="give-card__progress">
+					<div class="give-goal-progress">
+						<div class="raised">
+							<div class="income">
+								<span class="label">Current</span><span class="value">$4,090</span>
+							</div>
+							<div class="percentage">41%</div>
+							<div class="goal">
+								<span class="label">Target</span> <span class="value"><?php echo $row->goal;?></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- .fundpress-item-content END -->
+		</div>
+	</div>
+<?php
+}
+?>
+</div>
       height: 38px;
       border-radius: 100%;
       font-size: 0.21429em;
@@ -238,6 +278,40 @@ display: inline-block;
     width: 60px;
     height: 3px;
 }
+#banner4{
+    background-color: #fed857;
+    background-image: url(<?php echo base_url('themes/unity/img/about_img2.png')?>);
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: background .3s,border .3s,border-radius .3s,box-shadow .3s;
+    margin: 0;
+    margin-top:20px;
+    padding: 40px 0 75px;
+    text-align:center;
+}
+#banner4 .elementor-background-overlay{
+    background-color: #fed857;
+    opacity: .3;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+ #banner4 h1{
+        font-family:'Edo SZ';font-weight:normal;font-size:80px;
+        color: #000;
+        z-index:1
+}
+#banner4 p{
+    color: #000;
+}
+
+.opal-shape-arrow {
+    clip-path: polygon(0 0,100% 0,100% calc(100% - 15px),calc(50% + 15px) calc(100% - 15px),50% 100%,calc(50% - 15px) calc(100% - 15px),0 calc(100% - 15px));
+}
+
 </style>
 <section id="hero" class="d-flex align-items-center">
 	<div class="container position-relative text-center text-lg-left"
@@ -354,7 +428,18 @@ foreach($campaign_item as $row)
 			</div>
 		</div>
 	</div>
-</section>	
+</section>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<div id="banner4" class="opal-shape-arrow">
+				<div class="elementor-background-overlay"></div>
+				<h1>Unity Makes Strength</h1>
+				<p>Our partners are from all over the world</p>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="container">
 	<div class="row">
 		<div class="col-lg-3">
