@@ -9,9 +9,9 @@
       <div class="languages">
         <ul>
         <?php
-           if ($this->auth->is_logged_in() !== false)
+          if ($this->auth->is_logged_in() !== false)
             {
-             //    echo '<li><a> Login User : '.$current_user->display_name.'</a></li>';
+                echo '<li><a> Hi,'.$this->auth->user()->display_name.'</a></li>';
      
                  //   echo '<li><a href="'.base_url('users/logout').'">Logout</a></li>';
                    /* echo '<li><a href="'.base_url('campaign/front_view_user').'">MY Campaign</a></li>';
