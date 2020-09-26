@@ -29,10 +29,9 @@ $fieldData = array(
 		<div class="container">
             <div class="card card-outline-secondary">
                 <div class="card-header">
-                    <h3 class="mb-0">Login</h3>
+                    <h3 class="mb-0"><?php echo lang('us_sign_up'); ?></h3>
                 </div>
                 <div class="card-body">
-                <h1 class="page-header"><?php echo lang('us_sign_up'); ?></h1>
                 <?php if (validation_errors()) : ?>
                 <div class="alert alert-danger" role="alert"	>
                     <?php echo validation_errors(); ?>
@@ -49,10 +48,7 @@ $fieldData = array(
                 <div class="row">
                     <div class="col-lg-12">
                         <?php echo form_open(site_url(REGISTER_URL), array('class' => "form-horizontal", 'autocomplete' => 'off')); ?>
-                            <fieldset>
                                 <?php Template::block('user_fields', 'user_fields', $fieldData); ?>
-                            </fieldset>
-                            <fieldset>
                                 <?php
                                 // Allow modules to render custom fields. No payload is passed
                                 // since the user has not been created, yet.
@@ -61,14 +57,7 @@ $fieldData = array(
                                 <!-- Start of User Meta -->
                                 <?php $this->load->view('users/user_meta', array('frontend_only' => true)); ?>
                                 <!-- End of User Meta -->
-                            </fieldset>
-                            <fieldset>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <input class="btn btn-primary" type="submit" name="register" id="submit" value="<?php echo lang('us_register'); ?>" />
-                                    </div>
-                                </div>
-                            </fieldset>
+                            <input class="btn btn-primary" type="submit" name="register" id="submit" value="<?php echo lang('us_register'); ?>" />
                         <?php echo form_close(); ?>
                         <p class='already-registered'>
                             <?php echo lang('us_already_registered'); ?>
