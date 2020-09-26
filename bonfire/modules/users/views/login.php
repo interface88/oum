@@ -1,7 +1,8 @@
 <!--<?php
-	$site_open = $this->settings_lib->item('auth.allow_register');
+  $site_open = $this->settings_lib->item('auth.allow_register');
 ?>
 <p><br/><a href="<?php echo site_url(); ?>">&larr; <?php echo lang('us_back_to') . $this->settings_lib->item('site.title'); ?></a></p>-->
+
 
 <main id="main">
 	<section class="breadcrumbs">
@@ -85,3 +86,5 @@
         </div>
 	</section>
 </main>
+
+   

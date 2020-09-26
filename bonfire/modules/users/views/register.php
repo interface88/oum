@@ -6,7 +6,6 @@ $fieldData = array(
     'errorClass'    => $errorClass,
     'controlClass'  => $controlClass,
 );
-
 ?>
 <style scoped='scoped'>
 #register p.already-registered {
