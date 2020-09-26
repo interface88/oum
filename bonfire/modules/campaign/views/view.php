@@ -16,48 +16,50 @@
     </section>
 <section class="inner-page">
 <div class="container">
-<table class="table table-hover">
-  <caption>List of Project</caption>
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Title</th>
-      <th scope="col">Sub Title</th>
-      <th scope="col">category</th>
-      <th scope="col">Image</th>
-      <th scope="col">launched</th>
-      <th scope="col">Exipre date</th>
-      <th scope="col">Status</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-    $i=1;
-    foreach ($list_item as $row) 
-    {
-      echo '<tr><th scope="row">'.$i++.'</th><td>'.$row->title.'</td><td>'.$row->subtitle.'</td><td>'.$row->category.'</td><td><img class="img-thumbnail" src="'.base_url('assets/Campaign/'.$row->image.'').'"></td><td>'.$row->launched.'</td><td>'.$row->deadline.'</td><td>';
-        if('D'==$row->status)
-        {
-          echo 'Draft';
-        }
-        elseif('A'==$row->status)
-        {
-            echo 'Approval';
-        }
-        elseif('R'==$row->status)
-        {
-            echo 'Reject';
-        }
-        elseif('P'==$row->status)
-        {
-            echo 'Pending';
-        }
-      echo'</td><td><a href="'.base_url('Campaign/Edit/'.$row->campaign_id.'').'">Edit</a></td></tr>';
-    }
-    ?>
-  </tbody>
-</table>
+    <div class="table-responsive-sm">    
+        <table class="table table-hover table-sm">
+          <caption>List of Project</caption>
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">Sub Title</th>
+              <th scope="col">category</th>
+              <th scope="col">Image</th>
+              <th scope="col">launched</th>
+              <th scope="col">Exipre date</th>
+              <th scope="col">Status</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            $i=1;
+            foreach ($list_item as $row) 
+            {
+              echo '<tr><td scope="row">'.$i++.'</td><td>'.$row->title.'</td><td>'.$row->subtitle.'</td><td>'.$row->category.'</td><td><img class="img-thumbnail" src="'.base_url('assets/Campaign/'.$row->image.'').'"></td><td>'.$row->launched.'</td><td>'.$row->deadline.'</td><td>';
+                if('D'==$row->status)
+                {
+                  echo 'Draft';
+                }
+                elseif('A'==$row->status)
+                {
+                    echo 'Approval';
+                }
+                elseif('R'==$row->status)
+                {
+                    echo 'Reject';
+                }
+                elseif('P'==$row->status)
+                {
+                    echo 'Pending';
+                }
+              echo'</td><td><a class="btn" href="'.base_url('index.php/campaign/Edit/'.$row->campaign_id.'').'"><i class="bx bx-edit-alt"></i></a></td></tr>';
+            }
+            ?>
+          </tbody>
+        </table>
+    </div>        
 </div>
 </section>
 </main>
