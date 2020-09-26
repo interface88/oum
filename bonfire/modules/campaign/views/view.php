@@ -46,7 +46,7 @@
                       	<td>
                       		<div class="btn-group btn-group-sm" role="group" aria-label="action button">
                      			<?php echo anchor(base_url('Campaign/Edit/'.$row->campaign_id), '<i class="btn bx bx-edit-alt"></i>', 'class="btn btn-secondary btn-sm" title="Edit"'); ?>
-                     			<?php echo anchor(base_url('home/campaign_view/'.$row->slug), '<i class="btn bx bx-show-alt"></i>', 'class="btn btn-secondary btn-sm" title="View"'); ?>
+                     			<?php echo anchor(base_url('campaign_view/'.$row->slug), '<i class="btn bx bx-show-alt"></i>', 'class="btn btn-secondary btn-sm" title="View"'); ?>
                             </div>
                       	</td>
                       	</tr>

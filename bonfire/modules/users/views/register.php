@@ -7,12 +7,6 @@ $fieldData = array(
     'controlClass'  => $controlClass,
 );
 ?>
-<style scoped='scoped'>
-#register p.already-registered {
-    text-align: center;
-}git
-</style>
-
 <main id="main">
 	<section class="breadcrumbs">
 		<div class="container">
