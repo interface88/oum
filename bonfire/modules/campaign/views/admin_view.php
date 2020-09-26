@@ -43,8 +43,8 @@
                               		<td scope="row"><?php echo $i++;?></th>
                               		<td><?php echo $row->title;?></td>
                               		<td><?php echo $row->category;?></td>
-                              		<td><?php echo $row->launched;?></td>
-                              		<td><?php echo $row->launched;?></td>
+                              		<td><?php echo date("d-M-Y", strtotime($row->launched));?></td>
+              						<td><?php echo date("d-M-Y", strtotime($row->deadline));?></td>
                               		<td>
                               		<?php echo form_dropdown('status',array('D'=>'Draft','A'=>'Approval','R'=>'Reject','P'=>'Pending'),
                               		    $row->status,'','class="status_checks" data-id="'.$row->campaign_id.'"');?>
