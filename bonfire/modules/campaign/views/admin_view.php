@@ -3,7 +3,7 @@
   .img-thumbnail{width: 20%;}
 </style>
 <main id="main">
-<section class="breadcrumbs">
+	<section class="breadcrumbs">
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <h2>Campaign</h2>
@@ -14,48 +14,63 @@
         </div>
       </div>
     </section>
-<section class="inner-page">
-<div class="container">
-<div class="table-responsive">
-        <table class="table table-hover table-sm">
-          <caption>List of Project</caption>
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Title</th>
-              <th scope="col">Sub Title</th>
-              <th scope="col">category</th>
-              <th scope="col">launched</th>
-              <th scope="col">Exipre date</th>
-              <th scope="col">Status</th>
-              <th scope="col">Activate/Deactivate</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            $i=1;
-            foreach ($list_item as $row) 
-            {
-              echo '<tr><th scope="row">'.$i++.'</th><td>'.$row->title.'</td><td>'.$row->subtitle.'</td><td>'.$row->category.'</td><td>'.$row->launched.'</td><td>'.$row->deadline.'</td><td>';
-              echo form_dropdown('status',array('D'=>'Draft','A'=>'Approval','R'=>'Reject','P'=>'Pending'),$row->status,'','class="status_checks form-control" data-id="'.$row->campaign_id.'"');
-              echo'</td><td>';
-              if($row->is_active == FALSE)
-              {
-                  echo '<button type="button" class="active btn btn-success" data-id="'.$row->campaign_id.'" status="1">Activate</button>';
-              }
-              else{
-                  echo '<button  type="button" class="active btn btn-danger" data-id="'.$row->campaign_id.'" status="0">Deactivate</button>';
-              }
-              
-              echo '</td><td><a href="'.base_url('Campaign/Edit/'.$row->campaign_id.'').'" title="Edit"><i class="btn bx bx-edit-alt"></i></a> <button type="button" class="delete btn" data-id="'.$row->campaign_id.'" title="Delete"><i class="btn bx bx-trash-alt"></i></button></td></tr>';
-            }
-            ?>
-          </tbody>
-        </table>
-    </div>    
-</div>
-</section>
+    <section class="inner-page">
+        <div class="container">
+        	<div class="page-container row">
+        		<div class="col-lg-12">
+                <div class="table-responsive">
+                        <table class="table table-hover table-bordered  table-sm">
+                          <caption>List of Campaign</caption>
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Title</th>
+                              <th scope="col">Category</th>
+                              <th scope="col">Launched</th>
+                              <th scope="col">Exipre date</th>
+                              <th scope="col">Status</th>
+                              <th scope="col">Activate/Deactivate</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php
+                            $i=1;
+                            foreach ($list_item as $row) {
+                            ?>
+                              <tr>
+                              
+                              		<td scope="row"><?php echo $i++;?></th>
+                              		<td><?php echo $row->title;?></td>
+                              		<td><?php echo $row->category;?></td>
+                              		<td><?php echo $row->launched;?></td>
+                              		<td><?php echo $row->launched;?></td>
+                              		<td>
+                              		<?php echo form_dropdown('status',array('D'=>'Draft','A'=>'Approval','R'=>'Reject','P'=>'Pending'),
+                              		    $row->status,'','class="status_checks" data-id="'.$row->campaign_id.'"');?>
+                              		</td>
+                              		<td> 
+                                  		<?php if($row->is_active == FALSE) {?>
+                                  			<button type="button" class="active btn btn-success" data-id="'.$row->campaign_id.'" status="1">Activate</button>
+                          				<?php }else {?>
+                                	      <button  type="button" class="active btn btn-danger btn-sm" data-id="'.$row->campaign_id.'" status="0">Deactivate</button>
+                                  		<?php }?>
+	                             	</td>
+	                             	<td>
+	                             		<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+	                             			<?php echo anchor(base_url('Campaign/Edit/'.$row->campaign_id), '<i class="btn bx bx-edit-alt"></i>', 'class="btn btn-secondary btn-sm"'); ?>
+    										<button type="button" class="btn btn-danger btn-sm delete" data-id="'.$row->campaign_id.'" title="Delete"><i class="btn bx bx-trash-alt"></i></button>
+                                        </div>
+									</td>
+								</tr>
+                           <?php }?>
+                          </tbody>
+                        </table>
+                    </div>
+        		</div>
+        	</div>
+        </div>
+    </section>
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -77,8 +92,6 @@ $(document).on('change', '.status_checks', function()
               }
             });
 });
-</script>
-<script>
 $(document).on('click','.delete',function()
  {
    if(confirm('Are you sure Delete data'))
@@ -104,8 +117,6 @@ $(document).on('click','.delete',function()
    }
  }
 );
-</script>
-<script>
   $(document).on('click','.active',function()
  { 
     var $btn =  $(this);

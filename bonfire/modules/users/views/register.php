@@ -10,7 +10,7 @@ $fieldData = array(
 <style scoped='scoped'>
 #register p.already-registered {
     text-align: center;
-}
+}git
 </style>
 
 <main id="main">
