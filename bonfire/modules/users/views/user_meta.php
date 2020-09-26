@@ -55,16 +55,16 @@ if (! empty($meta_fields)) :
             $stateFieldId = $field['name'];
             $stateValue = isset($user->{$field['name']}) ? $user->{$field['name']} : $defaultState;
 ?>
-<div class="control-group<?php echo form_error($field['name']) ? ' error' : ''; ?>">
-    <label class="control-label" for="<?php echo $field['name']; ?>"><?php echo lang('user_meta_state'); ?></label>
-    <div class="controls">
+<div class="form-group row <?php echo form_error($field['name']) ? ' error' : ''; ?>">
+    <label class="col-sm-3 col-form-label" for="<?php echo $field['name']; ?>"><?php echo lang('user_meta_state'); ?></label>
+    <div class="col-sm-9">
         <?php
         echo state_select(
             set_value($field['name'], $stateValue),
             $defaultState,
             $defaultCountry,
             $field['name'],
-            'span6 chzn-select'
+            'form-control chzn-select'
         );
         ?>
     </div>
@@ -76,15 +76,15 @@ if (! empty($meta_fields)) :
             $countryFieldId = $field['name'];
             $countryValue = isset($user->{$field['name']}) ? $user->{$field['name']} : $defaultCountry;
 ?>
-<div class="control-group<?php echo form_error($field['name']) ? ' error' : ''; ?>">
-    <label class="control-label" for="<?php echo $field['name']; ?>"><?php echo lang('user_meta_country'); ?></label>
-    <div class="controls">
+<div class="form-group row<?php echo form_error($field['name']) ? ' error' : ''; ?>">
+    <label class="col-sm-3 col-form-label" for="<?php echo $field['name']; ?>"><?php echo lang('user_meta_country'); ?></label>
+    <div class="col-sm-9">
         <?php
         echo country_select(
             set_value($field['name'], isset($user->{$field['name']}) ? $user->{$field['name']} : $defaultCountry),
             $defaultCountry,
             $field['name'],
-            'span6 chzn-select'
+            'form-control chzn-select'
         );
         ?>
     </div>

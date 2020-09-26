@@ -263,7 +263,7 @@ public function view_all($slug = Null)
         $query = $this->db->get_where($this->table_name, array('status'=>'A','deleted'=>0));
         return $query->result();
     }
-    $query = $this->db->get_where($this->table_name, array('status'=>'A','slug' => $slug, 'deleted'=>0));
+    $query = $this->db->get_where($this->table_name, array('slug' => $slug, 'deleted'=>0));
     return $query->row();
 }
 /*this function used to fronted data fetch database end*/

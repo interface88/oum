@@ -19,3 +19,8 @@
 	background-attachment: scroll;
 	color: #333 !important;
 }
+
+.page-container{
+	background-color: #ffffff;
+	padding: 10px 0;
+}
