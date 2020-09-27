@@ -28,7 +28,7 @@ class Campaign_model extends BF_Model
     /** @var string Name of the oum_campaign table. */
     protected $table_name = 'oum_campaign';
     protected $table_name2 = 'category';
-    protected $table_name3 = 'subcategory';
+    protected $table_name3 = 'sub_category';
     /** @var string Name of the user meta table. */
     protected $meta_table = 'user_meta';
 
