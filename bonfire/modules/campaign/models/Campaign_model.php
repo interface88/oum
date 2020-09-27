@@ -27,7 +27,8 @@ class Campaign_model extends BF_Model
 {
     /** @var string Name of the oum_campaign table. */
     protected $table_name = 'oum_campaign';
-
+    protected $table_name2 = 'category';
+    protected $table_name3 = 'subcategory';
     /** @var string Name of the user meta table. */
     protected $meta_table = 'user_meta';
 
@@ -333,8 +334,55 @@ public function get_views($slug = FALSE)
         return $query->row();
 }
 
-
-
+/*function used to insert category*/
+  public function insert_category($data = array())
+  {
+      return  $this->db->insert($this->table_name2, $data);
+  }
+/*function used to insert category end*/
+/*this function used to update category */
+ public function update_category($slug = null, $data = array())
+    {        
+        $this->db->where('category_id', $slug);
+      return  $this->db->update($this->table_name2, $data);
+    } 
+/*function used to update category end*/
+/*function used to edit/view category*/
+public function get_view_category($slug = NULL)
+{ 
+    if ($slug === NULL)
+                {   $query = $this->db->get($this->table_name2);
+                    return $query->result();
+                }
+        $query = $this->db->get_where($this->table_name2, array('category_id' => $slug));
+        return $query->row();
+}
+/*functoin used to edit/view category end*/
+/*functoin used to insert subcategory*/
+  public function insert_subcategory($data = array())
+  {
+      return  $this->db->insert($this->table_name3, $data);
+  }
+/*functoin used to insert subcategory end*/
+/*this function used to update subcategory */
+ public function update_subcategory($slug = null, $data = array())
+    {        
+        $this->db->where('subcategory_id', $slug);
+      return  $this->db->update($this->table_name3, $data);
+    } 
+/*function used to update subcategory end*/
+/*functoin used to edit/view category*/
+public function get_view_subcategory($slug = NULL)
+{ 
+    if ($slug === NULL)
+                {
+                    $query = $this->db->get($this->table_name3);
+                    return $query->result();
+                }
+        $query = $this->db->get_where($this->table_name3, array('subcategory_id' => $slug));
+        return $query->row();
+}
+/*functoin used to edit/view category end*/
 
 
 

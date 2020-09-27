@@ -384,8 +384,10 @@ $config['encryption_key'] = "58f62e7a5c072527eb00fad7ccb6f547";
  */
 // Shared (CI 2 and 3) Session Variables
 $config['sess_cookie_name']		= 'bf_session';
-$config['sess_expiration']		= 7200;
-$config['sess_time_to_update'] = 300;
+//$config['sess_expiration']		= 7200;
+//$config['sess_time_to_update'] = 300;
+$config['sess_expiration']		= 1400;
+$config['sess_time_to_update'] = 600;
 $config['sess_match_ip'] = false;
 
 // CI 2 Session Variables

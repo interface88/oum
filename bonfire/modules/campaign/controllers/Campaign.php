@@ -253,6 +253,190 @@ class Campaign extends Front_Controller
         $result = $this->campaign_model->campaign_status($id, $data);
         echo $result;
     }
+
+    /*function used to create category*/
+     public function category()
+     {
+      /* this function check user login */
+        $this->auth->restrict();
+        if ($this->session->role_id == 1) 
+        {
+            $this->form_validation->set_rules('category', 'Category', 'required|trim');
+             if ($this->form_validation->run() == FALSE)
+            {
+                    Template::set_view('campaign/create_category');
+                    Template::render();
+            } 
+            else {
+                    if (isset($_POST['save'])) 
+                    {
+                        $data=array('category_name' =>$_POST['category'],);
+                        if ($this->campaign_model->insert_category($data) == true)
+                         {
+                            Template::set_message(lang('us_user_created_success'), 'success');
+                            redirect('Campaign/view_cateogry');
+                         }       
+                    }
+                  }  
+        }
+         else {
+            Template::set_message('Cannot Access this page.', 'error');
+            Template::render();
+        }   
+     }
+    /*function used to create category end*/
+    /*function used to edit category*/
+     public function edit_category()
+     {
+      /* this function check user login */
+        $this->auth->restrict();
+        if ($this->session->role_id == 1) 
+        {
+            $this->form_validation->set_rules('category', 'Category Name', 'required|trim');
+             if ($this->form_validation->run() == FALSE)
+            {
+                    $slug=$this->uri->segment(3);
+                    $data=$this->campaign_model->get_view_category($slug);
+                    Template::set_view('campaign/edit_category');
+                    Template::set('list_item',$data);
+                    Template::render();
+            } 
+            else {
+                    if (isset($_POST['save'])) 
+                    {
+                        $data=array('category_name' =>$_POST['category']);
+                        if ($this->campaign_model->update_category($slug,$data) == true)
+                         {
+                            Template::set_message(lang('us_user_created_success'), 'success');
+                            redirect('Campaign/view_cateogry');
+                         }       
+                    }
+                  }  
+        }
+         else {
+            Template::set_message('Cannot Access this page.', 'error');
+            Template::render();
+        }   
+     }
+    /*function used to edit category*/
+    /*function used to subcreate category*/
+     public function subcategory()
+     {
+      /* this function check user login */
+        $this->auth->restrict();
+        if ($this->session->role_id == 1) 
+        {
+            $this->form_validation->set_rules('category', 'Sub Category Name', 'required|trim');
+            $this->form_validation->set_rules('category_name', 'Category Name', 'required|trim');
+             if ($this->form_validation->run() == FALSE)
+            {
+                    $data=$this->campaign_model->get_view_category();
+                    $category_item=array();
+                    foreach ($data as $row)
+                     {
+                         $category_item[$row->category_id]=$row->category_name;
+                     }
+                    Template::set_view('campaign/create_subcategory');
+                    Template::set('category_item',$category_item);
+                    Template::render();
+            } 
+            else {
+                    if (isset($_POST['save'])) 
+                    {
+                        $data=array('subcategory_name' =>$_POST['category'],'category_id'=>$_POST['category_name']);
+                        if ($this->campaign_model->insert_subcategory($data) == true)
+                         {
+                            Template::set_message(lang('us_user_created_success'), 'success');
+                            redirect('Campaign/view_subcateogry');
+                         }       
+                    }
+                  }  
+        }
+         else {
+            Template::set_message('Cannot Access this page.', 'error');
+            Template::render();
+        }   
+     }
+    /*function used to create subcategory end*/
+    /*function used to subcreate edit category*/
+     public function edit_subcategory()
+     {
+      /* this function check user login */
+        $this->auth->restrict();
+        if ($this->session->role_id == 1) 
+        {
+            $this->form_validation->set_rules('category', 'Sub Category Name', 'required|trim');
+            $this->form_validation->set_rules('category_name', 'Category Name', 'required|trim');
+             if ($this->form_validation->run() == FALSE)
+            {
+                    $slug=$this->uri->segment(3);
+                    $datasub=$this->campaign_model->get_view_subcategory($slug);
+                    $data=$this->campaign_model->get_view_category();
+                    $category_item=array();
+                    foreach ($data as $row)
+                     {
+                         $category_item[$row->category_id]=$row->category_name;
+                     }
+                    Template::set_view('campaign/edit_subcategory');
+                    Template::set('list_item',$datasub);
+                    Template::set('category_item',$category_item);
+                    Template::render();
+            } 
+            else {
+                    if (isset($_POST['save'])) 
+                    {
+                        $data=array('subcategory_name' =>$_POST['category'],'category_id'=>$_POST['category_name']);
+                        if ($this->campaign_model->update_subcategory($slug,$data) == true)
+                         {
+                            Template::set_message(lang('us_user_created_success'), 'success');
+                            redirect('Campaign/view_cateogry');
+                         }       
+                    }
+                  }  
+        }
+         else {
+            Template::set_message('Cannot Access this page.', 'error');
+            Template::render();
+        }   
+     }
+         /*function used to subcreate edit category*/
+    /*function used to view category*/
+        public function category_view()
+    {
+        /* this function check user login */
+        $this->auth->restrict();
+        if ($this->session->role_id == 1) {
+            $slug = $this->uri->segment(3);
+            
+            $data = $this->campaign_model->get_view_category($slug);
+            Template::set_view('campaign/view_cateogry');
+            Template::set('list_item', $data);
+            Template::render();
+        } else {
+            Template::set_message('Cannot Access this page.', 'error');
+            Template::render();
+        }
+    }
+    /*function used to view category end*/
+    /*function used to view subcategory*/
+        public function sub_category_view()
+    {
+        /* this function check user login */
+        $this->auth->restrict();
+        if ($this->session->role_id == 1) {
+            $slug = $this->uri->segment(3);
+
+            $data = $this->campaign_model->get_view_subcategory($slug);
+            
+            Template::set_view('campaign/view_subcategory');
+            Template::set('list_item', $data);
+            Template::render();
+        } else {
+            Template::set_message('Cannot Access this page.', 'error');
+            Template::render();
+        }
+    }
+    /*function used to view subcategory end*/
 }
 
 /* End of file /bonfire/modules/users/controllers/users.php */

@@ -25,6 +25,8 @@
                if($this->session->role_id==1)
                 {
                   echo '<li><a href="'.base_url('campaign/Views').'">My Campaign</a></li>';
+                  echo '<li><a href="'.base_url('campaign/category_view').'">Category</a></li>';
+                  echo '<li><a href="'.base_url('campaign/sub_category_view').'">Sub Category</a></li>';
                 }
                 else{
                     echo '<li><a href="'.base_url('campaign/View').'">My Campaign</a></li>';
