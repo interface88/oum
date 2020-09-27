@@ -71,22 +71,23 @@ class Campaign extends Front_Controller
     {
         /* this function check user login */
         $this->auth->restrict();
-        
         $this->form_validation->set_rules($this->user_model->get_validation_rules('project'));
         $config['upload_path'] = './assets/Campaign/';
         $config['allowed_types'] = 'gif|jpeg|jpg|png';
         $this->load->library('upload', $config);
-        
         Template::set('active_tab', 'project');
-        if ($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == FALSE) 
+        {
             $error = array(
                 'error' => ''
             );
-            Template::set_view('campaign/new');
+            Template::set_view('campaign/create');
             Template::render();
-        } else {
+        }
+         else {
             if (isset($_POST['save'])) {
-                if ($this->upload->do_upload()) {
+                if ($this->upload->do_upload('userfile')) 
+                {
                     $upload_data = $this->upload->data();
                     $data = array(
                         'user_id' => $this->session->user_id,
@@ -94,28 +95,24 @@ class Campaign extends Front_Controller
                         'slug' => url_title($_POST['title'], 'dash', true),
                         'subtitle' => $_POST['subtitle'],
                         'category' => $_POST['category'],
-                        'location' => $_POST['location'],
+                        'sub_category'=>$_POST['sub_category'],
+                        'target_audience' => $_POST['target_audience'],
+                        'description' => $_POST['txtEditor'],
                         'image' => $upload_data['file_name'],
                         'video_url' => $_POST['video_url'],
-                        'description' => $_POST['txtEditor'],
-                        'goal' => $_POST['goal'],
-                        'launched' => $_POST['launched'],
-                        'deadline' => $_POST['fixed_day_value'],
                         'status' => 'D',
-                        'is_active' => 1,
-                        'created_on' => date("Y-m-d H:i:s"),
-                        'created_by' => ''
-                    );
+                         );
                     if ($this->campaign_model->insert($data) == true) {
                         Template::set_message(lang('us_user_created_success'), 'success');
                         Template::render();
                         redirect('Campaign/funding');
                     }
-                } else {
+                } 
+                else {
                     $error = array(
                         'error' => $this->upload->display_errors()
                     );
-                    Template::set_view('campaign/new');
+                    Template::set_view('campaign/create');
                     Template::set('error', $error);
                     Template::render();
                 }

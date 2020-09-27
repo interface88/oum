@@ -26,7 +26,7 @@
 class Campaign_model extends BF_Model
 {
     /** @var string Name of the oum_campaign table. */
-    protected $table_name = 'oum_campaign';
+    protected $table_name = 'campaign';
     protected $table_name2 = 'category';
     protected $table_name3 = 'sub_category';
     /** @var string Name of the user meta table. */
@@ -59,7 +59,7 @@ class Campaign_model extends BF_Model
         array('field' => 'category', 'label' => 'Category','rules' => 'required'),
         array('field' => 'sub_category', 'label' => 'Sub category','rules' => 'required'),
         array('field' => 'target_audience', 'label' => 'Target audience','rules' => 'required|numeric'),
-        array('field' => 'description', 'label' => 'Project description','rules' => 'required'),
+        array('field' => 'txtEditor', 'label' => 'Project description','rules' => 'required'),
         array('field' => 'image', 'label' => 'Campaign Image ','rules' => 'required'),
         array('field' => 'video_url', 'label' => 'Video Url','rules' => 'valid_url|max_length[100]')
     );
