@@ -90,13 +90,13 @@ body {
                                          </div>
                                       </div>
                                        <div class="form-group row">
-                                          <label for="" class="col-sm-3 col-form-label">Subtitle</label>
+                                          <label for="subtitle" class="col-sm-3 col-form-label">Subtitle</label>
                                           <div class="col-sm-6">
                                                <?php echo form_input(array('class' =>'form-control', 'id'=>'subtitle', 'name'=>'subtitle', 'type'=>'text', 'value'=>set_value('subtitle'),)); echo '<div class="error">'.form_error('subtitle').'</div>';?>   
                                            </div>
                                         </div>	
                                         <div class="form-group row">
-                                          <label for="" class="col-sm-3 col-form-label">Category</label>
+                                          <label for="category" class="col-sm-3 col-form-label">Category</label>
                                           <div class="col-sm-6">
                                                <?php $category_list=array('Art'=>'Art','Comics'=>'Comics','Crafts'=>'Crafts','Dance'=>'Dance','Design'=>'Design','Fashion'=>'Fashion','Film & Video'=>'Film & Video','Food'=>'Food','Games'=>'Games','Journalism'=>'Journalism','Music'=>'Music','Photography'=>'Photography','Publishing'=>'Publishing','Technology'=>'Technology','Theater'=>'Theater');?>
                                                  <?php
@@ -106,9 +106,27 @@ body {
                                            </div>
                                         </div>  
                                         <div class="form-group row">
-                                          <label for="location" class="col-sm-3 col-form-label">Project location</label>
+                                          <label for="subcategory" class="col-sm-3 col-form-label">Sub Category</label>
                                           <div class="col-sm-6">
-                                                <?php echo form_input(array('class' =>'form-control', 'id'=>'location', 'name'=>'location', 'type'=>'text', 'value'=>set_value('location'), 'placeholder'=>"Start typing your location...")); echo '<div class="error">'.form_error('location').'</div>';?>      
+                                               <?php $category_list=array('Art'=>'Art','Comics'=>'Comics','Crafts'=>'Crafts','Dance'=>'Dance','Design'=>'Design','Fashion'=>'Fashion','Film & Video'=>'Film & Video','Food'=>'Food','Games'=>'Games','Journalism'=>'Journalism','Music'=>'Music','Photography'=>'Photography','Publishing'=>'Publishing','Technology'=>'Technology','Theater'=>'Theater');?>
+                                                 <?php
+                                                  echo form_dropdown('subcategory', $category_list, set_value('subcategory'), '','class="form-control"');
+                                                  echo '<div class="error">'.form_error('subcategory').'</div>';
+                                                ?>     
+                                           </div>
+                                        </div>  
+                                        <div class="form-group row">
+                                          <label for="location" class="col-sm-3 col-form-label">Target Audience</label>
+                                          <div class="col-sm-6">
+                                                <?php
+                                                  $audiencearr=array();
+                                                  for($i=1; $i<=10; $i++)
+                                                  {
+                                                    $audiencearr[$i.'000']=$i;
+                                                  }
+                                                  echo form_dropdown('audience', $audiencearr, set_value('audience'), '','class="form-control"');
+                                                  echo '<div class="error">'.form_error('audience').'</div>';
+                                                ?>          
                                            </div>
                                         </div>  
                                         <div class="form-group row">
@@ -148,7 +166,7 @@ body {
                                       echo form_open_multipart('Campaign/new', $attributes);
                                   ?> 
                                      <div class="form-group row">
-                                        <label for="" class="col-sm-6 col-form-label">
+                                        <label for="" class="col-sm-3 col-form-label">
                                           Campaign duration
                                           <p>Set a time limit for your campaign. You won't be able to change this after you launch.</p>
                                         </label>
@@ -156,12 +174,48 @@ body {
                                            <?php echo form_input(array('class' =>'form-control', 'id'=>'launched', 'name'=>'launched', 'type'=>'text', 'value'=>set_value('launched'), 'placeholder'=>"")); echo '<div class="error">'.form_error('launched').'</div>';?>  
                                               <?php echo form_input(array('class' =>'form-control', 'id'=>'fixed_day_value', 'name'=>'fixed_day_value', 'type'=>'text', 'value'=>set_value('fixed_day_value'), 'placeholder'=>"")); echo '<div class="error">'.form_error('fixed_day_value').'</div>';?>   
                                          </div>
-                                     </div>  
+                                     </div>
                                      <div class="form-group row">
-                                        <label for="" class="col-sm-6 col-form-label">Amount required</label>
+                                          <label for="80G_availablity" class="col-sm-3 col-form-label">Target Audience</label>
+                                          <div class="col-sm-6">
+                                                <?php
+                                                $yesarr= array('Yes' => 'Yes','No' => 'No',);
+                                                echo form_dropdown('80G_availablity', $yesarr, set_value('80G_availablity'),'class="form-control"');
+                                                  echo '<div class="error">'.form_error('80G_availablity').'</div>';
+                                                ?> 
+                                               <p>option to provide 80G certificate to the donor</p>
+                                               <p>Campaigners who are able to provide the 80G certificate usually get more support and  backers.</p>          
+                                           </div>
+                                     </div>    
+                                     <div class="form-group row">
+                                        <label for="" class="col-sm-3 col-form-label">Amount required</label>
                                          <div class="col-sm-6">
                                                 <?php echo form_input(array('class' =>'form-control', 'id'=>'goal', 'name'=>'goal', 'type'=>'text', 'value'=>set_value('goal'), 'placeholder'=>"2000.00")); echo '<div class="error">'.form_error('goal').'</div>';?>   
                                          </div>
+                                         <div class="col-sm-12 col-sm-offset-2">
+                                             <table class="table table-bordered  table-sm">
+                                              <caption class="bg-warning text-white text-center">Funding Goal - Rs 64,00,000</caption>
+                                               <thead class="thead-dark">
+                                                 <tr>
+                                                   <th>Particulars</th>
+                                                   <th>Percentage</th>
+                                                   <th>Amount</th>
+                                                 </tr>
+                                               </thead>
+                                               <tbody>
+                                                 <tr>
+                                                   <td>Processing Fee</td>
+                                                   <td>10%</td>
+                                                   <td>5,00,000</td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>Taxes</td>
+                                                   <td>18%</td>
+                                                   <td>9,00,000</td>
+                                                 </tr>
+                                               </tbody>
+                                             </table>
+                                        </div>
                                      </div>
                                      <div class="form-group row">
                                           <div class="col-sm-12 col-md-offset-3">
