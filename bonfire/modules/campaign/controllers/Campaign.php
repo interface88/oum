@@ -72,16 +72,7 @@ class Campaign extends Front_Controller
         /* this function check user login */
         $this->auth->restrict();
         
-        $this->form_validation->set_rules($this->user_model->get_validation_rules($type));
-        /*
-        $this->form_validation->set_rules('title', 'Title', 'required|trim');
-        $this->form_validation->set_rules('subtitle', 'Sub Title', 'required|trim');
-        $this->form_validation->set_rules('category', 'Category', 'required|trim');
-        $this->form_validation->set_rules('txtEditor', 'Description', 'required|trim');
-        $this->form_validation->set_rules('launched', 'Target launch date', 'required|trim');
-        $this->form_validation->set_rules('fixed_day_value', 'Campaign duration', 'required|trim');
-        $this->form_validation->set_rules('goal', 'Target Amount', 'required|trim');
-        */
+        $this->form_validation->set_rules($this->user_model->get_validation_rules('project'));
         $config['upload_path'] = './assets/Campaign/';
         $config['allowed_types'] = 'gif|jpeg|jpg|png';
         $this->load->library('upload', $config);
@@ -118,7 +109,7 @@ class Campaign extends Front_Controller
                     if ($this->campaign_model->insert($data) == true) {
                         Template::set_message(lang('us_user_created_success'), 'success');
                         Template::render();
-                        redirect('Campaign/views');
+                        redirect('Campaign/funding');
                     }
                 } else {
                     $error = array(
