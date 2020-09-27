@@ -17,7 +17,7 @@
                     <div class="card card-outline-secondary">
                         <div class="card-header">
                             <h3 class="mb-0"><?php echo lang('us_reset_password'); ?></h3>
-                        </div>
+                        </div>z
                         <div class="card-body">
                     			<?php if (validation_errors()) : ?>
                                 	<div class="alert alert-danger">
