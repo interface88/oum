@@ -48,40 +48,53 @@ class Campaign_model extends BF_Model
 
     /** @var array Validation rules. */
     protected $validation_rules = array(
+        
+    );
+
+    /** @var Array Additional validation rules only used on project tab. */
+    protected $project_validation_rules = array(
         array(
             'field' => 'password',
             'label' => 'lang:bf_password',
-            'rules' => 'max_length[120]|valid_password|matches[pass_confirm]',
+            'rules' => 'required',
         ),
         array(
             'field' => 'pass_confirm',
             'label' => 'lang:bf_password_confirm',
-            'rules' => '',
-        ),
-        array(
-            'field' => 'display_name',
-            'label' => 'lang:bf_display_name',
-            'rules' => 'trim|max_length[255]',
-        ),
-        array(
-            'field' => 'language',
-            'label' => 'lang:bf_language',
-            'rules' => 'required|trim',
-        ),
-        array(
-            'field' => 'timezones',
-            'label' => 'lang:bf_timezone',
-            'rules' => 'required|trim|max_length[40]',
-        ),
-        array(
-            'field' => 'role_id',
-            'label' => 'lang:us_role',
-            'rules' => 'trim|max_length[2]|is_numeric',
+            'rules' => 'required',
         ),
     );
-
-    /** @var Array Additional validation rules only used on insert. */
-    protected $insert_validation_rules = array(
+    
+    /** @var Array Additional validation rules only used on project tab. */
+    protected $funding_validation_rules = array(
+        array(
+            'field' => 'password',
+            'label' => 'lang:bf_password',
+            'rules' => 'required',
+        ),
+        array(
+            'field' => 'pass_confirm',
+            'label' => 'lang:bf_password_confirm',
+            'rules' => 'required',
+        ),
+    );
+    
+    /** @var Array Additional validation rules only used on project tab. */
+    protected $people_team_validation_rules = array(
+        array(
+            'field' => 'password',
+            'label' => 'lang:bf_password',
+            'rules' => 'required',
+        ),
+        array(
+            'field' => 'pass_confirm',
+            'label' => 'lang:bf_password_confirm',
+            'rules' => 'required',
+        ),
+    );
+    
+    /** @var Array Additional validation rules only used on project tab. */
+    protected $payment_validation_rules = array(
         array(
             'field' => 'password',
             'label' => 'lang:bf_password',
