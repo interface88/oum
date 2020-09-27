@@ -53,46 +53,48 @@ class Campaign_model extends BF_Model
 
     /** @var Array Additional validation rules only used on project tab. */
     protected $project_validation_rules = array(
-        array(
-            'field' => 'password',
-            'label' => 'lang:bf_password',
-            'rules' => 'required',
-        ),
-        array(
-            'field' => 'pass_confirm',
-            'label' => 'lang:bf_password_confirm',
-            'rules' => 'required',
-        ),
+        array('field' => 'title', 'label' => 'Title','rules' => 'required|max_length[50]'),
+        array('field' => 'subtitle', 'label' => 'Subtitle','rules' => 'max_length[100]'),
+        array('field' => 'category', 'label' => 'Category','rules' => 'required'),
+        array('field' => 'sub_category', 'label' => 'Sub category','rules' => 'required'),
+        array('field' => 'target_audience', 'label' => 'Target audience','rules' => 'required|numeric'),
+        array('field' => 'description', 'label' => 'Project description','rules' => 'required'),
+        array('field' => 'image', 'label' => 'Campaign Image ','rules' => 'required'),
+        array('field' => 'video_url', 'label' => 'Video Url','rules' => 'valid_url|max_length[100]')
     );
     
     /** @var Array Additional validation rules only used on project tab. */
     protected $funding_validation_rules = array(
-        array(
-            'field' => 'password',
-            'label' => 'lang:bf_password',
-            'rules' => 'required',
-        ),
-        array(
-            'field' => 'pass_confirm',
-            'label' => 'lang:bf_password_confirm',
-            'rules' => 'required',
-        ),
+        array('field' => 'deadline_day', 'label' => 'Campaign Duration','rules' => 'numeric'),
+        array('field' => 'deadline', 'label' => 'Campaign Duration','rules' => 'required'),
+        array('field' => '80G_availablity', 'label' => 'Option for 80G','rules' => 'required'),
+        array('field' => 'goal', 'label' => 'Goal','rules' => 'required|numeric'),
+        array('field' => 'final_goal', 'label' => 'Final Goal','rules' => 'required|numeric')
     );
     
     /** @var Array Additional validation rules only used on project tab. */
-    protected $people_team_validation_rules = array(
-        array(
-            'field' => 'password',
-            'label' => 'lang:bf_password',
-            'rules' => 'required',
-        ),
-        array(
-            'field' => 'pass_confirm',
-            'label' => 'lang:bf_password_confirm',
-            'rules' => 'required',
-        ),
-    );
+    protected $people_validation_rules = array(
+        array('field' => 'name', 'label' => 'Name','rules' => 'required|max_length[100]'),
+        array('field' => 'email_id', 'label' => 'Email','rules' => 'valid_email|max_length[100]'),
+        array('field' => 'education', 'label' => 'Education','rules' => 'required|max_length[100]'),
+        array('field' => 'phone_number', 'label' => 'Phone','rules' => 'required|max_length[50]'),
+        array('field' => 'facebook_profile_link', 'label' => 'Facebook','rules' => 'valid_url|max_length[100]'),
+        array('field' => 'linkedin_profile_link', 'label' => 'LinkedIn','rules' => 'valid_url|max_length[100]'),
+        array('field' => 'twitter_profile_link', 'label' => 'Twitter','rules' => 'max_length[100]'),
+        array('field' => 'adhaar_card_img', 'label' => 'education','rules' => 'required|max_length[50]'),
+        array('field' => 'pan_card_img', 'label' => 'education','rules' => 'required|max_length[50]')
+    );  
     
+    protected $team_validation_rules = array(
+        array('field' => 'company_name', 'label' => 'Company Name','rules' => 'required|numeric'),
+        array('field' => 'no_of_director', 'label' => 'No of Director','rules' => 'required|numeric'),
+        array('field' => 'registered_address', 'label' => 'Registered Address','rules' => 'required|max_length[500]'),
+        array('field' => 'communication_address', 'label' => 'Communication address','rules' => 'max_length[500]'),
+        array('field' => 'gst', 'label' => 'GST','rules' => 'max_length[20]'),
+        array('field' => 'cin_img', 'label' => 'CIN','rules' => 'max_length[50]'),
+        array('field' => 'pan_img', 'label' => 'PAN','rules' => 'max_length[50]')
+    );  
+      
     /** @var Array Additional validation rules only used on project tab. */
     protected $payment_validation_rules = array(
         array(
