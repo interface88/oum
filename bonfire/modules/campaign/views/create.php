@@ -86,7 +86,10 @@ body {
                                       <div class="form-group row">
                                         <label for="title" class="col-sm-3 col-form-label">Title</label>
                                         <div class="col-sm-6">
-                                             <?php echo form_input(array('class' =>'form-control', 'id'=>'title', 'name'=>'title', 'type'=>'text', 'value'=>set_value('title'),)); echo '<div class="error">'.form_error('title').'</div>';?>    
+                                             <?php echo 
+                                                form_input(array('class' => form_error('title') ? 'form-control is-invalid' : 'form-control', 'id'=>'title', 'name'=>'title', 'type'=>'text', 'value'=>set_value('title'),)); 
+                                                echo '<div class="invalid-feedback">'.form_error('title').'</div>';
+                                             ?>
                                          </div>
                                       </div>
                                        <div class="form-group row">

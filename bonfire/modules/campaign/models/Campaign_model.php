@@ -1000,5 +1000,24 @@ public function get_view_subcategory($slug = NULL)
             'left'
         );
     }
+    
+    public function get_custom_validation_rules($type = '')
+    {
+        if($type == 'project'){
+            return $this->project_validation_rules;
+        }
+        
+        if($type == 'project'){
+            return $this->project_validation_rules;
+        }
+        
+        if($type == 'project'){
+            return $this->project_validation_rules;
+        }
+        
+        if($type == 'project'){
+            return $this->project_validation_rules;
+        }
+    }
 }
 //end User_model

@@ -71,53 +71,44 @@ class Campaign extends Front_Controller
     {
         /* this function check user login */
         $this->auth->restrict();
-        $this->form_validation->set_rules($this->user_model->get_validation_rules('project'));
-        $config['upload_path'] = './assets/Campaign/';
-        $config['allowed_types'] = 'gif|jpeg|jpg|png';
-        $this->load->library('upload', $config);
+        
         Template::set('active_tab', 'project');
-        if ($this->form_validation->run() == FALSE) 
-        {
-            $error = array(
-                'error' => ''
-            );
-            Template::set_view('campaign/create');
-            Template::render();
-        }
-         else {
-            if (isset($_POST['save'])) {
-                if ($this->upload->do_upload('userfile')) 
-                {
-                    $upload_data = $this->upload->data();
-                    $data = array(
-                        'user_id' => $this->session->user_id,
-                        'title' => $_POST['title'],
-                        'slug' => url_title($_POST['title'], 'dash', true),
-                        'subtitle' => $_POST['subtitle'],
-                        'category' => $_POST['category'],
-                        'sub_category'=>$_POST['sub_category'],
-                        'target_audience' => $_POST['target_audience'],
-                        'description' => $_POST['txtEditor'],
-                        'image' => $upload_data['file_name'],
-                        'video_url' => $_POST['video_url'],
-                        'status' => 'D',
-                         );
-                    if ($this->campaign_model->insert($data) == true) {
-                        Template::set_message(lang('us_user_created_success'), 'success');
-                        Template::render();
-                        redirect('Campaign/funding');
-                    }
-                } 
-                else {
-                    $error = array(
-                        'error' => $this->upload->display_errors()
-                    );
-                    Template::set_view('campaign/create');
-                    Template::set('error', $error);
+        if (isset($_POST['save'])) {
+            $this->form_validation->set_rules($this->campaign_model->get_custom_validation_rules('project'));
+            $config['upload_path'] = './assets/Campaign/';
+            $config['allowed_types'] = 'gif|jpeg|jpg|png';
+            $this->load->library('upload', $config);
+            
+            // checking validation
+            if ($this->form_validation->run() == FALSE){
+                $error = array('error' => $this->upload->display_errors());
+            }else{
+                $upload_data = $this->upload->data();
+                $data = array(
+                    'user_id' => $this->session->user_id,
+                    'title' => $_POST['title'],
+                    'slug' => url_title($_POST['title'], 'dash', true),
+                    'subtitle' => $_POST['subtitle'],
+                    'category' => $_POST['category'],
+                    'sub_category'=>$_POST['sub_category'],
+                    'target_audience' => $_POST['target_audience'],
+                    'description' => $_POST['txtEditor'],
+                    'image' => $upload_data['file_name'],
+                    'video_url' => $_POST['video_url'],
+                    'status' => 'D',
+                );
+                if ($this->campaign_model->insert($data) == true) {
+                    Template::set_message(lang('us_user_created_success'), 'success');
                     Template::render();
+                    redirect('Campaign/funding');
                 }
             }
+            
         }
+        Template::set_view('campaign/create');
+        Template::render();
+        
+        
     }
     
     /**
@@ -130,6 +121,7 @@ class Campaign extends Front_Controller
         $config['upload_path'] = './assets/Campaign/';
         $config['allowed_types'] = 'gif|jpeg|jpg|png';
         $this->load->library('upload', $config);
+        
         
         Template::set('active_tab', 'funding');
         if ($this->form_validation->run() == FALSE) {
