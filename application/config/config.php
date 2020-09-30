@@ -465,13 +465,14 @@ $config['global_xss_filtering'] = false;
 | 'csrf_regenerate' = Regenerate token on every submission (CI3)
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks (CI3)
  */
+/*
 $config['csrf_protection']  = true;
 $config['csrf_token_name'] = 'ci_csrf_token';
 $config['csrf_cookie_name'] = 'ci_csrf_token';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = true;
 $config['csrf_exclude_uris'] = array();
-
+*/
 /*
 |--------------------------------------------------------------------------
 | Output Compression

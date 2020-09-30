@@ -19,7 +19,7 @@
         	<div class="page-container row">
         		<div class="col-lg-12">
                 <div class="table-responsive">
-                        <table class="table table-hover table-bordered  table-sm">
+                        <table class="table table-hover table-bordered  table-sm datatable">
                           <caption>List of Campaign</caption>
                           <thead class="thead-dark">
                             <tr>

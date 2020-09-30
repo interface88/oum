@@ -27,31 +27,20 @@ class Campaign_model extends BF_Model
 {
     /** @var string Name of the oum_campaign table. */
     protected $table_name = 'campaign';
-    protected $table_name2 = 'category';
-    protected $table_name3 = 'sub_category';
     /** @var string Name of the user meta table. */
     protected $meta_table = 'user_meta';
-
     /** @var string Name of the roles table. */
     protected $roles_table = 'roles';
-
     /** @var boolean Use soft deletes or not. */
     protected $soft_deletes = true;
-
     /** @var string The date format to use. */
     protected $date_format = 'datetime';
-
     /** @var boolean Set the modified time automatically. */
     protected $set_modified = false;
-
     /** @var boolean Skip the validation. */
     protected $skip_validation = true;
-
     /** @var array Validation rules. */
-    protected $validation_rules = array(
-        
-    );
-
+    protected $validation_rules = array();
     /** @var Array Additional validation rules only used on project tab. */
     protected $project_validation_rules = array(
         array('field' => 'title', 'label' => 'Title','rules' => 'required|max_length[50]'),
@@ -59,15 +48,15 @@ class Campaign_model extends BF_Model
         array('field' => 'category', 'label' => 'Category','rules' => 'required'),
         array('field' => 'sub_category', 'label' => 'Sub category','rules' => 'required'),
         array('field' => 'target_audience', 'label' => 'Target audience','rules' => 'required|numeric'),
-        array('field' => 'txtEditor', 'label' => 'Project description','rules' => 'required'),
-        array('field' => 'image', 'label' => 'Campaign Image ','rules' => 'required'),
+        array('field' => 'description', 'label' => 'Project description','rules' => 'required'),
+        //array('field' => 'image', 'label' => 'Campaign Image ','rules' => 'required'),
         array('field' => 'video_url', 'label' => 'Video Url','rules' => 'valid_url|max_length[100]')
     );
     
     /** @var Array Additional validation rules only used on project tab. */
     protected $funding_validation_rules = array(
-        array('field' => 'deadline_day', 'label' => 'Campaign Duration','rules' => 'numeric'),
-        array('field' => 'deadline', 'label' => 'Campaign Duration','rules' => 'required'),
+       // array('field' => 'deadline_day', 'label' => 'Campaign Duration','rules' => 'numeric'),
+       // array('field' => 'deadline', 'label' => 'Campaign Duration','rules' => 'required'),
         array('field' => '80G_availablity', 'label' => 'Option for 80G','rules' => 'required'),
         array('field' => 'goal', 'label' => 'Goal','rules' => 'required|numeric'),
         array('field' => 'final_goal', 'label' => 'Final Goal','rules' => 'required|numeric')
@@ -98,16 +87,10 @@ class Campaign_model extends BF_Model
       
     /** @var Array Additional validation rules only used on project tab. */
     protected $payment_validation_rules = array(
-        array(
-            'field' => 'password',
-            'label' => 'lang:bf_password',
-            'rules' => 'required',
-        ),
-        array(
-            'field' => 'pass_confirm',
-            'label' => 'lang:bf_password_confirm',
-            'rules' => 'required',
-        ),
+        array('field' => 'account_number', 'label' => 'Account Number','rules' => 'required|numeric'),
+        array('field' => 'bank_name', 'label' => 'Bank Name','rules' => 'required'),
+        array('field' => 'ifsc_code', 'label' => 'IFSC Code','rules' => 'required|max_length[500]'),
+        array('field' => 'account_holder_name', 'label' => 'Account Holders Name','rules' => 'max_length[500]')
     );
 
     /** @var array Metadata for the model's database fields. */
@@ -283,6 +266,36 @@ public function view_all($slug = Null)
     return $query->row();
 }
 /*this function used to fronted data fetch database end*/
+/*this function used to fronted feature data fetch database*/
+public function view_feature_all($slug = Null)
+{
+    if ($slug === NULL)
+    {
+        $query = $this->db->get_where($this->table_name, array('feature'=>1,'status'=>'A','deleted'=>0));
+        return $query->result();
+    }
+    $query = $this->db->get_where($this->table_name, array('slug' => $slug, 'deleted'=>0));
+    return $query->row();
+}
+/*this function used to fronted feature data fetch database end*/
+/*this function used to fronted view_last_campaign_all data fetch database*/
+public function view_last_campaign_all($slug = Null)
+{
+    if ($slug === NULL)
+    { 
+        $limit=6;
+        $start=0;
+        $this->db->limit($limit, $start);
+        $this->db->where('deleted',0);
+        $this->db->where('status','A');
+        $this->db->order_by('campaign_id', 'DESC');
+        $query = $this->db->get($this->table_name);
+        return $query->result();
+    }
+    $query = $this->db->get_where($this->table_name, array('slug' => $slug, 'deleted'=>0));
+    return $query->row();
+}
+/*this function used to fronted view_last_campaign_all data fetch database end*/
 
 /*this function used to backend data admin fetch database*/
 public function get_view_all($slug = Null)
@@ -303,13 +316,6 @@ public function campaign_status($id = null,$data = array())
     return  $this->db->update($this->table_name, $data);
 }
 
-
-    
-    
-    
-    
-    
-    
 
 /*this funtion used to front user to belong data fetch user_id accourding*/ 
 public function get_view_user_id_campaign($slug = FALSE)
@@ -348,59 +354,6 @@ public function get_views($slug = FALSE)
         $query = $this->db->get_where($this->table_name, array('slug' => $slug, 'deleted'=>0));
         return $query->row();
 }
-
-/*function used to insert category*/
-  public function insert_category($data = array())
-  {
-      return  $this->db->insert($this->table_name2, $data);
-  }
-/*function used to insert category end*/
-/*this function used to update category */
- public function update_category($slug = null, $data = array())
-    {        
-        $this->db->where('category_id', $slug);
-      return  $this->db->update($this->table_name2, $data);
-    } 
-/*function used to update category end*/
-/*function used to edit/view category*/
-public function get_view_category($slug = NULL)
-{ 
-    if ($slug === NULL)
-                {   $query = $this->db->get($this->table_name2);
-                    return $query->result();
-                }
-        $query = $this->db->get_where($this->table_name2, array('category_id' => $slug));
-        return $query->row();
-}
-/*functoin used to edit/view category end*/
-/*functoin used to insert subcategory*/
-  public function insert_subcategory($data = array())
-  {
-      return  $this->db->insert($this->table_name3, $data);
-  }
-/*functoin used to insert subcategory end*/
-/*this function used to update subcategory */
- public function update_subcategory($slug = null, $data = array())
-    {        
-        $this->db->where('subcategory_id', $slug);
-      return  $this->db->update($this->table_name3, $data);
-    } 
-/*function used to update subcategory end*/
-/*functoin used to edit/view category*/
-public function get_view_subcategory($slug = NULL)
-{ 
-    if ($slug === NULL)
-                {
-                    $query = $this->db->get($this->table_name3);
-                    return $query->result();
-                }
-        $query = $this->db->get_where($this->table_name3, array('subcategory_id' => $slug));
-        return $query->row();
-}
-/*functoin used to edit/view category end*/
-
-
-
 
     /**
      * Update an existing user. Before saving, it will:
@@ -1007,16 +960,16 @@ public function get_view_subcategory($slug = NULL)
             return $this->project_validation_rules;
         }
         
-        if($type == 'project'){
-            return $this->project_validation_rules;
+        if($type == 'funding'){
+            return $this->funding_validation_rules;
         }
         
-        if($type == 'project'){
-            return $this->project_validation_rules;
+        if($type == 'people_team'){
+            return $this->people_validation_rules;
         }
         
-        if($type == 'project'){
-            return $this->project_validation_rules;
+        if($type == 'payment'){
+            return $this->payment_validation_rules;
         }
     }
 }

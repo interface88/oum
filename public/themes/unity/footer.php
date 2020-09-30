@@ -62,7 +62,7 @@
          <div class="row">
          	 <div class="col-lg-6 col-md-6">
                   <div class="copyright">
-                    &copy; Copyright <strong><span>OUM</span></strong>. All Rights Reserved
+                    &copy; Copyright <strong><span><img style="max-height: 40px;" src="<?php echo base_url('assets/images/logo.jpg');?>"/></span></strong>. All Rights Reserved
                   </div>
          	 </div>
          	 <div class="col-lg-6 col-md-6">

@@ -5,7 +5,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto">	<?php echo anchor(base_url(), 'OUM'); ?></h1>
+      <h1 class="logo mr-auto">	<?php echo anchor(base_url(), '<img src="'.base_url('assets/images/logo.jpg').'"/>'); ?></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -25,8 +25,8 @@
                if($this->session->role_id==1)
                 {
                   echo '<li><a href="'.base_url('campaign/Views').'">My Campaign</a></li>';
-                  echo '<li><a href="'.base_url('campaign/category_view').'">Category</a></li>';
-                  echo '<li><a href="'.base_url('campaign/sub_category_view').'">Sub Category</a></li>';
+                  echo '<li><a href="'.base_url('category/list').'">Category</a></li>';
+                  echo '<li><a href="'.base_url('subcategory/list').'">Sub Category</a></li>';
                 }
                 else{
                     echo '<li><a href="'.base_url('campaign/View').'">My Campaign</a></li>';

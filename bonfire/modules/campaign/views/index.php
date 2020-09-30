@@ -238,6 +238,20 @@ background-color: #FFF;
                         Backers
                         <span class="badge badge-primary badge-pill">64</span>
                       </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                       <?php echo form_open('campaign_view/'.$this->uri->segment(2).'');?>
+                       	<div class="row">
+      						<div class="col">
+                     			<input type="hidden" value="<?php echo $campaign_item->campaign_id;?>" name="campaign_id">
+                        		<?php echo form_input(array('class'=>'form-control','name'=>'amount','value'=>set_value('amount'),'width'=>'100px'));?>
+                        	</div>
+      						<div class="col">
+		                        <?php echo form_submit('save', 'Donate','class="btn btn-primary"');?>
+        					</div>
+        				</div>		
+                        <?php echo form_close();?>	
+                        
+                      </li>
                     </ul>
     			</div>
     		</div>

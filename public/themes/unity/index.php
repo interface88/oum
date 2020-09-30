@@ -11,7 +11,6 @@ Assets::add_css(array(
 ));
 
 Assets::add_js(  array(
-    'vendor/jquery/jquery.min.js',
     'vendor/bootstrap/js/bootstrap.bundle.min.js',
     'vendor/jquery.easing/jquery.easing.min.js',
     'vendor/php-email-form/validate.js',
@@ -35,8 +34,7 @@ Assets::add_js($inline, 'inline');
     ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="<?php e(isset($meta_description) ? $meta_description : ''); ?>">
-    <meta name="author" content="<?php e(isset($meta_author) ? $meta_author : ''); ?>">
-   
+    <meta name="author" content="<?php e(isset($meta_author) ? $meta_author : ''); ?>">   
     <?php
     /* Modernizr is loaded before CSS so CSS can utilize its features */
     echo Assets::js('modernizr-2.5.3.js');
@@ -44,9 +42,11 @@ Assets::add_js($inline, 'inline');
     <?php echo Assets::css(); ?>
     <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet"> 
-    <style>
+    <link href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet"> 
+   
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
     
-    </style>
 </head>
 <body>
 
@@ -65,6 +65,13 @@ Assets::add_js($inline, 'inline');
 <?php echo Assets::js(); ?>
   <div id="preloader"></div>
   <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
+  <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready( function () {
+        $('.datatable').DataTable();
+    } );
+    </script>
 </body>
+
 
 </html>

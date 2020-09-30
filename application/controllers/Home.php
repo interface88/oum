@@ -65,7 +65,11 @@ class Home extends MX_Controller
 		$this->set_current_user();
 		$this->load->model('campaign/Campaign_model');
 		$data=$this->Campaign_model->view_all();
+		$feature_data=$this->Campaign_model->view_feature_all();
+		$last_campaign_data=$this->Campaign_model->view_last_campaign_all();
 		Template::set('campaign_item',$data);
+		Template::set('feature_item',$feature_data);
+		Template::set('last_campaign_item',$last_campaign_data);
 		Template::render();
 	}//end index()
 	public function Campaign()
@@ -79,11 +83,51 @@ class Home extends MX_Controller
 	    Template::render();
 	}
 	public function campaign_view()
-	{
+	{ 
+	    $this->load->helper(array('oum_form', 'url'));
+	    $this->load->library('form_validation');
 	    $this->load->library('users/auth');
 	    $this->set_current_user();
 	    $this->load->model('campaign/Campaign_model');
 	    $slug=$this->uri->segment(2);
+	    if(isset($_POST['save']))
+	    {
+    	    if ($this->auth->is_logged_in()== FALSE)
+    	    {
+    	        redirect('login');
+    	    }
+          else{
+                  $this->form_validation->set_rules('amount','Please Enter Amount','required|numeric|greater_than[0.99]');
+                  if($this->form_validation->run()==true)
+                  {
+                      $data=array(
+                          'user_id'=>$this->auth->user()->id,
+                          'campaign_id'=>$this->input->post('campaign_id'),
+                          'amount'=>$this->input->post('amount'),
+                          'firstname'=>$this->auth->user()->username,
+                          'email'=>$this->auth->user()->email,
+                      );
+                      $this->load->model('campaign/donor_model');
+                      if ($this->donor_model->donor_insert($data) == true)
+                      {
+                          Template::set_message(lang('us_user_created_success'), 'success');
+                          redirect('campaign_view'.$slug.'');
+                      }
+                      else{
+                          Template::set_message(lang('us_user_created_error'), 'error');
+                          redirect('campaign_view'.$slug.'');
+                          }
+                      
+                      
+                  }
+                  else{
+                          $data=$this->Campaign_model->view_all($slug);
+                          Template::set_view('campaign/index');
+                          Template::set('campaign_item',$data);
+                          Template::render();
+                       }
+              }
+	    }
 	    $data=$this->Campaign_model->view_all($slug);
 	    Template::set_view('campaign/index');
 	    Template::set('campaign_item',$data);
