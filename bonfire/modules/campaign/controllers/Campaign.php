@@ -456,6 +456,15 @@ class Campaign extends Front_Controller
         $result = $this->campaign_model->campaign_status($id, $data);
         echo $result;
     }
+    
+    /* function used to status changes */
+    public function load_more()
+    {
+        $data = $this->campaign_model->view_last_campaign_all();
+        Template::set('last_campaign_item',$data);
+        Template::set_view('campaign/campaign_list');
+        Template::render('ajax');
+    }
 
 }
 

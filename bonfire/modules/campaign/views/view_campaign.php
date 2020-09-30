@@ -245,7 +245,7 @@ body {
 </section>
 
 
-<div class="container">
+<div class="container campaign-list-container">
 <div class="row">
 <?php
 foreach($campaign_item as $row)
@@ -285,64 +285,23 @@ foreach($campaign_item as $row)
 ?>
 </div>
 </div>
-      
- <section id="banner2" class="d-flex align-items-center">
-	<div class="container position-relative text-center text-lg-left"
-		data-aos="zoom-in" data-aos-delay="100">
-		<div class="row">
-			<div class="col-lg-4">
-			</div>
-			<div class="col-lg-8">
-				<h1>We always see hope</h1>
-				<h2>To contribute to the structural improvement of the health of disadvantaged groups in South East Asia</h2>
-
-			</div>
-		</div>
-	</div>
-</section>	
 <div class="container">
-	<div class="row">
-		<div class="col-lg-3">
-			<div class="elementor-brand-item">
-				<a><img alt="brand1" src="<?php echo base_url('themes/unity/img/brand_image/brand-1.png')?>"></a>
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<div class="elementor-brand-item">
-				<a><img alt="brand1" src="<?php echo base_url('themes/unity/img/brand_image/brand-2.png')?>"></a>
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<div class="elementor-brand-item">
-				<a><img alt="brand1" src="<?php echo base_url('themes/unity/img/brand_image/brand-3.png')?>"></a>
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<div class="elementor-brand-item">
-				<a><img alt="brand1" src="<?php echo base_url('themes/unity/img/brand_image/brand-4.png')?>"></a>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-3">
-			<div class="elementor-brand-item">
-				<a><img alt="brand1" src="<?php echo base_url('themes/unity/img/brand_image/brand-5.png')?>"></a>
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<div class="elementor-brand-item">
-				<a><img alt="brand1" src="<?php echo base_url('themes/unity/img/brand_image/brand-6.png')?>"></a>
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<div class="elementor-brand-item">
-				<a><img alt="brand1" src="<?php echo base_url('themes/unity/img/brand_image/brand-7.png')?>"></a>
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<div class="elementor-brand-item">
-				<a><img alt="brand1" src="<?php echo base_url('themes/unity/img/brand_image/brand-8.png')?>"></a>
-			</div>
-		</div>
-	</div>
+    <div class="row">
+    	<div class="col-lg-12 text-center">
+            <button class="btn btn-primary" id="loadmore" type="button">
+              	<span class="spinner-border spinner-border-sm" style="display:none;" role="status" aria-hidden="true"></span>
+              	Load more
+             </button>
+    	</div>
+    </div>
 </div>
+<script type="text/javascript">
+	$('#loadmore').click(function(){
+		var $btn = $(this);
+		$btn.find('span').show();
+		$.get('<?php echo base_url('campaign/load_more')?>',function(response){
+    		$('.campaign-list-container').append(response);
+    		$btn.find('span').hide();
+		});
+	});
+</script>
