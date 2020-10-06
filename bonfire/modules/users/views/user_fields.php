@@ -1,7 +1,5 @@
 <?php /* /users/views/user_fields.php */
-
 $currentMethod = $this->router->fetch_method();
-
 $errorClass     = empty($errorClass) ? 'is-invalid' : $errorClass;
 $controlClass   = empty($controlClass) ? 'form-control' : $controlClass;
 $registerClass  = $currentMethod == 'register' ? ' required' : '';

@@ -54,8 +54,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
-$route['campaign_view/(:any)'] = 'Home/campaign_view';
-$route['Campaign/(:any)'] = 'Home/Campaign';
+
+$route['campaign/create'] = 'campaign/create';
+$route['campaign/funding'] = 'campaign/funding';
+$route['campaign/people_team'] = 'campaign/people_team';
+$route['campaign/payment'] = 'campaign/payment';
+$route['campaign/views'] = 'campaign/views';
+$route['campaign/view'] = 'campaign/view';
+$route['campaign/edit'] = 'campaign/edit';
+$route['campaign/status_change'] = 'campaign/status_change';
+$route['campaign/active'] = 'campaign/active';
+$route['campaign/delete'] = 'campaign/delete';
+
+$route['campaign'] = 'Home/campaign';
+$route['campaign/(:any)'] = 'Home/campaign/$1';
+$route['about'] = 'Home/about';
+$route['contact_us'] = 'Home/contact_us';
+
 // Authentication
 Route::any(LOGIN_URL, 'users/login', array('as' => 'login'));
 Route::any(REGISTER_URL, 'users/register', array('as' => 'register'));

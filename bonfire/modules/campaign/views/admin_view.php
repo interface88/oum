@@ -28,38 +28,43 @@
                               <th scope="col">Category</th>
                               <th scope="col">Launched</th>
                               <th scope="col">Exipre date</th>
+                              <th scope="col">Feature</th>
                               <th scope="col">Status</th>
-                              <th scope="col">Activate/Deactivate</th>
                               <th scope="col">Action</th>
                             </tr>
                           </thead>
                           <tbody>
                             <?php
                             $i=1;
+                            $statusArr = array("D"=>"Draft", "A"=>"Approved", "R"=>"Reject", "P"=>"Pending");
                             foreach ($list_item as $row) {
                             ?>
                               <tr>
-                              
                               		<td scope="row"><?php echo $i++;?></th>
                               		<td><?php echo $row->title;?></td>
                               		<td><?php echo $row->category;?></td>
                               		<td><?php echo date("d-M-Y", strtotime($row->launched));?></td>
               						<td><?php echo date("d-M-Y", strtotime($row->deadline));?></td>
                               		<td>
-                              		<?php echo form_dropdown('status',array('D'=>'Draft','A'=>'Approval','R'=>'Reject','P'=>'Pending'),
-                              		    $row->status,'','class="status_checks" data-id="'.$row->campaign_id.'"');?>
+                              		<?php echo form_dropdown('status',array('D'=>'Draft','A'=>'Approved','R'=>'Reject','P'=>'Pending'),
+                              		    $row->status,'class="status_checks" data-id="'.$row->campaign_id.'"');?>
                               		</td>
-                              		<td> 
-                                  		<?php if($row->is_active == FALSE) {?>
-                                  			<button type="button" class="active btn btn-success" data-id="'.$row->campaign_id.'" status="1">Activate</button>
-                          				<?php }else {?>
-                                	      <button  type="button" class="active btn btn-danger btn-sm" data-id="'.$row->campaign_id.'" status="0">Deactivate</button>
-                                  		<?php }?>
-	                             	</td>
-	                             	<td>
+                              		<td>
+                              		</td>
+                              	 	<td>
 	                             		<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-	                             			<?php echo anchor(base_url('Campaign/Edit/'.$row->campaign_id), '<i class="btn bx bx-edit-alt"></i>', 'class="btn btn-secondary btn-sm"'); ?>
-    										<button type="button" class="btn btn-danger btn-sm delete" data-id="'.$row->campaign_id.'" title="Delete"><i class="btn bx bx-trash-alt"></i></button>
+	                             			<?php
+	                             			
+	                             			if('Approved'==$statusArr[$row->status])
+	                             			{}                                 			
+	                             			else
+	                             			{
+	                             			    echo anchor(base_url('campaign/edit/'.$row->campaign_id), '<i class="btn bx bx-edit-alt"></i>', 'class="btn btn-secondary btn-sm" title="Edit"');
+	                             			    echo'<button type="button" class="btn btn-danger btn-sm delete" data-id="'.$row->campaign_id.'" title="Delete"><i class="btn bx bx-trash-alt"></i></button>';
+	                             			}
+	                             			echo anchor(base_url('campaign/preview/'.$row->campaign_id), '<i class="btn bx bx-show"></i>', 'class="btn btn-secondary btn-sm" title="View"');
+	                             			?>
+    									
                                         </div>
 									</td>
 								</tr>
@@ -78,9 +83,8 @@ $(document).on('change', '.status_checks', function()
 { 
   var status =this.value;
   var id = $(this).attr('data-id');
-     url = "<?php echo base_url('index.php/campaign/status_change');?>"; 
-     $.ajax({
-              type:"GET",
+     url = "<?php echo base_url('campaign/status_change');?>"; 
+     $.get({
               url: url, 
               data: {"id":id,"status":status}, 
               success: function(data)
@@ -98,7 +102,7 @@ $(document).on('click','.delete',function()
    {
     $row = $(this).parent().parent();
     var id = $(this).attr('data-id');
-    var url ="<?php echo base_url('index.php/campaign/delete');?>";
+    var url ="<?php echo base_url('campaign/delete');?>";
       $.ajax({
         type:"GET",
         url:url,
@@ -117,41 +121,4 @@ $(document).on('click','.delete',function()
    }
  }
 );
-  $(document).on('click','.active',function()
- { 
-    var $btn =  $(this);
-    var status = ($(this).hasClass("btn-success")) ? '0' : '1'; 
-    var msg = (status=='0')? 'Deactivate' : 'Activate'; 
-    if(confirm("Are you sure to "+ msg))
-    { 
-        var current_element = $(this); 
-        var status =$(current_element).attr('status');
-        var id = $(current_element).attr('data-id');
-        url = "<?php echo base_url('index.php/campaign/active');?>"; 
-            $.ajax({
-              type:"GET",
-              url: url, 
-              data: {"id":id,"status":status}, 
-              success: function(data)
-              {
-                if(data == true)
-                {
-                  if(status == 1)
-                    {
-                      $btn.text('Deactivate');
-                      $btn.addClass("btn-danger");
-                      $btn.removeClass("btn-success");
-                      $btn.attr('status', 0);
-                    }
-                    else{
-                        $btn.text('Activate');
-                        $btn.addClass("btn-success");
-                        $btn.removeClass("btn-danger");
-                        $btn.attr('status', 1);
-                      }
-                } 
-             } 
-        });
-    }  
- });
 </script>

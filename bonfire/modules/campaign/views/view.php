@@ -15,7 +15,7 @@
     <div class="table-responsive-sm">
     	<div class="page-container row">
     		<div class="col-lg-12">
-                <table class="table table-hover table-bordered table-sm">
+                <table class="table table-hover table-bordered table-sm datatable">
                   <caption>My Campaign</caption>
                   <thead class="thead-dark">
                     <tr>
@@ -32,7 +32,7 @@
                   <tbody>
                     <?php
                     $i=1;
-                    $statusArr = array("D"=>"Draft", "A"=>"Approval", "R"=>"Reject", "P"=>"Pending");
+                    $statusArr = array("D"=>"Draft", "A"=>"Approved", "R"=>"Reject", "P"=>"Pending");
                     foreach ($list_item as $row) {
                     ?>
                     	<tr>
@@ -44,11 +44,18 @@
               			<td><?php echo date("d-M-Y", strtotime($row->deadline));?></td>
               			<td><?php echo $statusArr[$row->status];?></td>
                       	<td>
-                      		<div class="btn-group btn-group-sm" role="group" aria-label="action button">
-                     			<?php echo anchor(base_url('Campaign/Edit/'.$row->campaign_id), '<i class="btn bx bx-edit-alt"></i>', 'class="btn btn-secondary btn-sm" title="Edit"'); ?>
-                     			<?php echo anchor(base_url('campaign_view/'.$row->slug), '<i class="btn bx bx-show-alt"></i>', 'class="btn btn-secondary btn-sm" title="View"'); ?>
-                            </div>
-                      	</td>
+                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+	                       <?php
+	                         if('Approved'==$statusArr[$row->status])
+	                          {}                                 			
+                     			else
+                     			{
+                     			    echo anchor(base_url('campaign/edit/'.$row->campaign_id), '<i class="btn bx bx-edit-alt"></i>', 'class="btn btn-secondary btn-sm" title="Edit"');
+                     			}
+                     			echo anchor(base_url('campaign/preview/'.$row->campaign_id), '<i class="btn bx bx-show"></i>', 'class="btn btn-secondary btn-sm" title="View"');
+	                         ?>
+    					   </div>
+				      	</td>
                       	</tr>
                     <?php
                     }

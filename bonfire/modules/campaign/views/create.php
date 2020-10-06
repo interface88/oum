@@ -53,10 +53,10 @@ body {
   <section class="breadcrumbs">
         <div class="container">
           <div class="d-flex justify-content-between align-items-center">
-            <h2>Inner Page</h2>
+            <h2>Campagin</h2>
             <ol>
-              <li><a href="index.html">Home</a></li>
-              <li>Start Project</li>
+              <li><a href="<?php echo base_url('');?>">Home</a></li>
+              <li>Create Campagin</li>
             </ol>
           </div>
         </div>
@@ -83,7 +83,7 @@ body {
                                     $attributes = array('class' => 'form-horizontal', 'method' => 'post', 'id' => 'myform', 'accept-charset'=>'utf-8');
                                     echo form_open_multipart('campaign/create', $attributes);
                                   ?> 
-                                      <div class="form-group row">
+                                      <div class="form-group row required">
                                         <label for="title" class="col-sm-3 col-form-label">Title</label>
                                         <div class="col-sm-6">
                                              <?php echo 
@@ -98,27 +98,25 @@ body {
                                                <?php echo form_input(array('class' => form_error('subtitle') ? 'form-control is-invalid' : 'form-control', 'id'=>'subtitle', 'name'=>'subtitle', 'type'=>'text', 'value'=>set_value('subtitle'),)); echo '<div class="invalid-feedback">'.form_error('subtitle').'</div>';?>   
                                            </div>
                                         </div>	
-                                        <div class="form-group row">
+                                        <div class="form-group row required">
                                           <label for="category" class="col-sm-3 col-form-label">Category</label>
                                           <div class="col-sm-6">
-                                               <?php $category_list=array('Art'=>'Art','Comics'=>'Comics','Crafts'=>'Crafts','Dance'=>'Dance','Design'=>'Design','Fashion'=>'Fashion','Film & Video'=>'Film & Video','Food'=>'Food','Games'=>'Games','Journalism'=>'Journalism','Music'=>'Music','Photography'=>'Photography','Publishing'=>'Publishing','Technology'=>'Technology','Theater'=>'Theater');?>
                                                  <?php
-                                                  echo form_dropdown('category', $category_list, set_value('category'), '','class="form-control"');
+                                                 echo form_dropdown('category', $category_list, set_value('category'),form_error('category') ? 'class="form-control is-invalid" id="category"' : 'class="form-control" id="category"');
                                                   echo '<div class="invalid-feedback">'.form_error('category').'</div>';
                                                 ?>     
                                            </div>
                                         </div>  
-                                        <div class="form-group row">
+                                        <div class="form-group row required">
                                           <label for="sub_category" class="col-sm-3 col-form-label">Sub Category</label>
                                           <div class="col-sm-6">
-                                               <?php $category_list=array('Art'=>'Art','Comics'=>'Comics','Crafts'=>'Crafts','Dance'=>'Dance','Design'=>'Design','Fashion'=>'Fashion','Film & Video'=>'Film & Video','Food'=>'Food','Games'=>'Games','Journalism'=>'Journalism','Music'=>'Music','Photography'=>'Photography','Publishing'=>'Publishing','Technology'=>'Technology','Theater'=>'Theater');?>
                                                  <?php
-                                                  echo form_dropdown('sub_category', $category_list, set_value('sub_category'), '','class="form-control"');
+                                                 echo form_dropdown('sub_category', $subcategory_list, set_value('sub_category'),form_error('sub_category') ? 'class="form-control is-invalid" id="sub_category"' : 'class="form-control" id="sub_category"');
                                                   echo '<div class="invalid-feedback">'.form_error('sub_category').'</div>';
                                                 ?>     
                                            </div>
                                         </div>  
-                                        <div class="form-group row">
+                                        <div class="form-group row required">
                                           <label for="target_audience" class="col-sm-3 col-form-label">Target Audience</label>
                                           <div class="col-sm-6">
                                                 <?php
@@ -127,18 +125,18 @@ body {
                                                   {
                                                     $audiencearr[$i.'000']=$i;
                                                   }
-                                                  echo form_dropdown('target_audience', $audiencearr, set_value('target_audience'), '','class="form-control"');
+                                                  echo form_dropdown('target_audience', $audiencearr, set_value('target_audience'), 'class="form-control"');
                                                   echo '<div class="invalid-feedback">'.form_error('target_audience').'</div>';
                                                 ?>          
                                            </div>
                                         </div>  
-                                        <div class="form-group row">
+                                        <div class="form-group row required">
                                           <label for="description" class="col-sm-3 col-form-label">Project description</label>
                                           <div class="col-sm-6">
                                                 <?php echo form_textarea(array('class' => form_error('description') ? 'form-control is-invalid' : 'form-control',  'id'=>'description', 'name'=>'description', 'type'=>'text', 'value'=>set_value('description'), 'placeholder'=>"Start typing your description...")); echo '<div class="invalid-feedback">'.form_error('description').'</div>';?>      
                                            </div>
                                         </div>  
-                                        <div class="form-group row">
+                                        <div class="form-group row required">
                                           <label for="" class="col-sm-3 col-form-label">Image</label>
                                           <div class="col-sm-6">
                                                     <?php echo form_upload(array('class' => form_error('image') ? 'form-control is-invalid' : 'form-control', 'name'=>'image','id'=>'image')); echo '<div class="invalid-feedback">'.form_error('image').'</div>';?>
@@ -151,8 +149,8 @@ body {
                                               <small id="videoHelp" class="form-text text-muted">If you add the video you have a better chance of getting noticed</small> 
                                            </div>
                                         </div>  
-                                        <div class="form-group row">
-                                          <div class="col-sm-12 col-md-offset-3">
+                                        <div class="form-group row text-right">
+                                          <div class="col-sm-9 col-md-offset-3">
                                                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit" name="save" value="save" >Next</button> 
                                            </div>
                                         </div>  
@@ -195,7 +193,7 @@ body {
 
                                          </div>
                                      </div>
-                                     <div class="form-group row">
+                                     <div class="form-group row required">
                                           <label for="80G_availablity" class="col-sm-3 col-form-label">Target Audience</label>
                                           <div class="col-sm-6">
                                                 <?php
@@ -207,7 +205,7 @@ body {
                                                <p>Campaigners who are able to provide the 80G certificate usually get more support and  backers.</p>          
                                            </div>
                                      </div>    
-                                     <div class="form-group row">
+                                     <div class="form-group row required">
                                      
         <script>
         $(document).on('input','#goal',function(){
@@ -225,11 +223,11 @@ body {
                                   <style>
                                   #final_goal{background: transparent;color: #fff; border:none;}
                                   </style>   
-                                        <label for="" class="col-sm-3 col-form-label">Amount required</label>
+                                        <label for="goal" class="col-sm-3 col-form-label">Amount required</label>
                                          <div class="col-sm-6">
                                                 <?php echo form_input(array('class' => form_error('goal') ? 'form-control is-invalid' : 'form-control',  'id'=>'goal', 'name'=>'goal', 'type'=>'text', 'value'=>set_value('goal'), 'placeholder'=>"2000.00")); echo '<div class="invalid-feedback">'.form_error('goal').'</div>';?>   
                                          </div>
-                                         <div class="col-sm-12 col-sm-offset-2">
+                                         <div class="col-sm-9 col-sm-offset-2">
                                              <table class="table table-bordered  table-sm">
                                               <caption class="bg-warning text-white text-center">Funding Goal - Rs <input type="text" readonly="" name="final_goal" id="final_goal" value="" >  
                                               </caption>
@@ -255,8 +253,8 @@ body {
                                              </table>
                                         </div>
                                      </div>
-                                     <div class="form-group row">
-                                          <div class="col-sm-12 col-md-offset-3">
+                                     <div class="form-group row text-right">
+                                          <div class="col-sm-9 col-md-offset-3">
                                                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit" name="save" value="save"  >Next</button> 
                                            </div>
                                      </div>    
@@ -266,16 +264,26 @@ body {
                                   ?>
                               </div>
                               <div class="tab-pane <?php echo $active_tab == 'people_team' ? 'active' : ''; ?>" id="nav-people_team" role="tabpanel" aria-labelledby="nav-contact-tab">
-                              	<button type="button" class="user_tab">User</button><button class="company_tab" type="button">Company</button> 
+                              <div class="form-group row">
+                              <div class="col-sm-12 text-center">
+                              	<div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                  <label class="btn btn-secondary">
+                                    <input type="radio" class="user_tab" name="user_company_type" value="user_tab" id="User" autocomplete="off"> User
+                                  </label>
+                                  <label class="btn btn-secondary">
+                                    <input type="radio" class="company_tab" name="user_company_type" value="company_tab" id="Company" autocomplete="off"> Company
+                                  </label>
+                                </div>
+                                </div>
+                              </div>
                                  <?php
                                     if($active_tab == 'people_team') {
                                       $attributes = array('class' => 'form-horizontal user_profile', 'method' => 'post', 'id' => 'myform', 'accept-charset'=>'utf-8');
-                                      echo form_open_multipart('Campaign/people_team/'.$this->uri->segment(3).'', $attributes);
+                                      echo form_open_multipart('campaign/people_team/'.$this->uri->segment(3).'', $attributes);
                                   ?>
                                   <div class="people_block">
                                      <div class="single_people_block">
-                                          <h1>User Detail</h1>
-                                          <div class="form-group row">
+                                          <div class="form-group row required">
                                             <label for="name" class="col-sm-3 col-form-label">Name</label>
                                             <div class="col-sm-3">
                                              <?php echo form_input(array('class' => form_error('name') ? 'form-control is-invalid' : 'form-control',  'id'=>'name', 'name'=>'name', 'type'=>'text', 'value'=>set_value('name'),)); echo '<div class="invalid-feedback">'.form_error('name').'</div>';?>    
@@ -315,7 +323,7 @@ body {
                                                    <?php echo form_input(array('class' =>'form-control', 'id'=>'twitter_profile_link', 'name'=>'twitter_profile_link', 'type'=>'text', 'value'=>set_value('twitter_profile_link'),)); echo '<div class="invalid-feedback">'.form_error('twitter_profile_link').'</div>';?>    
                                                </div>
                                           </div>
-                                          <div class="form-group row">
+                                          <div class="form-group row required">
                                                 <label for="adhaarcard" class="col-sm-3 col-form-label">Adhaar Card</label>
                                                 <div class="col-sm-3">
                                                 <?php echo form_upload(array('class' => form_error('adhaarcard') ? 'form-control is-invalid' : 'form-control', 'name'=>'adhaarcard','id'=>'adhaarcard')); echo '<div class="invalid-feedback">'.form_error('adhaarcard').'</div>';?>
@@ -327,7 +335,7 @@ body {
                                           </div>
                                         </div>
                                    </div>
-                                   <div class="form-group row">
+                                   <div class="form-group row text-right">
                                           <div class="col-sm-12 col-md-offset-3">
                                           <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit" name="save" value="save" >Next</button> 
                                            </div>
@@ -337,49 +345,51 @@ body {
                                       $attributes = array('style'=>"display:none",'class' => 'form-horizontal company_profile', 'method' => 'post', 'id' => 'myform', 'accept-charset'=>'utf-8');
                                       echo form_open_multipart('campaign/company/'.$this->uri->segment(3).'', $attributes);
                                 ?>
-                                  <div class="form-group row">
+                                  <div class="form-group row required">
                                     <label for="company_name" class="col-sm-6 col-form-label">Company Name</label>
                                     <div class="col-sm-6">
                                      <?php echo form_input(array('class' => form_error('company_name') ? 'form-control is-invalid' : 'form-control',  'id'=>'company_name', 'name'=>'company_name', 'type'=>'text', 'value'=>set_value('company_name'),)); echo '<div class="invalid-feedback">'.form_error('company_name').'</div>';?>    
                                      </div>
                                   </div>
-                                  <div class="form-group row">
-                                    <label for="company_name" class="col-sm-6 col-form-label">Company Name</label>
+                                  <div class="form-group row required">
+                                    <label for="no_of_director" class="col-sm-6 col-form-label">Number of Director</label>
                                     <div class="col-sm-6">
-                                    
                                     <?php
                                     $no_directorArr=array();
                                     for($i=1; $i<=10; $i++)
                                     {
                                         $no_directorArr[$i]=$i;
                                     }
-                                    echo form_dropdown('no_of_director',$no_directorArr,set_value('no_of_director'),'class="form-control"');  echo '<div class="invalid-feedback">'.form_error('no_of_director').'</div>';?>    
+                                    echo form_dropdown('no_of_director',$no_directorArr,set_value('no_of_director'),'class="form-control" id="no_of_director"');  echo '<div class="invalid-feedback">'.form_error('no_of_director').'</div>';?>    
                                      </div>
                                   </div>
                                   <div class="form-group row">
-                                   <script>
-                                   $('#add_director').click(function()
-                                   {      $('.director_block').append($('.single_director_block').html());
-                                       //   $(' .single_director_block:last').append(removeBtn);
-                                     });
-                                   </script>
                                    <table class="table">
                                     <thead class="thead-dark">
                                     <tr><th>Name of 1sr Director</th><th>DIN of 1st Director</th></tr>
                                     </thead>
                                     <tbody class="single_director_block">
                                     <tr class="director_block">
-                                    	<td><?php echo form_input(array('class' => form_error('name_director') ? 'form-control is-invalid' : 'form-control',  'id'=>'name_director', 'name'=>'name_director[]', 'type'=>'text', 'value'=>set_value('name_director'),)); echo '<div class="invalid-feedback">'.form_error('name_director').'</div>';?></td>
-                                     	<td><?php echo form_input(array('class' =>'form-control', 'id'=>'din_director', 'name'=>'din_director[]', 'type'=>'text', 'value'=>set_value('din_director'),)); echo '<div class="invalid-feedback">'.form_error('din_director').'</div>';?></td>
-                                    	<td>
-                                    		<button type="button" class="btn btn-default" id="add_director">+</button> <button type="button" class="btn btn-default" id="remove_director">-</button>
-                                    	</td>
-                                     </tr>
-                                     
+                                    <td><?php echo form_input(array('class' => form_error('name_director') ? 'form-control is-invalid' : 'form-control',  'id'=>'name_director', 'name'=>'name_director[]', 'type'=>'text',));?></td>
+                                    <td><?php echo form_input(array('class' => form_error('din_director') ? 'form-control is-invalid' : 'form-control',  'id'=>'din_director', 'name'=>'din_director[]', 'type'=>'text',));?></td>
+                                    </tr>
                                     </tbody>
                                    </table> 
+                                   <script>
+                                   $(document).on('change','#no_of_director',function()
+                                   {
+                                       var current_value=$(this).val();
+                                       var row='';
+                                       for(var i=0; i<current_value; i++)
+                                       {
+                                        row = row + '<tr><td><input class="form-control" name="name_director[]" type="text" /></td><td><input name="din_director[]" class="form-control" type="text" /></td></tr>';
+                                       }
+                                       $('.single_director_block').html('');
+                                       $('.single_director_block').html(row);
+                                   });
+                                   </script>
                                    </div>
-                                  <div class="form-group row">
+                                  <div class="form-group row required">
                                         <label for="registered_address" class="col-sm-6 col-form-label">Registered Address</label>
                                         <div class="col-sm-6">
                                      		<?php echo form_input(array('class' => form_error('registered_address') ? 'form-control is-invalid' : 'form-control',  'id'=>'registered_address', 'name'=>'registered_address', 'type'=>'text', 'value'=>set_value('registered_address'),)); echo '<div class="invalid-feedback">'.form_error('registered_address').'</div>';?>    
@@ -397,20 +407,20 @@ body {
                                      		<?php echo form_input(array('class' => form_error('gst') ? 'form-control is-invalid' : 'form-control',  'id'=>'gst', 'name'=>'gst', 'type'=>'text', 'value'=>set_value('gst'),)); echo '<div class="invalid-feedback">'.form_error('gst').'</div>';?>    
                                        </div>
                                   </div>
-                                  <div class="form-group row">
+                                  <div class="form-group row required">
                                         <label for="cin_img" class="col-sm-6 col-form-label">Upload CIN</label>
                                         <div class="col-sm-6">
                                      		<?php echo form_upload(array('class' => form_error('cin_img') ? 'form-control is-invalid' : 'form-control',  'id'=>'cin_img', 'name'=>'cin_img', 'value'=>set_value('cin_img'),)); echo '<div class="invalid-feedback">'.form_error('cin_img').'</div>';?>    
                                            </div>
                                   </div>
-                                  <div class="form-group row">
+                                  <div class="form-group row required">
                                         <label for="pan_img" class="col-sm-6 col-form-label">Company Pan</label>
                                         <div class="col-sm-6">
                                      		<?php echo form_upload(array('class' => form_error('pan_img') ? 'form-control is-invalid' : 'form-control',  'id'=>'pan_img', 'name'=>'pan_img', 'value'=>set_value('pan_img'),)); echo '<div class="invalid-feedback">'.form_error('pan_img').'</div>';?>    
                                          </div>
                                   </div>
                                    <div class="form-group row">
-                                        <div class="col-sm-12 col-md-offset-3">
+                                        <div class="col-sm-12 col-md-offset-3 text-right">
                                            <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit" name="save" value="save" >Next</button> 
                                          </div>
                                    </div>    
@@ -425,10 +435,10 @@ body {
                                       $attributes = array('class' => 'form-horizontal company_profile', 'method' => 'post', 'id' => 'myform', 'accept-charset'=>'utf-8');
                                       echo form_open_multipart('campaign/payment/'.$this->uri->segment(3).'', $attributes);
                                 ?>
-                                   <div class="form-group row">
+                                   <div class="form-group row required">
                                         <label for="account_number" class="col-sm-6 col-form-label">Account Number</label>
                                         <div class="col-sm-6">
-                                             <?php echo form_input(array('class' =>'form-control', 'id'=>'account_number', 'name'=>'account_number', 'type'=>'text', 'value'=>set_value('account_number'),)); echo '<div class="invalid-feedback">'.form_error('account_number').'</div>';?>    
+                                             <?php echo form_input(array('class' => form_error('account_number') ? 'form-control is-invalid' : 'form-control', 'id'=>'account_number', 'name'=>'account_number', 'type'=>'text', 'value'=>set_value('account_number'),)); echo '<div class="invalid-feedback">'.form_error('account_number').'</div>';?>    
                                          </div>
                                   </div>
                                   <div class="form-group row">
@@ -469,6 +479,21 @@ body {
         </div>
   </section>
 </main>
+
+<script>
+	$(document).on('change','#category',function () {
+		var category_name=$(this).val();
+		var url="<?php echo base_url('subcategory/get_by_category_name');?>"
+		$.getJSON(url, {category_name:category_name}, function(response){
+    		var option = '<option value=""> - Select - </option>';
+    		$.each(response, function(k, v){
+    			option = option + '<option value="'+v+'">'+k+'</option>'
+    		});
+    		$('#sub_category').html(option);
+		});
+           
+	});
+</script>
 
 
 

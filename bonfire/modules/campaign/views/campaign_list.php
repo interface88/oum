@@ -17,9 +17,16 @@
         					<div class="give-goal-progress">
         						<div class="raised">
         							<div class="income">
-        								<span class="label">Current</span><span class="value">$4,090</span>
+        								<span class="label">Current</span><span class="value"><?php echo $row->pledge;?></span>
         							</div>
-        							<div class="percentage">41%</div>
+        							<div class="percentage">
+        							<?php
+        							$subtract_value=$row->goal-$row->pledge;
+        							$add_value=$row->goal+$row->pledge/2;
+        							$percentage=$subtract_value/$add_value;
+        							echo round($percentage).'%';
+        							?>
+        							</div>
         							<div class="goal">
         								<span class="label">Target</span> <span class="value"><?php echo $row->goal;?></span>
         							</div>

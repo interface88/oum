@@ -5,7 +5,7 @@
             <h2>Sub Category</h2>
             <ol>
           	  <li><a href="<?php echo base_url('');?>">Home</a></li>
-              <li><a href="<?php echo base_url('subcategory/list');?>">Sub Category List</a></li>
+              <li><a href="<?php echo base_url('subcategory/lists');?>">Sub Category List</a></li>
               <li>Create Category</li>
             </ol>
           </div>

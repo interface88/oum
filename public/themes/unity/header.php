@@ -12,10 +12,6 @@
           if ($this->auth->is_logged_in() !== false)
             {
                 echo '<li><a> Hi,'.$this->auth->user()->display_name.'</a></li>';
-     
-                 //   echo '<li><a href="'.base_url('users/logout').'">Logout</a></li>';
-                   /* echo '<li><a href="'.base_url('campaign/front_view_user').'">MY Campaign</a></li>';
-                    echo '<li class="book-a-table text-center"><a href="'.base_url('campaign/new').'">Start Campaign</a></li>';*/
             }
         else{
                   echo '<li><a href="'.base_url('login').'">Login</a></li>';

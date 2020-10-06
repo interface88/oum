@@ -133,7 +133,7 @@ background-color: #FFF;
     		<div class="col-lg-9">
     			<div class="row">
     				<div class="col-lg-12">
-    					<img class="img-fluid" src="<?php echo base_url('assets/Campaign/'.$campaign_item->image.'')?>" >
+    					<img class="img-fluid" src="<?php echo base_url('assets/campaign/'.$campaign_item->image.'')?>" >
     				</div>
     			</div>
     			<div class="row">
@@ -228,7 +228,13 @@ background-color: #FFF;
     				<ul class="list-group">
                       <li class="list-group-item d-flex justify-content-between align-items-center">
                         Current
-                        <span class="badge badge-primary badge-pill">$500</span>
+                         <input id="percentage" type="hidden" value="<?php 
+                         $subtract_value=$campaign_item->goal-$campaign_item->pledge;
+                         $add_value=$campaign_item->goal+$campaign_item->pledge/2;
+                			    $percentage=$subtract_value/$add_value;
+                			    echo round($percentage);
+        		          ?>"/>
+                        <span class="badge badge-primary badge-pill"><?php echo $campaign_item->pledge;?></span>
                       </li>
                       <li class="list-group-item d-flex justify-content-between align-items-center">
                         Target
@@ -236,13 +242,16 @@ background-color: #FFF;
                       </li>
                       <li class="list-group-item d-flex justify-content-between align-items-center">
                         Backers
-                        <span class="badge badge-primary badge-pill">64</span>
+                        <span class="badge badge-primary badge-pill">
+						64
+						</span>
                       </li>
                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                       <?php echo form_open('campaign_view/'.$this->uri->segment(2).'');?>
+                       <?php echo form_open('donation/donate/'.$this->uri->segment(2).'');?>
                        	<div class="row">
       						<div class="col">
                      			<input type="hidden" value="<?php echo $campaign_item->campaign_id;?>" name="campaign_id">
+                     			<input type="hidden" value="<?php echo $campaign_item->title;?>" name="campaign_name">
                         		<?php echo form_input(array('class'=>'form-control','name'=>'amount','value'=>set_value('amount'),'width'=>'100px'));?>
                         	</div>
       						<div class="col">
@@ -368,7 +377,7 @@ var config = {
   	cutoutPercentage: 90,
     elements: {
       center: {
-        text: '10%',
+        text:$('#percentage').val()+'%',
         color: '#666666', // Default is #000000
         fontStyle: 'Arial', // Default is Arial
         sidePadding: 20, // Default is 20 (as a percentage)

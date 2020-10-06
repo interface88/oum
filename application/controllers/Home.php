@@ -1,4 +1,6 @@
-<?php defined('BASEPATH') || exit('No direct script access allowed');
+<?php
+
+defined('BASEPATH') || exit('No direct script access allowed');
 
 /**
  * Bonfire
@@ -6,12 +8,12 @@
  * An open source project to allow developers to jumpstart their development of
  * CodeIgniter applications.
  *
- * @package   Bonfire
- * @author    Bonfire Dev Team
+ * @package Bonfire
+ * @author Bonfire Dev Team
  * @copyright Copyright (c) 2011 - 2014, Bonfire Dev Team
- * @license   http://opensource.org/licenses/MIT The MIT License
- * @link      http://cibonfire.com
- * @since     Version 1.0
+ * @license http://opensource.org/licenses/MIT The MIT License
+ * @link http://cibonfire.com
+ * @since Version 1.0
  * @filesource
  */
 
@@ -20,28 +22,31 @@
  *
  * The base controller which displays the homepage of the Bonfire site.
  *
- * @package    Bonfire
+ * @package Bonfire
  * @subpackage Controllers
- * @category   Controllers
- * @author     Bonfire Dev Team
- * @link       http://guides.cibonfire.com/helpers/file_helpers.html
- *
+ * @category Controllers
+ * @author Bonfire Dev Team
+ * @link http://guides.cibonfire.com/helpers/file_helpers.html
+ *      
  */
 class Home extends MX_Controller
 {
-	public function __construct()
-	{
-		parent::__construct();
 
-		$this->load->helper('application');
-		$this->load->library('Template');
-		$this->load->library('Assets');
-		$this->lang->load('application');
-		$this->load->library('events');
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->load->helper('application');
+        $this->load->library('Template');
+        $this->load->library('Assets');
+        $this->lang->load('application');
+        $this->load->library('events');
+        $this->load->library('users/auth');
+        $this->set_current_user();
 
         $this->load->library('installer_lib');
         if (! $this->installer_lib->is_installed()) {
-            $ci =& get_instance();
+            $ci = &get_instance();
             $ci->hooks->enabled = false;
             redirect('install');
         }
@@ -50,123 +55,150 @@ class Home extends MX_Controller
         // we're not extending from a Bonfire controller
         // and it's not done for us.
         $this->requested_page = isset($_SESSION['requested_page']) ? $_SESSION['requested_page'] : null;
-	}
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Displays the homepage of the Bonfire app
-	 *
-	 * @return void
-	 */
-	public function index()
-	{
-		$this->load->library('users/auth');
-		$this->set_current_user();
-		$this->load->model('campaign/Campaign_model');
-		$data=$this->Campaign_model->view_all();
-		$feature_data=$this->Campaign_model->view_feature_all();
-		$last_campaign_data=$this->Campaign_model->view_last_campaign_all();
-		Template::set('campaign_item',$data);
-		Template::set('feature_item',$feature_data);
-		Template::set('last_campaign_item',$last_campaign_data);
-		Template::render();
-	}//end index()
-	public function Campaign()
-	{
-	    $this->load->library('users/auth');
-	    $this->set_current_user();
-	    $this->load->model('campaign/Campaign_model');
-	    $data=$this->Campaign_model->view_all();
-	    Template::set_view('campaign/view_campaign');
-	    Template::set('campaign_item',$data);
-	    Template::render();
-	}
-	public function campaign_view()
-	{ 
-	    $this->load->helper(array('oum_form', 'url'));
-	    $this->load->library('form_validation');
-	    $this->load->library('users/auth');
-	    $this->set_current_user();
-	    $this->load->model('campaign/Campaign_model');
-	    $slug=$this->uri->segment(2);
-	    if(isset($_POST['save']))
-	    {
-    	    if ($this->auth->is_logged_in()== FALSE)
-    	    {
-    	        redirect('login');
-    	    }
-          else{
-                  $this->form_validation->set_rules('amount','Please Enter Amount','required|numeric|greater_than[0.99]');
-                  if($this->form_validation->run()==true)
-                  {
-                      $data=array(
-                          'user_id'=>$this->auth->user()->id,
-                          'campaign_id'=>$this->input->post('campaign_id'),
-                          'amount'=>$this->input->post('amount'),
-                          'firstname'=>$this->auth->user()->username,
-                          'email'=>$this->auth->user()->email,
-                      );
-                      $this->load->model('campaign/donor_model');
-                      if ($this->donor_model->donor_insert($data) == true)
-                      {
-                          Template::set_message(lang('us_user_created_success'), 'success');
-                          redirect('campaign_view'.$slug.'');
-                      }
-                      else{
-                          Template::set_message(lang('us_user_created_error'), 'error');
-                          redirect('campaign_view'.$slug.'');
-                          }
-                      
-                      
-                  }
-                  else{
-                          $data=$this->Campaign_model->view_all($slug);
-                          Template::set_view('campaign/index');
-                          Template::set('campaign_item',$data);
-                          Template::render();
-                       }
-              }
-	    }
-	    $data=$this->Campaign_model->view_all($slug);
-	    Template::set_view('campaign/index');
-	    Template::set('campaign_item',$data);
-	    Template::render();
-	}
-	//--------------------------------------------------------------------
-
-	/**
-	 * If the Auth lib is loaded, it will set the current user, since users
-	 * will never be needed if the Auth library is not loaded. By not requiring
-	 * this to be executed and loaded for every command, we can speed up calls
-	 * that don't need users at all, or rely on a different type of auth, like
-	 * an API or cronjob.
-	 *
-	 * Copied from Base_Controller
-	 */
-	protected function set_current_user()
-	{
-        if (class_exists('Auth')) {
-			// Load our current logged in user for convenience
-            if ($this->auth->is_logged_in()) {
-				$this->current_user = clone $this->auth->user();
-
-				$this->current_user->user_img = gravatar_link($this->current_user->email, 22, $this->current_user->email, "{$this->current_user->email} Profile");
-
-				// if the user has a language setting then use it
-                if (isset($this->current_user->language)) {
-					$this->config->set_item('language', $this->current_user->language);
-				}
+    /**
+     * Displays the homepage of the Bonfire app
+     *
+     * @return void
+     */
+    public function index()
+    {
+        $this->load->model('campaign/campaign_model');
+        Template::set('campaign_item', $this->campaign_model->get_front_campaign_by_hit());
+        Template::set('feature_item', $this->campaign_model->get_front_campaign_by_feature());
+        Template::set('last_campaign_item', $this->campaign_model->get_front_campaign());
+        Template::render();
+    }
+    // end index()
+    /**
+     * This function used to about us page view
+     */
+    public function about()
+    {   
+        Template::set_view('home/aboutus');
+        Template::render();
+    }
+    
+/**
+ * This function used to campaign page view
+ */
+    public function campaign()
+    {
+        $slug = $this->uri->segment(2);
+        if ($slug == NULL) {
+            $this->load->model('campaign/campaign_model');
+            Template::set('campaign_item', $this->campaign_model->get_front_campaign());
+            Template::set_view('campaign/view_campaign');
+            Template::render();
+        } else {
+            $this->load->helper(array(
+                'oum_form',
+                'url'
+            ));
+            $this->load->library('form_validation');
+            $this->load->model('campaign/campaign_model');
+            $data_campaign = $this->campaign_model->get_by_slug($slug);
+            if ($data_campaign == null) {
+                show_404("/");
+            }
+            /* hit function called */
+            $user_id = NULL;
+            if (! empty($this->auth->user()->id)) {
+                $user_id = $this->auth->user()->id;
+            }
+            $this->load->model('hits/hits_model');
+            $post_hits = array(
+                'campaign_id' => $data_campaign->campaign_id,
+                'user_id' => $user_id,
+                'ip_address' => $this->input->ip_address()
+            );
+            $this->hits_model->insert_hits($post_hits);
+            /* hit function called end */
+            Template::set('campaign_item', $data_campaign);
+            Template::set_view('campaign/index');
+            Template::render();
+        }
+    }
+/**
+ * This function used to contact page view
+ */
+    public function contact_us()
+    {
+        $this->load->helper(array(
+            'oum_form',
+            'url',
+            'security',
+        ));
+        $this->load->library('form_validation');
+        $this->load->model('contact_us/contact_model');
+        if (isset($_POST['send'])) {
+            $this->form_validation->set_rules($this->contact_model->get_custom_validation_rules('contact'));
+            if ($this->form_validation->run() == true) {
+                $data_post = array(
+                    'name' => $this->input->post('name', TRUE),
+                    'email' => $this->input->post('email', TRUE),
+                    'phone' => $this->input->post('phone', TRUE),
+                    'subject' => $this->input->post('subject', TRUE),
+                    'message' => $this->input->post('message', TRUE)
+                );
+                $data_post = $this->security->xss_clean($data_post);
+                if ($this->contact_model->insert_contact($data_post) == true) {
+                    Template::set_message(lang('us_user_created_success'), 'success');
+                    Template::render();
+                    // redirect('category/lists');
+                } else {
+                    Template::set_message(lang('us_user_created_unsuccess'), 'error');
+                    Template::render();
+                }
             } else {
-				$this->current_user = null;
-			}
+                Template::set_view('contact_us/contact_us');
+                Template::render();
+            }
+        }
 
-			// Make the current user available in the views
+        Template::set_view('contact_us/contact_us');
+        Template::render();
+    }
+
+    // end contact_us()
+    // --------------------------------------------------------------------
+
+    /**
+     * If the Auth lib is loaded, it will set the current user, since users
+     * will never be needed if the Auth library is not loaded.
+     * By not requiring
+     * this to be executed and loaded for every command, we can speed up calls
+     * that don't need users at all, or rely on a different type of auth, like
+     * an API or cronjob.
+     *
+     * Copied from Base_Controller
+     */
+    protected function set_current_user()
+    {
+        if (class_exists('Auth')) {
+            // Load our current logged in user for convenience
+            if ($this->auth->is_logged_in()) {
+                $this->current_user = clone $this->auth->user();
+
+                $this->current_user->user_img = gravatar_link($this->current_user->email, 22, $this->current_user->email, "{$this->current_user->email} Profile");
+
+                // if the user has a language setting then use it
+                if (isset($this->current_user->language)) {
+                    $this->config->set_item('language', $this->current_user->language);
+                }
+            } else {
+                $this->current_user = null;
+            }
+
+            // Make the current user available in the views
             if (! class_exists('Template')) {
-				$this->load->library('Template');
-			}
-			Template::set('current_user', $this->current_user);
-		}
-	}
+                $this->load->library('Template');
+            }
+            Template::set('current_user', $this->current_user);
+        }
+    }
 }
 /* end ./application/controllers/home.php */

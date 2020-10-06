@@ -282,7 +282,7 @@ display: inline-block;
 				<h2>Better world for Children!</h2>
 
 				<div class="btns">
-					<a href="#menu" class="btn-menu animated fadeInUp scrollto">camapign</a> <a href="#book-a-table"
+					<a href="<?php echo base_url('campaign');?>" class="btn-menu animated fadeInUp scrollto">camapign</a> <a href="<?php echo base_url('campaign');?>"
 						class="btn-book animated fadeInUp scrollto">Donate</a>
 				</div>
 			</div>
@@ -346,16 +346,23 @@ display: inline-block;
         			</div>
         			<!-- .fundpress-item-header END -->
         			<div class="fundpress-item-content text-center">
-        				<a href="<?php echo base_url('campaign_view/'.$row->slug.'')?>" class="d-block color-navy-blue fundpress-post-title"><?php echo $row->title;?></a>
+        				<a href="<?php echo base_url('campaign/'.$row->slug.'')?>" class="d-block color-navy-blue fundpress-post-title"><?php echo $row->title;?></a>
         				<p><?php echo $row->description;?></p>
         				<span class="xs-separetor"></span>
         				<div class="give-card__progress">
         					<div class="give-goal-progress">
         						<div class="raised">
         							<div class="income">
-        								<span class="label">Current</span><span class="value">$4,090</span>
+        								<span class="label">Current</span><span class="value"><?php echo $row->pledge;?></span>
         							</div>
-        							<div class="percentage">41%</div>
+        							<div class="percentage">
+        							<?php 
+        							$subtract_value=$row->goal-$row->pledge;
+        							$add_value=$row->goal+$row->pledge/2;
+        							$percentage=$subtract_value/$add_value;
+        							echo round($percentage).'%';
+        							?>
+        							</div>
         							<div class="goal">
         								<span class="label">Target</span> <span class="value"><?php echo $row->goal;?></span>
         							</div>
@@ -421,9 +428,17 @@ display: inline-block;
                 	<div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 content">
                 	 <p><?php echo $row->description;?></p>
                 	   <div class="raised">
-                            <div class="income"><span class="label">Current</span><br/><span class="value">$4,260</span></div>
+                            <div class="income"><span class="label">Current</span><br/><span class="value"><?php echo $row->pledge;?></span></div>
                             <div class="goal"><span class="label">Taget</span><br/><span class="value"><?php echo $row->goal;?></span></div>
-                            <div class="donors"><span class="label">Donors</span><br/><span class="value">44</span></div>
+                            <div class="donors"><span class="label">Donors</span><br/><span class="value">	
+                            		<?php 
+        							$subtract_value=$row->goal-$row->pledge;
+        							$add_value=$row->goal+$row->pledge/2;
+        							$percentage=$subtract_value/$add_value;
+        							echo round($percentage).'%';
+        							?>
+        						</span>
+        					</div>
                        </div>
                 	</div>
                 </div>
@@ -482,7 +497,7 @@ display: inline-block;
 <!-- category banner -->
 <style>
 #category_banner{background-color:#333; color:#fff;}
-#category_banner i{width:100px; height:100px; border-radius: 100px; padding: 22px; font-size: 58px;}
+#category_banner i{color:#fff; width:100px; height:100px; border-radius: 100px; padding: 22px; font-size: 58px;}
 #category_banner i:nth-child(1){background: #2b7152;}
 #category_banner i:nth-child(2){background: #2b7152;}
 #category_banner i:nth-child(3){background: #2b7152;}
@@ -525,7 +540,7 @@ display: inline-block;
 			</div>
 			<div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
 				<a href="#">
-				<i class="bx opal-icon- opal-icon-medical"></i>
+				<i class="bx bxl-baidu"></i>
 				<h3>Wildlife</h3>
 				</a>
 			</div>
@@ -550,16 +565,23 @@ display: inline-block;
         			</div>
         			<!-- .fundpress-item-header END -->
         			<div class="fundpress-item-content text-center">
-        				<a href="<?php echo base_url('campaign_view/'.$row->slug.'')?>" class="d-block color-navy-blue fundpress-post-title"><?php echo $row->title;?></a>
+        				<a href="<?php echo base_url('campaign/'.$row->slug.'')?>" class="d-block color-navy-blue fundpress-post-title"><?php echo $row->title;?></a>
         				<p><?php echo $row->description;?></p>
         				<span class="xs-separetor"></span>
         				<div class="give-card__progress">
         					<div class="give-goal-progress">
         						<div class="raised">
         							<div class="income">
-        								<span class="label">Current</span><span class="value">$4,090</span>
+        								<span class="label">Current</span><span class="value"><?php echo $row->pledge;?></span>
         							</div>
-        							<div class="percentage">41%</div>
+        							<div class="percentage">
+        							<?php 
+        							$subtract_value=$row->goal-$row->pledge;
+        							$add_value=$row->goal+$row->pledge/2;
+        							$percentage=$subtract_value/$add_value;
+        							echo round($percentage).'%';
+        							?>
+        							</div>
         							<div class="goal">
         								<span class="label">Target</span> <span class="value"><?php echo $row->goal;?></span>
         							</div>

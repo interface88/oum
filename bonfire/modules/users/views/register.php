@@ -1,5 +1,4 @@
 <?php
-
 $errorClass   = empty($errorClass) ? 'is-invalid' : $errorClass;
 $controlClass = empty($controlClass) ? 'form-control' : $controlClass;
 $fieldData = array(
@@ -27,7 +26,7 @@ $fieldData = array(
                 </div>
                 <div class="card-body">
                 <?php if (validation_errors()) : ?>
-                <div class="alert alert-danger" role="alert"	>
+                <div class="alert alert-danger" role="alert">
                     <?php echo validation_errors(); ?>
                 </div>
                 <?php endif; ?>

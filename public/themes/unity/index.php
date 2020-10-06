@@ -1,5 +1,4 @@
 <?php
-
 Assets::add_css(array(
     'vendor/bootstrap/css/bootstrap.min.css',
     'vendor/icofont/icofont.min.css',
@@ -19,7 +18,6 @@ Assets::add_js(  array(
     'vendor/venobox/venobox.min.js',
     'vendor/aos/aos.js',
     'main.js' ));
-
 $inline  = '$(".dropdown-toggle").dropdown();';
 $inline .= '$(".tooltips").tooltip();';
 Assets::add_js($inline, 'inline');
@@ -45,12 +43,13 @@ Assets::add_js($inline, 'inline');
     <link href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet"> 
    
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
-    
+<style>
+.add_btn{padding:10px;}
+</style>
 </head>
 <body>
-
 <?php echo theme_view('header'); ?>
+
 <?php
     echo theme_view('_sitenav');
     echo Template::message();
@@ -72,6 +71,4 @@ Assets::add_js($inline, 'inline');
     } );
     </script>
 </body>
-
-
 </html>

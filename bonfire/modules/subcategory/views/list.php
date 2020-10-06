@@ -5,8 +5,7 @@
           <h2>Sub Category</h2>
           <ol>              
           	  <li><a href="<?php echo base_url('');?>">Home</a></li>
-              <li><a href="<?php echo base_url('subcategory/list');?>">Sub Category List</a></li>
-              <li>Sub Category list</li>
+              <li><a href="<?php echo base_url('subcategory/lists');?>">Sub Category List</a></li>
           </ol>
         </div>
       </div>
@@ -16,8 +15,10 @@
         	<div class="page-container row">
         		<div class="col-lg-12">
                 <div class="table-responsive">
+                 <div class="col-sm-12 text-right add_btn">
                   <?php echo anchor(base_url('subcategory/create'), '<i class="bx bx-plus"></i> New', 'class="btn btn-secondary btn-sm"'); ?>
-                        <table class="table table-hover table-bordered  table-sm">
+                 </div>
+                        <table class="table table-hover table-bordered  table-sm datatable">
                           <caption>List of Sub Category </caption>
                           <thead class="thead-dark">
                             <tr>

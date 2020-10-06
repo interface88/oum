@@ -24,3 +24,8 @@
 	background-color: #ffffff;
 	padding: 10px 0;
 }
+
+.form-group.required label:after {
+  content:"*";
+  color:red;
+}
