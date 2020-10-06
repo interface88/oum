@@ -17,6 +17,7 @@ Assets::add_js(  array(
     'vendor/isotope-layout/isotope.pkgd.min.js',
     'vendor/venobox/venobox.min.js',
     'vendor/aos/aos.js',
+    'vendor/bootbox/bootbox.min.js',
     'main.js' ));
 $inline  = '$(".dropdown-toggle").dropdown();';
 $inline .= '$(".tooltips").tooltip();';
@@ -49,10 +50,8 @@ Assets::add_js($inline, 'inline');
 </head>
 <body>
 <?php echo theme_view('header'); ?>
-
 <?php
     echo theme_view('_sitenav');
-    echo Template::message();
     echo isset($content) ? $content : Template::content();
     echo theme_view('footer');
 ?>
@@ -68,7 +67,7 @@ Assets::add_js($inline, 'inline');
     <script type="text/javascript">
     $(document).ready( function () {
         $('.datatable').DataTable();
-    } );
+    });
     </script>
 </body>
 </html>
