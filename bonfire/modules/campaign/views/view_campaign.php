@@ -218,6 +218,12 @@ body {
     filter: contrast(1);
     opacity: 1
 }
+
+.campaign-search-panel{
+    margin: 10px 0;
+    background: #FFF;
+    padding: 10px;
+}
 </style>
 <section id="hero" class="d-flex align-items-center">
 	<div class="container position-relative text-center text-lg-left"
@@ -246,6 +252,15 @@ body {
 
 
 <div class="container campaign-list-container" data-offset="6">
+<div class="row campaign-search-panel" >
+    	<div class="col-lg-9">
+    	</div>
+    	<div class="col-lg-3">
+    		<select id="category" class="form-control">
+    			<option value="">- All Category -</option>
+    		</select>
+    	</div>
+	</div>
 <div class="row">
 <?php
 foreach($campaign_item as $row)
@@ -303,14 +318,22 @@ foreach($campaign_item as $row)
     </div>
 </div>
 <script type="text/javascript">
-	$('#loadmore').click(function(){
+	function loadmore(){
 		var offset = $('.campaign-list-container').data('offset');
-		var $btn = $(this);
+		var category = $('#category').val();
+		var $btn = $('#loadmore');
 		$btn.find('span').show();
-		$.get('<?php echo base_url('campaign/load_more')?>',function(response){
+		$.get('<?php echo base_url('campaign/loadmore')?>',{ 'offset' : offset , 'limit' : 6, 'category' : category },function(response){
     		$('.campaign-list-container').append(response);
     		$btn.find('span').hide();
     		$('.campaign-list-container').data('offset', offset + 6);
 		});
+	}
+	$('#loadmore').click(function(){
+		loadmore();
+	});
+	
+	$('#category').on('change', function(){
+		loadmore();
 	});
 </script>
