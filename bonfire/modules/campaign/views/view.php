@@ -15,7 +15,7 @@
     <div class="table-responsive-sm">
     	<div class="page-container row">
     		<div class="col-lg-12">
-                <table class="table table-hover table-bordered table-sm datatable">
+    		    <table class="table table-hover table-bordered table-sm datatable">
                   <caption>My Campaign</caption>
                   <thead class="thead-dark">
                     <tr>

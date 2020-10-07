@@ -633,5 +633,26 @@ class Users extends Front_Controller
     {
         return $this->saveUser('update', $id, $meta_fields);
     }
+    
+    /**
+     * this function used to all list of user
+     */
+    public function lists()
+    {
+        /* this function check user login */
+        $this->auth->restrict();
+        if ($this->session->role_id == 1) {
+            
+            Template::set_view('users/resend_activation');
+            Template::set('users_list', $this->user_model->find_all());
+            die();
+            Template::set_view('users/resend_activation');
+            Template::render();
+           
+        } else {
+            Template::set_message('Cannot Access this page.', 'error');
+            Template::render();
+        }
+    }
 }
 /* End of file /bonfire/modules/users/controllers/users.php */

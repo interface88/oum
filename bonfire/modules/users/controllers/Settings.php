@@ -233,7 +233,6 @@ class Settings extends Admin_Controller
         );
         Template::set('languages', unserialize($this->settings_lib->item('site.languages')));
         Template::set('toolbar_title', lang('us_create_user'));
-
         Template::set_view('users/settings/user_form');
         Template::render();
     }

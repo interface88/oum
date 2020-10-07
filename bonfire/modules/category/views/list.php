@@ -18,6 +18,7 @@
                 <div class="col-sm-12 text-right add_btn">
                     <?php echo anchor(base_url('category/create'), '<i class="bx bx-plus"></i> New', 'class="btn btn-secondary btn-sm"'); ?>
                 </div>
+               
                         <table class="table table-hover table-bordered  table-sm datatable">
                           <caption>List of Category</caption>
                           <thead class="thead-dark">

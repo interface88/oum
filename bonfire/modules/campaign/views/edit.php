@@ -188,8 +188,8 @@ body {
                                               </label>
                                             </div>
                                               <div class="form-group row option2 show2" style="display:none;">
-                                                 <?php echo form_input(array('class' => form_error('deadline_date') ? 'form-control is-invalid' : 'form-control',  'id'=>'deadline_date', 'name'=>'deadline_date', 'type'=>'datetime-local', 'format'=>d/m/Y, 'value'=>$campaign_list->deadline,)); echo '<div class="invalid-feedback">'.form_error('deadline_date').'</div>';?>   
-                                                  <?php echo form_input(array('class' => form_error('deadline_time') ? 'form-control is-invalid' : 'form-control',  'id'=>'deadline_time', 'name'=>'deadline_time', 'type'=>'time', 'value'=>$campaign_list->deadline,)); echo '<div class="invalid-feedback">'.form_error('deadline_time').'</div>';?>   
+                                                 <?php echo form_input(array('class' => form_error('deadline_date') ? 'form-control is-invalid' : 'form-control',  'id'=>'deadline_date', 'name'=>'deadline_date', 'type'=>'date', 'value'=>date("d/M/Y", strtotime($campaign_list->deadline)),)); echo '<div class="invalid-feedback">'.form_error('deadline_date').'</div>';?>   
+                                                  <?php echo form_input(array('class' => form_error('deadline_time') ? 'form-control is-invalid' : 'form-control',  'id'=>'deadline_time', 'name'=>'deadline_time', 'type'=>'time', 'value'=>date("h:i:s", strtotime($campaign_list->deadline)),)); echo '<div class="invalid-feedback">'.form_error('deadline_time').'</div>';?>   
                                               </div>
 
                                          </div>
@@ -371,7 +371,7 @@ body {
                                   <div class="form-group row">
                                    <table class="table">
                                     <thead class="thead-dark">
-                                    <tr><th>Name of 1sr Director</th><th>DIN of 1st Director</th></tr>
+                                    <tr><th>Name of Director</th><th>DIN of Director</th></tr>
                                     </thead>
                                     <tbody class="single_director_block">
                                     <?php foreach ($director_list as $row){?>
@@ -385,15 +385,23 @@ body {
                                    <script>
                                    $(document).on('change','#no_of_director',function()
                                    {
+                                   		var rowLen = $('.single_director_block tr').length;
                                        var current_value=$(this).val();
-                                       var row='';
-                                       for(var i=0; i<current_value; i++)
-                                       {
-                                        row = row + '<tr><td><input class="form-control" name="name_director[]" type="text" value="<?php echo $row->name_director;?>" /></td><td><input name="din_director[]" class="form-control" type="text" value="<?php echo $row->din_director;?>" /></td></tr>';
+                                       var final_row_count = current_value - rowLen;
+                                       if(final_row_count > 0){
+                                           var row='';
+                                           for(var i=0; i<final_row_count; i++)
+                                           {
+                                            row = row + '<tr><td><input class="form-control" name="name_director[]" type="text" value="" /></td><td><input name="din_director[]" class="form-control" type="text" value="" /></td></tr>';
+                                           }
+                                           $('.single_director_block').append(row);
                                        }
-                                       $('.single_director_block').html('');
-                                       $('.single_director_block').html(row);
-                                   });
+                                       debugger;
+                                       if(final_row_count < 0){
+                                           $('.single_director_block tr').slice(final_row_count).remove();
+                                       }
+                                       }
+                                   );
                                    </script>
                                    </div>
                                   <div class="form-group row required">

@@ -16,7 +16,7 @@
             else{
                     echo base_url('campaign/view');
                 }
-            ?>">Project List</a></li>
+            ?>">Campaign List</a></li>
           </ol>
         </div>
       </div>

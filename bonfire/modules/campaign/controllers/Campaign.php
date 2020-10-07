@@ -382,6 +382,7 @@ class Campaign extends Front_Controller
     public function edit()
     { 
         $campaign_id=$this->uri->segment(3);
+        Template::set('active_tab', 'people_team');
         /*this code run campaign project*/
         $campaign_list = $this->campaign_model->get_by_id($campaign_id);
         $this->load->model('category/category_model');
@@ -451,7 +452,19 @@ class Campaign extends Front_Controller
         $result = $this->campaign_model->update_campaign($id, $data);
         echo $result;
     }
-    
+    /*
+     *function used to feature_status 
+     */
+    public function feature_status()
+    {
+        $id = $this->input->get('id');
+        $data = array(
+            'feature' => $this->input->get('status')
+        );
+        $result = $this->campaign_model->update_campaign($id, $data);
+        echo $result;
+      
+    }
     /* function used to status changes */
     public function active()
     {
@@ -487,7 +500,10 @@ class Campaign extends Front_Controller
      * this function used to view campaign details
      */
     public function preview()
-    {   $campaign_id=$this->uri->segment(3);
+    {        /* this function check user login */
+        $this->auth->restrict();
+        
+        $campaign_id=$this->uri->segment(3);
         $campaign_list = $this->campaign_model->get_by_id($campaign_id);
    
         $this->load->model('company_model');

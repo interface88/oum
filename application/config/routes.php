@@ -63,6 +63,7 @@ $route['campaign/views'] = 'campaign/views';
 $route['campaign/view'] = 'campaign/view';
 $route['campaign/edit'] = 'campaign/edit';
 $route['campaign/status_change'] = 'campaign/status_change';
+$route['campaign/feature_status'] = 'campaign/feature_status';
 $route['campaign/active'] = 'campaign/active';
 $route['campaign/delete'] = 'campaign/delete';
 

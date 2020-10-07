@@ -24,6 +24,7 @@
                   echo '<li><a class="dropdown-item" href="'.base_url('subcategory/lists').'">Sub Category</a></li>';
                   echo '<li><a class="dropdown-item" href="'.base_url('contact_us/lists').'">Contact us</a></li>';
                   echo '<li><a class="dropdown-item" href="'.base_url('donation/lists').'">Donation</a></li>';
+                  echo '<li><a class="dropdown-item" href="'.base_url('users/lists').'">User List</a></li>';
                 }
                 else{
                     echo '<li><a class="dropdown-item" href="'.base_url('campaign/view').'">My Campaign</a></li>';
