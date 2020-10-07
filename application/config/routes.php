@@ -65,6 +65,7 @@ $route['campaign/edit'] = 'campaign/edit';
 $route['campaign/status_change'] = 'campaign/status_change';
 $route['campaign/active'] = 'campaign/active';
 $route['campaign/delete'] = 'campaign/delete';
+$route['campaign/loadmore'] = 'campaign/loadmore';
 
 $route['campaign'] = 'Home/campaign';
 $route['campaign/(:any)'] = 'Home/campaign/$1';

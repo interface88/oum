@@ -300,6 +300,16 @@ class Campaign_model extends BF_Model
         return $result == 0 ? true : false; 
     }
     
+    public function load_more_campaign($offset = '', $limit = '' , $category = ''){
+        
+        $this->db->limit($limit, $offset);
+        if($category != ''){
+            $this->db->where('category',$category);
+        }
+        $query = $this->db->get($this->table_name);
+        return $query->result();
+    }
+    
     // GET TOP 5 CATEGORIES
     // GET TOP 5 CAMPAIGN BY DONATION 
     // GET TOP 5 CAMPAIGN BY HIT 

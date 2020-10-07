@@ -474,10 +474,15 @@ class Campaign extends Front_Controller
         echo $result;
     }
     
-    /* function used to status changes */
-    public function load_more()
+    /**
+     * Function to load more campaign using ajax.
+     */
+    public function loadmore()
     {
-        $data = $this->campaign_model->view_last_campaign_all();
+        $offset = $this->input->get('offset');
+        $limit = $this->input->get('limit');
+        $category = $this->input->get('category');
+        $data = $this->campaign_model->load_more_campaign($offset, $limit, $category);
         Template::set('last_campaign_item',$data);
         Template::set_view('campaign/campaign_list');
         Template::render('ajax');
