@@ -36,12 +36,23 @@ Assets::add_js($inline, 'inline');
     <meta name="description" content="<?php e(isset($meta_description) ? $meta_description : ''); ?>">
     <meta name="author" content="<?php e(isset($meta_author) ? $meta_author : ''); ?>">
    
+   
+   
     <?php
     /* Modernizr is loaded before CSS so CSS can utilize its features */
     echo Assets::js('modernizr-2.5.3.js');
     ?>
     <?php echo Assets::css(); ?>
-    <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico">
+    
+    <!-- favicon code -->
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo base_url(); ?>/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url(); ?>/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url(); ?>/favicon/favicon-16x16.png">
+    <link rel="manifest" href="<?php echo base_url(); ?>/favicon/site.webmanifest">
+    <link rel="mask-icon" href="<?php echo base_url(); ?>/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet"> 
 </head>
 <body>
