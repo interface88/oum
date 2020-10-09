@@ -1,6 +1,3 @@
-<style>
-.table-responsive img{width:100px;}
-</style>
 <main id="main">
 	<section class="breadcrumbs">
       <div class="container">
@@ -47,11 +44,22 @@
                           </table>
                           <table class="table table-hover">
                            <thead class="thead-dark text-center">
-                           <tr><th colspan="2">Campagin & Funding Details</th></tr>
+                           <tr><th colspan="2">Campaign & Funding Details</th></tr>
                            </thead>
                             <tbody>
-                            	<tr><td>Campaign duration</td><td><?php echo $campaign_list->final_deadline;?></td></tr>
-                            	<tr><td>Target Audience</td><td>error</td></tr>
+                            	<tr><td>Campaign duration</td><td>
+                            	<?php 
+                            	if('DAY'==$campaign_list->final_deadline_type)
+                            	{
+                            	    echo $campaign_list->deadline_day;
+                            	}
+                            	elseif('DATE_TIME'==$campaign_list->final_deadline_type)
+                            	{
+                            	    echo date("d-M-Y h:i", strtotime($campaign_list->deadline));
+                            	}
+                            	?>
+                            	    </td></tr>
+                            	<tr><td>Option to provide 80G certificate to the donor</td><td><?php echo $campaign_list->{'80G_availablity'};?></td></tr>
                             	<tr><td>Amount required</td><td><?php echo $campaign_list->goal;?></td></tr>
                             	<tr><td>Funding Goal </td><td><?php echo $campaign_list->final_goal;?></td></tr>
                             </tbody>

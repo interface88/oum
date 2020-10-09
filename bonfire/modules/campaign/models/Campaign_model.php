@@ -104,7 +104,7 @@ class Campaign_model extends BF_Model
         ),
         array(
             'field' => 'goal',
-            'label' => 'Goal',
+            'label' => 'Amount required',
             'rules' => 'required|numeric'
         ),
         array(
@@ -293,6 +293,14 @@ class Campaign_model extends BF_Model
         return $query->result();
     }
     
+    public function get_campaign_by_category($category_name)
+    {   $this->db->limit(3,0);
+        $this->db->where('deleted', 0);
+        $this->db->where('status', 'A');
+        $this->db->where('category', $category_name);
+        $query = $this->db->get($this->table_name);
+        return $query->result();
+    }
     public function is_camapaign_owner($campaign_id , $user_id){
         $this->db->where('campaign_id',$campaign_id);
         $this->db->where('user_id',$user_id);
@@ -310,10 +318,6 @@ class Campaign_model extends BF_Model
         return $query->result();
     }
     
-    // GET TOP 5 CATEGORIES
-    // GET TOP 5 CAMPAIGN BY DONATION 
-    // GET TOP 5 CAMPAIGN BY HIT 
-    // GET TOP 5 CAMPAIGN ON COMPLETION
     
     public function get_custom_validation_rules($type = '')
     {

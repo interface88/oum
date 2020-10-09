@@ -52,29 +52,43 @@
     </section>
 </main>
 <script>
-$(document).on('click','.delete',function()
- {
-   if(confirm('Are you sure Delete data'))
-   {
-    $row = $(this).parent().parent().parent();
-    var id = $(this).attr('data-id');
-    var url ="<?php echo base_url('category/delete');?>";
-      $.ajax({
-        type:"GET",
-        url:url,
-        data:{"id":id},
-        success: function(data)
-          {
-            if(data==true)
-            {
-              $row.remove();
-            } 
-            else{
-                  alert('Unable to delete');
-               }
-          }
-      });
-   }
- }
-);
+
+$(document).on('click', '.delete', function() {
+	var $btn = $(this);
+    bootbox.confirm({
+        title: "Delete campaign?",
+        message: "Do you want to delete category? This cannot be undone.",
+        buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
+        },
+        callback: function(result) {
+            if (result) {
+                var $row = $btn.parent().parent().parent();
+                var id =  $btn.attr('data-id');
+                var url = "<?php echo base_url('category/delete');?>";
+                $.get({
+                    url: url,
+                    data: {
+                        "id": id
+                    },
+                    success: function(res) {
+                    debugger;
+                        if (res == true) {
+                            $row.remove();
+                        } else {
+                            bootbox.alert('Unable to delete');
+                        }
+                    }
+                });
+            }
+        }
+    });
+});
 </script>

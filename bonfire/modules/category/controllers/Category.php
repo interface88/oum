@@ -95,22 +95,31 @@ class Category extends Front_Controller
         $this->auth->restrict();
         if ($this->session->role_id == 1) {
             $slug = $this->uri->segment(3);
-            $this->form_validation->set_rules('category', 'Category Name', 'required|trim');
-            if ($this->form_validation->run() == FALSE) {
-                $category_list = $this->category_model->get_list($slug);
-                Template::set_view('category/edit');
-                Template::set('category_list', $category_list);
-                Template::render();
-            } else {
-                if (isset($_POST['save'])) {
+            if (isset($_POST['save'])) {
+                $this->form_validation->set_rules('category', 'Category Name', 'required|trim');
+                if ($this->form_validation->run() == FALSE) {
+                    $category_list = $this->category_model->get_list($slug);
+                    Template::set_view('category/edit');
+                    Template::set('category_list', $category_list);
+                    Template::render();
+                } else {
                     $data = array(
-                        'category_name' => $_POST['category']
+                        'category_name' =>$this->input->post('category'),
                     );
                     if ($this->category_model->update_category($slug, $data) == true) {
                         Template::set_message(lang('us_user_created_success'), 'success');
                         redirect('category/lists');
                     }
                 }
+            }
+            else{
+                $category_list = $this->category_model->get_list($slug);
+                if ($category_list == null) {
+                    show_404("/");
+                }
+                Template::set_view('category/edit');
+                Template::set('category_list', $category_list);
+                Template::render();
             }
         } else {
             Template::set_message('Cannot Access this page.', 'error');

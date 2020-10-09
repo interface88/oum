@@ -23,10 +23,10 @@
  * @author  Bonfire Dev Team
  * @link    http://cibonfire.com/docs/developer
  */
-class category_model extends BF_Model
+class Particulars_model extends BF_Model
 {
     /** @var string Name of the oum_campaign table. */
-    protected $table_name = 'category';
+    protected $table_name = 'particulars';
 
     /** @var boolean Use soft deletes or not. */
     protected $soft_deletes = true;
@@ -62,33 +62,35 @@ class category_model extends BF_Model
         // --------------------------------------------------------------------------
         // CRUD Method Overrides.
         // --------------------------------------------------------------------------
-        /* function used to insert category */
-    public function insert_category($data = array())
+        /* function used to insert particulars */
+    public function insert_particulars($data = array())
     {
         return $this->db->insert($this->table_name, $data);
     }
 
-    /* function used to insert category end */
-    /* this function used to update category */
-    public function update_category($slug = null, $data = array())
+    /* function used to insert particulars end */
+    /* this function used to update particulars */
+    public function update_particulars($slug = null, $data = array())
     {
-        $this->db->where('category_id', $slug);
+        $this->db->where('id', $slug);
         return $this->db->update($this->table_name, $data);
     }
 
-    /* function used to update category end */
-    /* function used to edit/view category */
+    /* function used to update particulars end */
+    /* function used to edit/view particulars */
     public function get_list($slug = NULL)
     {
         if ($slug === NULL) {
+            $this->db->where('deleted',0);
             $query = $this->db->get($this->table_name);
             return $query->result();
         }
         $query = $this->db->get_where($this->table_name, array(
-            'category_id' => $slug
+            'id' => $slug,
+            'deleted'=>0,
         ));
         return $query->row();
     }
-    /* functoin used to edit/view category end */
+    /* functoin used to edit/view particulars end */
 }
 //end User_model

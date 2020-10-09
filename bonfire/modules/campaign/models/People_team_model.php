@@ -65,6 +65,16 @@ public function people_insert($data)
    return $this->db->insert($this->table_name,$data);
 }
 /*this function used to insert data end*/
+
+/**
+ * People delete campaign_id and new insert
+ */
+public function people_user_delete_insert($campaign_id,$data)
+    {
+        $this->db->delete($this->table_name, array('campaign_id' => $campaign_id));
+        return $this->db->insert($this->table_name,$data);
+    }
+    
 /**
  *
  * @param People team user

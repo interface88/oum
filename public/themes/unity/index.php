@@ -12,11 +12,10 @@ Assets::add_css(array(
 Assets::add_js(  array(
     'vendor/bootstrap/js/bootstrap.bundle.min.js',
     'vendor/jquery.easing/jquery.easing.min.js',
-    'vendor/php-email-form/validate.js',
     'vendor/owl.carousel/owl.carousel.min.js',
-    'vendor/isotope-layout/isotope.pkgd.min.js',
     'vendor/venobox/venobox.min.js',
     'vendor/aos/aos.js',
+	'vendor/isotope-layout/isotope.pkgd.min.js',
     'vendor/bootbox/bootbox.min.js',
     'main.js' ));
 $inline  = '$(".dropdown-toggle").dropdown();';

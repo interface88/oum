@@ -6,7 +6,7 @@
 	<section class="breadcrumbs">
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Campaign</h2>
+          <h2><i class="bx bx-list-ul"></i>Campaign List</h2>
           <ol>
             <li><a href="<?php echo base_url('');?>">Home</a></li>
             <li>Campaign List</li>
@@ -40,7 +40,7 @@
                             foreach ($list_item as $row) {
                             ?>
                               <tr>
-                              		<td scope="row"><?php echo $i++;?></th>
+                              		<td scope="row"><?php echo $i++;?></td>
                               		<td><?php echo $row->title;?></td>
                               		<td><?php echo $row->category;?></td>
                               		<td><?php echo date("d-M-Y", strtotime($row->launched));?></td>
@@ -68,7 +68,7 @@
 	                             			{}                                 			
 	                             			else
 	                             			{
-	                             			    echo anchor(base_url('campaign/edit/'.$row->campaign_id), '<i class="btn bx bx-edit-alt"></i>', 'class="btn btn-secondary btn-sm" title="Edit"');
+	                             			    echo anchor(base_url('campaign/edit_create/'.$row->campaign_id), '<i class="btn bx bx-edit-alt"></i>', 'class="btn btn-secondary btn-sm" title="Edit"');
 	                             			    echo'<button type="button" class="btn btn-danger btn-sm delete" data-id="'.$row->campaign_id.'" title="Delete"><i class="btn bx bx-trash-alt"></i></button>';
 	                             			}
 	                             			echo anchor(base_url('campaign/preview/'.$row->campaign_id), '<i class="btn bx bx-show"></i>', 'class="btn btn-secondary btn-sm" title="View"');

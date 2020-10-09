@@ -70,6 +70,16 @@ class dashboard extends Front_Controller
             Template::render();
         }
     }
+    // GET TOP 5 CATEGORIES
+    // GET TOP 5 CAMPAIGN BY DONATION
+    // GET TOP 5 CAMPAIGN BY HIT
+    /*    SELECT hi.campaign_id,COUNT(1) AS hitcount ,c.title
+     FROM bf_hits hi
+     INNER JOIN bf_campaign c ON hi.campaign_id=c.campaign_id
+     GROUP BY  hi.campaign_id ORDER BY hitcount DESC
+     LIMIT 5;
+     */
+    // GET TOP 5 CAMPAIGN ON COMPLETION
     
     /* function used to list Dashboard end */
   }

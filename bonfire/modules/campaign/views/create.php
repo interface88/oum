@@ -47,16 +47,18 @@ body {
 .tab-pane {
     padding: 10px;
 }
-</style>
+ #final_goal{background: transparent;color: #fff; border:none;}
+ .fixed_date_time{display:none;}
+ </style>
 <!------ Include the above in your HEAD tag ---------->
 <main id="main">
   <section class="breadcrumbs">
         <div class="container">
           <div class="d-flex justify-content-between align-items-center">
-            <h2>Campagin</h2>
+            <h2>Campaign</h2>
             <ol>
               <li><a href="<?php echo base_url('');?>">Home</a></li>
-              <li>Create Campagin</li>
+              <li>Create Campaign</li>
             </ol>
           </div>
         </div>
@@ -70,7 +72,7 @@ body {
                         	<nav>
                               <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link <?php echo $active_tab == 'project' ? 'active' : ''; ?>" id="nav-home-tab" <?php echo $active_tab == 'project' ? 'data-toggle="tab"' : ''; ?> href="#nav-project" role="tab" aria-controls="nav-home" aria-selected="true">Project</a>
-                                <a class="nav-item nav-link <?php echo $active_tab == 'funding' ? 'active' : ''; ?>" id="nav-profile-tab" <?php echo $active_tab == 'funding' ? 'data-toggle="tab"' : ''; ?> href="#nav-funding" role="tab" aria-controls="nav-profile" aria-selected="false">Campagin & Funding Details</a>
+                                <a class="nav-item nav-link <?php echo $active_tab == 'funding' ? 'active' : ''; ?>" id="nav-profile-tab" <?php echo $active_tab == 'funding' ? 'data-toggle="tab"' : ''; ?> href="#nav-funding" role="tab" aria-controls="nav-profile" aria-selected="false">Campaign & Funding Details</a>
                                 <a class="nav-item nav-link <?php echo $active_tab == 'people_team' ? 'active' : ''; ?>" id="nav-contact-tab" <?php echo $active_tab == 'people_team' ? 'data-toggle="tab"' : ''; ?> href="#nav-people_team" role="tab" aria-controls="nav-contact" aria-selected="false">People/team</a>
                                 <a class="nav-item nav-link <?php echo $active_tab == 'payment' ? 'active' : ''; ?> " id="nav-contact1-tab" <?php echo $active_tab == 'payment' ? 'data-toggle="tab"' : ''; ?> href="#nav-payment" role="tab" aria-controls="nav-contact" aria-selected="false">Payment Details</a>
                               </div>
@@ -146,7 +148,10 @@ body {
                                           <label for="" class="col-sm-3 col-form-label">Video</label>
                                           <div class="col-sm-6">
                                               <?php echo form_input(array('class' => form_error('video_url') ? 'form-control is-invalid' : 'form-control',  'id'=>'video_url', 'name'=>'video_url', 'type'=>'text', 'value'=>set_value('video_url'), 'placeholder'=>"Youtube Video Url")); echo '<div class="invalid-feedback">'.form_error('video_url').'</div>';?>
-                                              <small id="videoHelp" class="form-text text-muted">If you add the video you have a better chance of getting noticed</small> 
+                                              <small id="videoHelp" class="form-text text-muted">
+                                                If you add the video you have a better chance of getting noticed
+                                                <br/><a href="">Click here</a> for a quick guide on how to make the video
+                                              </small> 
                                            </div>
                                         </div>  
                                         <div class="form-group row text-right">
@@ -158,7 +163,6 @@ body {
                                     echo form_close();
                               	 }
                                     ?>  
-                              
                               </div>
                               <div class="tab-pane <?php echo $active_tab == 'funding' ? 'active' : ''; ?>" id="nav-funding" role="tabpanel" aria-labelledby="nav-profile-tab">
                               	 <?php
@@ -166,69 +170,52 @@ body {
                                       $attributes = array('class' => 'form-horizontal', 'method' => 'post', 'id' => 'myform', 'accept-charset'=>'utf-8');
                                       echo form_open_multipart('campaign/funding/'.$this->uri->segment(3).'', $attributes);
                                   ?> 
-                                     <div class="form-group row">
+                                    <div class="form-group row">
                                         <label for="" class="col-sm-3 col-form-label">
                                           Campaign duration
                                           <p>Set a time limit for your campaign. You won't be able to change this after you launch.</p>
                                         </label>
                                         <div class="col-sm-6">
-                                              <div class="form-group row">
-                                                <label class="form-check-label">
-                                                  <input type="radio" checked  class="form-check-input" id="deadline_selecter" name="deadline_selecter" value="DAY">Fixed number of days(1-60)
-                                                </label>
-                                              </div>
-                                              <div class="form-group row show1">
-                                                  <?php echo form_input(array('class' => form_error('deadline_day') ? 'form-control is-invalid' : 'form-control',  'id'=>'deadline_day', 'name'=>'deadline_day', 'type'=>'text', 'value'=>set_value('deadline_day'), 'placeholder'=>"60")); echo '<div class="invalid-feedback">'.form_error('deadline_day').'</div>';?>   
-                                        
-                                              </div>
-                                            <div class="form-group row">
-                                              <label class="form-check-label">
+                                          <div class="form-group">
+                                       		<label for="" class="col-sm-6 col-form-label">
+                                             <input type="radio" checked class="form-check-input" id="deadline_selecter" name="deadline_selecter" value="DAY">Fixed number of days(1-60)
+                                        	</label>
+                                            <?php echo form_input(array('class' => form_error('deadline_day') ? 'form-control fixed_day is-invalid' : 'form-control fixed_day',  'id'=>'deadline_day', 'name'=>'deadline_day', 'type'=>'text', 'value'=>set_value('deadline_day'), 'placeholder'=>"60")); echo '<div class="invalid-feedback">'.form_error('deadline_day').'</div>';?>   
+                                           </div>
+                                           <div class="form-group">
+                                       		<label for="" class="col-sm-6 col-form-label">
                                                 <input type="radio" class="form-check-input" id="deadline_selecter" name="deadline_selecter" value="DATE_TIME">End on a specific date & time
-                                              </label>
-                                            </div>
-                                              <div class="form-group row option2 show2" style="display:none;">
-                                                 <?php echo form_input(array('class' => form_error('deadline_date') ? 'form-control is-invalid' : 'form-control',  'id'=>'deadline_date', 'name'=>'deadline_date', 'type'=>'date', 'value'=>set_value('deadline_date'),)); echo '<div class="invalid-feedback">'.form_error('deadline_date').'</div>';?>   
-                                                  <?php echo form_input(array('class' => form_error('deadline_time') ? 'form-control is-invalid' : 'form-control',  'id'=>'deadline_time', 'name'=>'deadline_time', 'type'=>'time', 'value'=>set_value('deadline_time'),)); echo '<div class="invalid-feedback">'.form_error('deadline_time').'</div>';?>   
-                                              </div>
-
-                                         </div>
-                                     </div>
+                                         	</label>
+	                                             <?php echo form_input(array('class' => form_error('deadline_date') ? 'form-control fixed_date_time is-invalid' : 'form-control fixed_date_time',  'id'=>'deadline_date', 'name'=>'deadline_date', 'type'=>'date', 'value'=>set_value('deadline_date'),)); echo '<div class="invalid-feedback">'.form_error('deadline_date').'</div>';?>   
+                                                 <?php echo form_input(array('class' => form_error('deadline_time') ? 'form-control fixed_date_time is-invalid' : 'form-control fixed_date_time',  'id'=>'deadline_time', 'name'=>'deadline_time', 'type'=>'time', 'value'=>set_value('deadline_time'),)); echo '<div class="invalid-feedback">'.form_error('deadline_time').'</div>';?>   
+                                             	 <small class="form-text text-muted fixed_date_time"><i class="bx bx-map"></i>Campaigns that last 30 days or less are more likely to be successful. <a href="">learn more..</a></small>
+                                           </div>	
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    
                                      <div class="form-group row required">
-                                          <label for="80G_availablity" class="col-sm-3 col-form-label">Target Audience</label>
+                                          <label for="80G_availablity" class="col-sm-3 col-form-label">Option to provide 80G certificate to the donor</label>
                                           <div class="col-sm-6">
                                                 <?php
                                                 $yesarr= array('Yes' => 'Yes','No' => 'No',);
                                                 echo form_dropdown('80G_availablity', $yesarr, set_value('80G_availablity'),'class="form-control"');
                                                   echo '<div class="invalid-feedback">'.form_error('80G_availablity').'</div>';
                                                 ?> 
-                                               <p>option to provide 80G certificate to the donor</p>
-                                               <p>Campaigners who are able to provide the 80G certificate usually get more support and  backers.</p>          
+                                               <small class="form-text text-muted">Campaigners who are able to provide the 80G certificate usually get more support and  backers.</small>          
                                            </div>
                                      </div>    
                                      <div class="form-group row required">
-                                     
-        <script>
-        $(document).on('input','#goal',function(){
-              var amount=$("#goal").val();
-              var tan_per=amount*10/100;
-              var eight_per=amount*18/100;
-              var pro_fee=parseFloat(amount) + parseFloat(tan_per);
-              var taxes=parseFloat(amount) + parseFloat(eight_per);
-              var totalamount=parseFloat(amount) + parseFloat(tan_per) + parseFloat(eight_per);
-             $("#final_goal").val(totalamount);
-           	 $('#pro_fee').text(pro_fee);
-             $('#taxes').text(taxes);        
-        });
-        </script>                             
-                                  <style>
-                                  #final_goal{background: transparent;color: #fff; border:none;}
-                                  </style>   
                                         <label for="goal" class="col-sm-3 col-form-label">Amount required</label>
                                          <div class="col-sm-6">
-                                                <?php echo form_input(array('class' => form_error('goal') ? 'form-control is-invalid' : 'form-control',  'id'=>'goal', 'name'=>'goal', 'type'=>'text', 'value'=>set_value('goal'), 'placeholder'=>"2000.00")); echo '<div class="invalid-feedback">'.form_error('goal').'</div>';?>   
+                                                <?php echo form_input(array('class' => form_error('goal') ? 'form-control is-invalid' : 'form-control',  'id'=>'goal', 'name'=>'goal', 'type'=>'text', 'value'=>set_value('goal'), 'placeholder'=>"")); echo '<div class="invalid-feedback">'.form_error('goal').'</div>';?>   
                                          </div>
-                                         <div class="col-sm-9 col-sm-offset-2">
-                                             <table class="table table-bordered  table-sm">
+                                     </div>
+                                     <div class="form-group row">
+                                      <div class="col-sm-9 col-sm-offset-2">
+                                             <table class="table table-bordered  table-sm" id="particular_calc">
                                               <caption class="bg-warning text-white text-center">Funding Goal - Rs <input type="text" readonly="" name="final_goal" id="final_goal" value="" >  
                                               </caption>
                                                <thead class="thead-dark">
@@ -239,16 +226,19 @@ body {
                                                  </tr>
                                                </thead>
                                                <tbody>
+                                                  <?php
+                                                  foreach ($particulars_list as $row)
+                                                  {
+                                                  ?>
                                                  <tr>
-                                                   <td>Processing Fee</td>
-                                                   <td>10%</td>
-                                                   <td id="pro_fee"></td>
+                                                   <td><?php echo $row->particular;?></td>
+                                                   <td><?php echo $row->particular_value;?>%</td>
+                                                   <td></td>	
                                                  </tr>
-                                                 <tr>
-                                                   <td>Taxes</td>
-                                                   <td>18%</td>
-                                                   <td id="taxes"></td>
-                                                 </tr>
+                                              <?php
+                                                 }
+                                              ?>
+                                            
                                                </tbody>
                                              </table>
                                         </div>
@@ -292,7 +282,25 @@ body {
                                              <label for="education" class="col-sm-3 col-form-label">Education Degree</label>
                                             <div class="col-sm-3">
                                              <?php 
-                                             echo form_dropdown('education',array('ba' => 'ba','bca'=>'bca'),set_value('education'),'class="form-control"'); 
+                                             $education=
+                                             array(
+                                                 '--select'=>'--Select--',
+                                                 'ba'=>'Ba','b.com'=>'B.com',
+                                                 'bca'=>'Bca','bbm'=>'Bbm',
+                                                 'Art Directors'=>'Art Directors',
+                                                 'Craft Artists'=>'Craft Artists',
+                                                 'Fine Artists'=>'Fine Artists',
+                                                 'Multimedia Artists'=>'Multimedia Artists',
+                                                 'Printmakers'=>'Printmakers',
+                                                 'Painting Restorers'=>'Painting Restorers','Bailiff'=>'Bailiff',
+                                                 'Border patrol agent'=>'Border patrol agent','CIA agent'=>'CIA agent',
+                                                 'Corrections officer'=>'Corrections officer','Court reporter'=>'Court reporter',
+                                                 'Crime scene investigator'=>'Crime scene investigator','Customs agent'=>'Customs agent',
+                                                 'Detective'=>'Detective','Drug enforcement agent'=>'Drug enforcement agent',
+                                                 'FBI agent'=>'FBI agent','Industrial security specialist'=>'Industrial security specialist',
+                                                 
+                                             );
+                                             echo form_dropdown('education',$education,set_value('education'),'class="form-control"'); 
                                              echo '<div class="invalid-feedback">'.form_error('education').'</div>';?>    
                                              </div>
                                           </div>
@@ -375,19 +383,6 @@ body {
                                     </tr>
                                     </tbody>
                                    </table> 
-                                   <script>
-                                   $(document).on('change','#no_of_director',function()
-                                   {
-                                       var current_value=$(this).val();
-                                       var row='';
-                                       for(var i=0; i<current_value; i++)
-                                       {
-                                        row = row + '<tr><td><input class="form-control" name="name_director[]" type="text" /></td><td><input name="din_director[]" class="form-control" type="text" /></td></tr>';
-                                       }
-                                       $('.single_director_block').html('');
-                                       $('.single_director_block').html(row);
-                                   });
-                                   </script>
                                    </div>
                                   <div class="form-group row required">
                                         <label for="registered_address" class="col-sm-6 col-form-label">Registered Address</label>
@@ -558,12 +553,43 @@ body {
       var value=$(this).val();
       if('DAY'==value)
       {
-        $('.show1').show();
-        $('.show2').hide();   
+        $('.fixed_day').show();
+        $('.fixed_date_time').hide();   
       }
       else {
-            $('.show2').show();
-             $('.show1').hide();   
+            $('.fixed_date_time').show();
+            $('.fixed_day').hide();   
       }
   });
 </script>
+
+ <script>
+        $(document).on('input','#goal',function(){
+        	var amount = 0;
+        	if($("#goal").val().trim() != ''){
+              amount= parseFloat($("#goal").val());
+              amount = isNaN(amount) ? 0 : amount;
+        	}
+              var final_amount = amount; 
+              $('#particular_calc tbody tr').each(function(){
+              	var particular_percent = parseFloat( $(this).find('td:eq(1)').text());
+              	var particular_calc_amt = amount * (particular_percent/100);
+              	$(this).find('td:eq(2)').text(particular_calc_amt);
+              	final_amount = final_amount + particular_calc_amt;
+              })
+             $("#final_goal").val(final_amount);
+        });
+ </script>                             
+ <script>
+                                   $(document).on('change','#no_of_director',function()
+                                   {
+                                       var current_value=$(this).val();
+                                       var row='';
+                                       for(var i=0; i<current_value; i++)
+                                       {
+                                        row = row + '<tr><td><input class="form-control" name="name_director[]" type="text" /></td><td><input name="din_director[]" class="form-control" type="text" /></td></tr>';
+                                       }
+                                       $('.single_director_block').html('');
+                                       $('.single_director_block').html(row);
+                                   });
+ </script>      

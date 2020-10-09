@@ -103,11 +103,41 @@ class subcategory extends Front_Controller
         if ($this->session->role_id == 1)
         {
             $slug=$this->uri->segment(3);
-            $this->form_validation->set_rules('category', 'Sub Category Name', 'required|trim');
-            $this->form_validation->set_rules('category_name', 'Category Name', 'required|trim');
-            if ($this->form_validation->run() == FALSE)
+            if (isset($_POST['save']))
             {
+                $this->form_validation->set_rules('category', 'Sub Category Name', 'required|trim');
+                $this->form_validation->set_rules('category_name', 'Category Name', 'required|trim');
+                if ($this->form_validation->run() == FALSE)
+                {
+                    $datasub=$this->subcategory_model->get_list($slug);
+                    if ($datasub == null) {
+                        show_404("/");
+                    }
+                    $data=$this->category_model->get_list();
+                    $category_list=array();
+                    foreach ($data as $row)
+                    {
+                        $category_list[$row->category_id]=$row->category_name;
+                    }
+                    Template::set_view('subcategory/edit');
+                    Template::set('subcategory_list',$datasub);
+                    Template::set('category_list',$category_list);
+                    Template::render();
+                }
+                else{
+                        $data=array('category_id'=>$this->input->post('category_name'),'sub_category_name' =>$this->input->post('category'));
+                        if ($this->subcategory_model->update_subcategory($slug,$data) == true)
+                        {
+                            Template::set_message(lang('us_user_created_success'), 'success');
+                            redirect('subcategory/lists');
+                        }
+                    }
+            }
+            else{
                 $datasub=$this->subcategory_model->get_list($slug);
+                if ($datasub == null) {
+                    show_404("/");
+                }
                 $data=$this->category_model->get_list();
                 $category_list=array();
                 foreach ($data as $row)
@@ -118,17 +148,6 @@ class subcategory extends Front_Controller
                 Template::set('subcategory_list',$datasub);
                 Template::set('category_list',$category_list);
                 Template::render();
-            }
-            else {
-                if (isset($_POST['save']))
-                {
-                    $data=array('category_id'=>$this->input->post('category_name'),'sub_category_name' =>$this->input->post('category'));
-                    if ($this->subcategory_model->update_subcategory($slug,$data) == true)
-                    {
-                        Template::set_message(lang('us_user_created_success'), 'success');
-                        redirect('subcategory/lists');
-                    }
-                }
             }
         }
         else {

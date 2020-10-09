@@ -1,5 +1,4 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-
 <style>
 body {
  background-image: url("<?php echo base_url('themes/unity/img/bg-body.jpg')?>");
@@ -228,12 +227,7 @@ background-color: #FFF;
     				<ul class="list-group">
                       <li class="list-group-item d-flex justify-content-between align-items-center">
                         Current
-                         <input id="percentage" type="hidden" value="<?php 
-                         $subtract_value=$campaign_item->goal-$campaign_item->pledge;
-                         $add_value=$campaign_item->goal+$campaign_item->pledge/2;
-                			    $percentage=$subtract_value/$add_value;
-                			    echo round($percentage);
-        		          ?>"/>
+                         <input id="percentage" type="hidden" value="<?php echo percentage_calculation($goal=$campaign_item->goal,$pledge=$campaign_item->pledge);?>"/>
                         <span class="badge badge-primary badge-pill"><?php echo $campaign_item->pledge;?></span>
                       </li>
                       <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -243,7 +237,7 @@ background-color: #FFF;
                       <li class="list-group-item d-flex justify-content-between align-items-center">
                         Backers
                         <span class="badge badge-primary badge-pill">
-						64
+						<?php echo $donation_count;?>
 						</span>
                       </li>
                       <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -265,7 +259,51 @@ background-color: #FFF;
     			</div>
     		</div>
     	</div>
-    </div>	
+    </div>
+<!-- recent campaign -->
+<div class="container page-container">
+<div class="row">
+        <?php
+        foreach($recent_campaign_item as $row)
+        {
+            ?>	
+        	<div class="col-lg-4 give-wrap">
+        		<div class="fundpress-grid-item-content-v2 give-card">
+        			<div class="fundpress-item-header">
+        				<img src="<?php echo base_url('assets/campaign/'.$row->image.'')?>" class="img-thumbnail" />
+        			</div>
+        			<!-- .fundpress-item-header END -->
+        			<div class="fundpress-item-content text-center">
+        				<a href="<?php echo base_url('campaign/'.$row->slug.'')?>" class="d-block color-navy-blue fundpress-post-title"><?php echo $row->title;?></a>
+        				<p><?php echo character_limiter($row->description,100)?></p>
+        				<span class="xs-separetor"></span>
+        				<div class="give-card__progress">
+        					<div class="give-goal-progress">
+        						<div class="raised">
+        							<div class="income">
+        								<span class="label">Current</span><span class="value"><i class="bx bx-rupee"></i><?php echo $row->pledge;?></span>
+        							</div>
+        							<div class="percentage">
+        							<?php
+        							echo percentage_calculation($goal=$row->goal,$pledge=$row->pledge);
+        							?>
+        							</div>
+        							<div class="goal">
+        								<span class="label">Target</span><span class="value"><i class="bx bx-rupee"></i><?php echo $row->goal;?></span>
+        							</div>
+        						</div>
+        					</div>
+        				</div>
+        			</div>
+        			<!-- .fundpress-item-content END -->
+        		</div>
+        	</div>
+        <?php
+        }
+        ?>
+	</div>
+</div>
+<!-- recent campaign end -->    	
 </section>
 </main>
 
@@ -281,11 +319,11 @@ Chart.pluginService.register({
           var fontStyle = centerConfig.fontStyle || 'Arial';
           var txt = centerConfig.text;
           var color = centerConfig.color || '#000';
-          var maxFontSize = centerConfig.maxFontSize || 75;
+          var maxFontSize = centerConfig.maxFontSize || 50;
           var sidePadding = centerConfig.sidePadding || 20;
           var sidePaddingCalculated = (sidePadding / 100) * (chart.innerRadius * 2)
           // Start with a base font of 30px
-          ctx.font = "30px " + fontStyle;
+          ctx.font = "20px " + fontStyle;
 
           // Get the width of the string and also the width of the element minus 10 to give it 5px side padding
           var stringWidth = ctx.measureText(txt).width;
@@ -362,7 +400,7 @@ var config = {
       'Remaining', 'Donated'
     ],
     datasets: [{
-      data: [7000, 500],
+      data: [<?php echo $campaign_item->goal;?>, <?php echo $campaign_item->pledge;?>],
       backgroundColor: [
         "#2a2a2a",
         "#fed857"
@@ -374,10 +412,10 @@ var config = {
     }]
   },
   options: {
-  	cutoutPercentage: 90,
+  	cutoutPercentage: 70,
     elements: {
       center: {
-        text:$('#percentage').val()+'%',
+        text:$('#percentage').val(),
         color: '#666666', // Default is #000000
         fontStyle: 'Arial', // Default is Arial
         sidePadding: 20, // Default is 20 (as a percentage)

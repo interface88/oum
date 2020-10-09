@@ -24,7 +24,7 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display", serif;
+  /*font-family: "Playfair Display", serif;*/
 }
 
 /*--------------------------------------------------------------
@@ -166,8 +166,8 @@ h1, h2, h3, h4, h5, h6 {
 # Header
 --------------------------------------------------------------*/
 #header {
-  background: rgba(12, 11, 9, 0.6);
-  border-bottom: 1px solid rgba(12, 11, 9, 0.6);
+  background: rgba(12, 11, 9, 0.4);
+ /* border-bottom: 1px solid rgba(12, 11, 9, 0.6);*/
   transition: all 0.5s;
   z-index: 997;
   padding: 15px 0;
@@ -196,7 +196,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header .logo img {
-  max-height: 40px;
+ /*  max-height: 40px;*/
 }
 
 /*--------------------------------------------------------------
@@ -246,7 +246,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-menu .book-a-table a:hover {
   background: #fed857;
-  color: #fff;
+  color: #333;
 }
 
 .nav-menu .drop-down ul {
@@ -486,7 +486,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #hero:before {
   content: "";
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -970,7 +970,9 @@ section {
 }
 
 .menu .menu-content::after {
-  content: "......................................................................" "...................................................................." "....................................................................";
+  content: "......................................................................"
+ "...................................................................."
+ "....................................................................";
   position: absolute;
   left: 20px;
   right: 0;
@@ -1674,7 +1676,6 @@ section {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
-  font-family: "Playfair Display", serif;
   color: #fff;
 }
 

@@ -25,6 +25,7 @@
                       <th scope="col">category</th>
                       <th scope="col">launched</th>
                       <th scope="col">Exipre date</th>
+					  <th scope="col">Feature</th>	
                       <th scope="col">Status</th>
                       <th scope="col">Action</th>
                     </tr>
@@ -42,7 +43,18 @@
               			<td><?php echo $row->category;?></td>
               			<td><?php echo date("d-M-Y", strtotime($row->launched));?></td>
               			<td><?php echo date("d-M-Y", strtotime($row->deadline));?></td>
-              			<td><?php echo $statusArr[$row->status];?></td>
+              	 		<td>
+                              		<?php 
+                              		 if($row->feature==true)
+                              		 {
+                              		     echo '<i class="btn-feature active bx bxs-star" data-value="0" data-id="'.$row->campaign_id.'"></i>';
+                              		 }
+                              		 else{
+                              		  echo '<i class="btn-feature bx bxs-star" data-value="1" data-id="'.$row->campaign_id.'"></i>';                              		 
+                              		 }
+                              		 ?>
+                   		</td>
+                    	<td><?php echo $statusArr[$row->status];?></td>
                       	<td>
                          <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
 	                       <?php
@@ -50,7 +62,7 @@
 	                          {}                                 			
                      			else
                      			{
-                     			    echo anchor(base_url('campaign/edit/'.$row->campaign_id), '<i class="btn bx bx-edit-alt"></i>', 'class="btn btn-secondary btn-sm" title="Edit"');
+                     			  //  echo anchor(base_url('campaign/edit/'.$row->campaign_id), '<i class="btn bx bx-edit-alt"></i>', 'class="btn btn-secondary btn-sm" title="Edit"');
                      			}
                      			echo anchor(base_url('campaign/preview/'.$row->campaign_id), '<i class="btn bx bx-show"></i>', 'class="btn btn-secondary btn-sm" title="View"');
 	                         ?>

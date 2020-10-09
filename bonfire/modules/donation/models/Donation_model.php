@@ -83,5 +83,11 @@ class Donation_model extends BF_Model
         }
     }
     
+    public function get_by_campaign_count($campaign_id)
+    {
+        $this->db->select('donor_id');
+        $this->db->where('campaign_id', $campaign_id);
+        return $this->db->count_all_results($this->table_name);
+    }
 }
 //end User_model

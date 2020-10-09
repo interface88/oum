@@ -70,10 +70,11 @@ public function get_list($slug = NULL)
        $this->db->select("$this->table_name.*,$this->table_name2.category_name");
        $this->db->from($this->table_name);
        $this->db->join($this->table_name2,"$this->table_name2.category_id=$this->table_name.category_id");
+       $this->db->where($this->table_name.'.is_delete',0);
        $query = $this->db->get("");
        return $query->result();
     }
-    $query = $this->db->get_where($this->table_name, array('sub_category_id' => $slug));
+    $query = $this->db->get_where($this->table_name, array('sub_category_id' => $slug, 'is_delete'=>0,));
     return $query->row();
 }
 /*functoin used to edit/list category end*/

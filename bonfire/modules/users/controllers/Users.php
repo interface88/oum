@@ -643,10 +643,8 @@ class Users extends Front_Controller
         $this->auth->restrict();
         if ($this->session->role_id == 1) {
             
-            Template::set_view('users/resend_activation');
             Template::set('users_list', $this->user_model->find_all());
-            die();
-            Template::set_view('users/resend_activation');
+            Template::set_view('users/list_user');
             Template::render();
            
         } else {

@@ -43,7 +43,7 @@ class Home extends MX_Controller
         $this->load->library('events');
         $this->load->library('users/auth');
         $this->set_current_user();
-
+        $this->load->helper(array('text','percentage'));
         $this->load->library('installer_lib');
         if (! $this->installer_lib->is_installed()) {
             $ci = &get_instance();
@@ -87,26 +87,44 @@ class Home extends MX_Controller
  */
     public function campaign()
     {
+        $this->load->helper(array(
+            'oum_form',
+            'url','security',
+        ));
+        $this->load->library('form_validation');
+        
         $slug = $this->uri->segment(2);
         if ($slug == NULL) {
             $this->load->model('campaign/campaign_model');
+            $this->load->model('category/category_model');
+            $category_item=$this->category_model->get_list();
+            $category_list=array();
+            $category_list['']= '- select category -';
+            foreach($category_item as $row)
+            {
+                 $category_list[$row->category_name]=$row->category_name;
+            }
             Template::set('campaign_item', $this->campaign_model->get_front_campaign());
+            Template::set('category_list',$category_list);
+            
             Template::set_view('campaign/view_campaign');
             Template::render();
         } else {
-            $this->load->helper(array(
-                'oum_form',
-                'url'
-            ));
+            $this->load->helper(array('oum_form','url',));
             $this->load->library('form_validation');
             $this->load->model('campaign/campaign_model');
             $data_campaign = $this->campaign_model->get_by_slug($slug);
+            $this->load->model('donation/donation_model');
+            $donation_count=$this->donation_model->get_by_campaign_count($data_campaign->campaign_id);
+            $recent_campaign=$this->campaign_model->get_campaign_by_category($data_campaign->category);
             if ($data_campaign == null) {
                 show_404("/");
             }
+            
             /* hit function called */
-            $user_id = NULL;
-            if (! empty($this->auth->user()->id)) {
+            $user_id = 0;
+            if (! empty($this->auth->user()->id))
+            {
                 $user_id = $this->auth->user()->id;
             }
             $this->load->model('hits/hits_model');
@@ -118,6 +136,8 @@ class Home extends MX_Controller
             $this->hits_model->insert_hits($post_hits);
             /* hit function called end */
             Template::set('campaign_item', $data_campaign);
+            Template::set('donation_count', $donation_count);
+            Template::set('recent_campaign_item', $recent_campaign);
             Template::set_view('campaign/index');
             Template::render();
         }
@@ -129,8 +149,7 @@ class Home extends MX_Controller
     {
         $this->load->helper(array(
             'oum_form',
-            'url',
-            'security',
+            'url','security',
         ));
         $this->load->library('form_validation');
         $this->load->model('contact_us/contact_model');

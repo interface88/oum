@@ -105,6 +105,15 @@ public function company_insert($data)
     }
 
     /**
+     * company delete campaign_id and new insert
+     */
+    public function company_delete_insert($campaign_id,$data)
+    {
+        $this->db->delete($this->table_name, array('campaign_id' => $campaign_id));
+        return $this->db->insert($this->table_name,$data);
+    }
+    
+    /**
      *
      * @param Campaign Company Validation
      * @return team_validation_rules

@@ -79,4 +79,43 @@ $(document).on('click','.delete',function()
    }
  }
 );
+/*
+$(document).on('click', '.delete', function() {
+    bootbox.confirm({
+        title: "Delete campaign?",
+        message: "Do you want to delete sub-category? This cannot be undone.",
+        buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-danger'
+            }
+        },
+        callback: function(result) {
+            if (result) {
+                    $row = $(this).parent().parent().parent();
+                    var id = $(this).attr('data-id');
+                var url = "<?php echo base_url('subcategory/delete');?>";
+                $.get({
+                    url: url,
+                    data: {
+                        "id": id
+                    },
+                    success: function(data) {
+                        if (data == true) {
+                            $row.remove();
+                        } else {
+                            bootbox.alert('Unable to delete');
+                        }
+                    }
+                });
+            }
+        }
+    });
+});
+*/
+
 </script>

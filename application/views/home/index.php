@@ -282,7 +282,8 @@ display: inline-block;
 				<h2>Better world for Children!</h2>
 
 				<div class="btns">
-					<a href="<?php echo base_url('campaign');?>" class="btn-menu animated fadeInUp scrollto">camapign</a> <a href="<?php echo base_url('campaign');?>"
+					<a href="<?php echo base_url('campaign');?>" class="btn-menu animated fadeInUp scrollto">
+campaign</a> <a href="<?php echo base_url('campaign');?>"
 						class="btn-book animated fadeInUp scrollto">Donate</a>
 				</div>
 			</div>
@@ -347,24 +348,19 @@ display: inline-block;
         			<!-- .fundpress-item-header END -->
         			<div class="fundpress-item-content text-center">
         				<a href="<?php echo base_url('campaign/'.$row->slug.'')?>" class="d-block color-navy-blue fundpress-post-title"><?php echo $row->title;?></a>
-        				<p><?php echo $row->description;?></p>
+        				<p><?php echo character_limiter($row->description,100);?></p>
         				<span class="xs-separetor"></span>
         				<div class="give-card__progress">
         					<div class="give-goal-progress">
         						<div class="raised">
         							<div class="income">
-        								<span class="label">Current</span><span class="value"><?php echo $row->pledge;?></span>
+        								<span class="label">Current</span><span class="value"><i class="bx bx-rupee"></i><?php echo $row->pledge;?></span>
         							</div>
         							<div class="percentage">
-        							<?php 
-        							$subtract_value=$row->goal-$row->pledge;
-        							$add_value=$row->goal+$row->pledge/2;
-        							$percentage=$subtract_value/$add_value;
-        							echo round($percentage).'%';
-        							?>
+        							 <?php echo percentage_calculation($goal=$row->goal,$pledge=$row->pledge);?>
         							</div>
         							<div class="goal">
-        								<span class="label">Target</span> <span class="value"><?php echo $row->goal;?></span>
+        								<span class="label">Target</span> <span class="value"><i class="bx bx-rupee"></i><?php echo $row->goal;?></span>
         							</div>
         						</div>
         					</div>
@@ -394,26 +390,15 @@ display: inline-block;
 </section>	
 <!-- banner end-->
 <!-- feature slider -->
-<!-- Owl Stylesheets -->
+  <!-- Owl Stylesheets -->
     <link rel="stylesheet" href="<?php echo base_url();?>assets/owlcarousel/owl.carousel.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/owlcarousel/owl.theme.default.min.css">
   <!-- Yeah i know js should not be in header. Its required for demos.-->
   <!-- javascript -->
     <script src="<?php echo base_url();?>assets/owlcarousel/jquery.min.js"></script>
     <script src="<?php echo base_url();?>assets/owlcarousel/owl.carousel.js"></script> 
-<style>
-.w3_title{padding:10px; color:#333; font-weight:500;}
-.items .content{background-color:#fff; color:#333; padding:20px;}
-.raised{column-count: 3; text-align:center;}
-.raised .income{border-right:3px solid #fff000;}
-.raised .goal{border-right:3px solid #fff000;}
-.owl-nav {margin-top:-2px !important;position: absolute;right: 6%;}
-.owl-nav i{font-size: 32px; color:#000;}
-.owl-nav i:hover{font-size: 32px; color: #000; border-radius: 100%; background-color: #FED857;}
-.owl-nav [class*=owl-]{padding: 0px !important; background-color: transparent !important;}
-</style>
 <section class="container-fluid" style="padding: 40px;">
-  <div class="text-center"><h1 class="w3_title">Feature Campaigns</h1></div>
+  <div class="text-center"><h1 class="title_header">Feature Campaigns</h1></div>
   <div class="row">
     <div class="owl-carousel owl-theme camapignslider">
           <?php
@@ -428,16 +413,10 @@ display: inline-block;
                 	<div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 content">
                 	 <p><?php echo $row->description;?></p>
                 	   <div class="raised">
-                            <div class="income"><span class="label">Current</span><br/><span class="value"><?php echo $row->pledge;?></span></div>
-                            <div class="goal"><span class="label">Taget</span><br/><span class="value"><?php echo $row->goal;?></span></div>
+                            <div class="income"><span class="label">Current</span><br/><span class="value"><i class="bx bx-rupee"></i><?php echo $row->pledge;?></span></div>
+                            <div class="goal"><span class="label">Taget</span><br/><span class="value"><i class="bx bx-rupee"></i><?php echo $row->goal;?></span></div>
                             <div class="donors"><span class="label">Donors</span><br/><span class="value">	
-                            		<?php 
-        							$subtract_value=$row->goal-$row->pledge;
-        							$add_value=$row->goal+$row->pledge/2;
-        							$percentage=$subtract_value/$add_value;
-        							echo round($percentage).'%';
-        							?>
-        						</span>
+        							<?php echo percentage_calculation($goal=$row->goal,$pledge=$row->pledge);?>        						</span>
         					</div>
                        </div>
                 	</div>
@@ -447,65 +426,11 @@ display: inline-block;
             }
             ?>    
     </div>
-    <script>
-            $(document).ready(function() {
-              $('.camapignslider').owlCarousel({
-                loop: true,
-                margin: 10,
-                responsiveClass: true,
-                responsive: {
-                  0: {
-                    items: 1,
-                    nav: true,
-                    dots:false,
-                    loop:false,
-                    autoplay:true, 
-                    autoplayTimeout:3500                          
-                  },
-                  600: {
-                    items: 1,
-                    nav: true,
-                    dots:false,
-                    animateIn:true,
-                    loop:false,
-                    autoplay:true, 
-                    navText: ['<div aria-label="' + 'Previous' + '"><i class="bx bx-fade-left-hover bxs-left-arrow-circle bx-md"></i></div>',
-                              '<div aria-label="' + 'Next' + '"><i class="bx bx-fade-right-hover bxs-right-arrow-circle bx-md"></i></div>'],
-                    navElement: 'div role="presentation"',
-                    autoplayTimeout:3500      
-
-                    
-                  },
-                  1000: {
-                    items: 1,
-                    nav: true,
-                    dots:false,
-                    navText: ['<div aria-label="' + 'Previous' + '"><i class="bx bx-fade-left-hover bxs-left-arrow-circle bx-md"></i></div>',
-                              '<div aria-label="' + 'Next' + '"><i class="bx bx-fade-right-hover bxs-right-arrow-circle bx-md"></i></div>'],
-                    navElement: 'div role="presentation"',
-                    animateIn:true,
-                    loop:false,
-                    margin: 20
-                  }
-                }
-              });
-            });
- </script>  
   </div>  
 </section>           
 <!-- feature slider end-->
 <!-- category banner -->
-<style>
-#category_banner{background-color:#333; color:#fff;}
-#category_banner i{color:#fff; width:100px; height:100px; border-radius: 100px; padding: 22px; font-size: 58px;}
-#category_banner i:nth-child(1){background: #2b7152;}
-#category_banner i:nth-child(2){background: #2b7152;}
-#category_banner i:nth-child(3){background: #2b7152;}
-#category_banner i:nth-child(4){background: #2b7152;}
-#category_banner i:nth-child(5){background: #2b7152;}
-#category_banner i:nth-child(6){background: #2b7152;}
-</style>
-<section id="category_banner">
+<section id="category_banner" data-aos="zoom-in">
     <div class="container">
 		<div class="row">
 			<div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
@@ -551,7 +476,7 @@ display: inline-block;
 <!-- last camaping -->
 <div class="container">
    	<div class="row">
-   		<div class="col-sm-12"><h1 class="text-center w3_title">Last Campaigns</h1></div>
+   		<div class="col-sm-12"><h1 class="text-center title_header">Last Campaigns</h1></div>
     </div>
     <div class="row">
         <?php
@@ -566,24 +491,19 @@ display: inline-block;
         			<!-- .fundpress-item-header END -->
         			<div class="fundpress-item-content text-center">
         				<a href="<?php echo base_url('campaign/'.$row->slug.'')?>" class="d-block color-navy-blue fundpress-post-title"><?php echo $row->title;?></a>
-        				<p><?php echo $row->description;?></p>
+        				<p><?php echo character_limiter($row->description, 100);?></p>
         				<span class="xs-separetor"></span>
         				<div class="give-card__progress">
         					<div class="give-goal-progress">
         						<div class="raised">
         							<div class="income">
-        								<span class="label">Current</span><span class="value"><?php echo $row->pledge;?></span>
+        								<span class="label">Current</span><span class="value"><i class="bx bx-rupee"></i><?php echo $row->pledge;?></span>
         							</div>
         							<div class="percentage">
-        							<?php 
-        							$subtract_value=$row->goal-$row->pledge;
-        							$add_value=$row->goal+$row->pledge/2;
-        							$percentage=$subtract_value/$add_value;
-        							echo round($percentage).'%';
-        							?>
+        							<?php echo percentage_calculation($goal=$row->goal,$pledge=$row->pledge);?>
         							</div>
         							<div class="goal">
-        								<span class="label">Target</span> <span class="value"><?php echo $row->goal;?></span>
+        								<span class="label">Target</span><span class="value"><i class="bx bx-rupee"></i><?php echo $row->goal;?></span>
         							</div>
         						</div>
         					</div>
@@ -604,7 +524,7 @@ display: inline-block;
 		<div class="col-lg-12">
 			<div id="banner4" class="opal-shape-arrow">
 				<div class="elementor-background-overlay"></div>
-				<h1>Unity Makes Strength</h1>
+				<h1  data-aos="zoom-in">Unity Makes Strength</h1>
 				<p>Our partners are from all over the world</p>
 			</div>
 		</div>
@@ -659,3 +579,49 @@ display: inline-block;
 	</div>
 </div>
 <!-- brand end-->
+
+
+    <script>
+            $(document).ready(function() {
+              $('.camapignslider').owlCarousel({
+                loop: true,
+                margin: 10,
+                responsiveClass: true,
+                responsive: {
+                  0: {
+                    items: 1,
+                    nav: true,
+                    dots:false,
+                    loop:false,
+                    autoplay:true, 
+                    autoplayTimeout:3500                          
+                  },
+                  600: {
+                    items: 1,
+                    nav: true,
+                    dots:false,
+                    animateIn:true,
+                    loop:false,
+                    autoplay:true, 
+                    navText: ['<div aria-label="' + 'Previous' + '"><i class="bx bx-fade-left-hover bxs-left-arrow-circle bx-md"></i></div>',
+                              '<div aria-label="' + 'Next' + '"><i class="bx bx-fade-right-hover bxs-right-arrow-circle bx-md"></i></div>'],
+                    navElement: 'div role="presentation"',
+                    autoplayTimeout:3500      
+
+                    
+                  },
+                  1000: {
+                    items: 1,
+                    nav: true,
+                    dots:false,
+                    navText: ['<div aria-label="' + 'Previous' + '"><i class="bx bx-fade-left-hover bxs-left-arrow-circle bx-md"></i></div>',
+                              '<div aria-label="' + 'Next' + '"><i class="bx bx-fade-right-hover bxs-right-arrow-circle bx-md"></i></div>'],
+                    navElement: 'div role="presentation"',
+                    animateIn:true,
+                    loop:false,
+                    margin: 20
+                  }
+                }
+              });
+            });
+ </script>  

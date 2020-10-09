@@ -7,8 +7,7 @@ body {
  background-repeat: repeat;
  background-attachment: scroll;
 }
-
-    .fundpress-icon-with-square-service-v2 {
+  .fundpress-icon-with-square-service-v2 {
   text-align: center;
   margin-bottom: 50px; }
   .fundpress-icon-with-square-service-v2 i {
@@ -194,7 +193,6 @@ body {
 
 }
 
-
 /* ----- brand image section -----*/
 .elementor-brand-item {
     text-align: center;
@@ -224,8 +222,13 @@ body {
     background: #FFF;
     padding: 10px;
 }
+ #hero2{
+  background: url("<?php echo base_url('themes/unity/img/bg-breadcrum.jpg')?>") top center;
+  height:500px;
+  }
 </style>
-<section id="hero" class="d-flex align-items-center">
+
+<section id="hero2" class="d-flex align-items-center">
 	<div class="container position-relative text-center text-lg-left"
 		data-aos="zoom-in" data-aos-delay="100">
 		<div class="row">
@@ -236,37 +239,40 @@ body {
 				<h2>Better world for Children!</h2>
 
 				<div class="btns">
-					<a href="#menu" class="btn-menu animated fadeInUp scrollto">camapign</a> <a href="#book-a-table"
+					<a href="#menu" class="btn-menu animated fadeInUp scrollto">campaign</a> <a href="#book-a-table"
 						class="btn-book animated fadeInUp scrollto">Donate</a>
 				</div>
 			</div>
-			<div
-				class="col-lg-4 d-flex align-items-center justify-content-center"
-				data-aos="zoom-in" data-aos-delay="200">
-				<a href="https://www.youtube.com/watch?v=GlrxcuEDyF8"
-					class="venobox play-btn" data-vbtype="video" data-autoplay="true"></a>
-			</div>
+			
 		</div>
 	</div>
 </section>
 
 
-<div class="container campaign-list-container" data-offset="6">
-<div class="row campaign-search-panel" >
+<div class="container">
+	<div class="row campaign-search-panel" >
     	<div class="col-lg-9">
     	</div>
     	<div class="col-lg-3">
-    		<select id="category" class="form-control">
-    			<option value="">- All Category -</option>
-    		</select>
+    		<?php 
+    			echo form_dropdown('category',$category_list,'','class="form-control" id="category"');
+    		?>
     	</div>
 	</div>
-<div class="row">
+<div class="campaign-list-container" data-offset="6">
 <?php
+$cnt = 0;
 foreach($campaign_item as $row)
 {
+    if($cnt == 0){
+        echo '<div class="row">';
+    }
+    if($cnt != 0 && fmod($cnt , 3) == 0){
+       echo '</div>';
+       echo '<div class="row">';
+    }
 ?>	
-	<div class="col-lg-4 give-wrap">
+	<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 give-wrap">
 		<div class="fundpress-grid-item-content-v2 give-card">
 			<div class="fundpress-item-header">
 				<img src="<?php echo base_url('assets/campaign/'.$row->image.'')?>"
@@ -276,24 +282,19 @@ foreach($campaign_item as $row)
 
 			<div class="fundpress-item-content text-center">
 				<a href="<?php echo base_url('campaign/'.$row->slug.'')?>" class="d-block color-navy-blue fundpress-post-title"><?php echo $row->title;?></a>
-				<p><?php echo $row->description;?></p>
+				<p><?php echo character_limiter($row->description,100);?></p>
 				<span class="xs-separetor"></span>
 				<div class="give-card__progress">
 					<div class="give-goal-progress">
 						<div class="raised">
 							<div class="income">
-								<span class="label">Current</span><span class="value"><?php echo $row->pledge;?></span>
+								<span class="label">Current</span><span class="value"><i class="bx bx-rupee"></i><?php echo $row->pledge;?></span>
 							</div>
 							<div class="percentage">	
-									<?php 
-        							$subtract_value=$row->goal-$row->pledge;
-        							$add_value=$row->goal+$row->pledge/2;
-        							$percentage=$subtract_value/$add_value;
-        							echo round($percentage).'%';
-        							?>
+							   <?php echo percentage_calculation($goal=$row->goal,$pledge=$row->pledge);?>
         					</div>
 							<div class="goal">
-								<span class="label">Target</span> <span class="value"><?php echo $row->goal;?></span>
+								<span class="label">Target</span> <span class="value"><i class="bx bx-rupee"></i><?php echo $row->goal;?></span>
 							</div>
 						</div>
 					</div>
@@ -303,14 +304,16 @@ foreach($campaign_item as $row)
 		</div>
 	</div>
 <?php
+$cnt++;
 }
 ?>
+</div>
 </div>
 </div>
 <div class="container">
     <div class="row">
     	<div class="col-lg-12 text-center">
-            <button class="btn btn-primary" id="loadmore" type="button">
+            <button class="btn btn-primary btn-theme" id="loadmore" type="button">
               	<span class="spinner-border spinner-border-sm" style="display:none;" role="status" aria-hidden="true"></span>
               	Load more
              </button>
@@ -318,15 +321,21 @@ foreach($campaign_item as $row)
     </div>
 </div>
 <script type="text/javascript">
-	function loadmore(){
+	function loadmore(reload){
 		var offset = $('.campaign-list-container').data('offset');
 		var category = $('#category').val();
 		var $btn = $('#loadmore');
 		$btn.find('span').show();
 		$.get('<?php echo base_url('campaign/loadmore')?>',{ 'offset' : offset , 'limit' : 6, 'category' : category },function(response){
-    		$('.campaign-list-container').append(response);
+			if(reload){
+        		$('.campaign-list-container').html(response);
+        		$('.campaign-list-container').data('offset', 0);
+			
+			}else{
+        		$('.campaign-list-container').append(response);
+        		$('.campaign-list-container').data('offset', offset + 6);
+			}
     		$btn.find('span').hide();
-    		$('.campaign-list-container').data('offset', offset + 6);
 		});
 	}
 	$('#loadmore').click(function(){
@@ -334,6 +343,6 @@ foreach($campaign_item as $row)
 	});
 	
 	$('#category').on('change', function(){
-		loadmore();
+		loadmore(true);
 	});
 </script>

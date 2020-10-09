@@ -1,3 +1,16 @@
+#header{
+	/*background:transparent;*/
+	border-bottom:1px solid rgba(255,255,255,.2);
+}
+#header .logo img {
+    max-height: 76px;
+    }
+.mobile-nav .dropdown-item{color:#333;}  
+.breadcrumbs{
+	margin-top:145px !important;
+}
+#dropdownMenuButton{color:#fed857;}
+#dropdownMenuButton:hover{color:#d9ba85;}
 #hero h1, #hero h2 {
 	font-family: 'Edo SZ';
 	font-weight: normal;
@@ -52,4 +65,51 @@
 }
 .btn-feature.active{
     color: yellow;
+}
+.btn-theme{
+	border: 2px solid #fed857;
+    color: #fff;
+    border-radius: 50px;
+    padding: 8px 25px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+.btn-theme:hover{
+	    background: #fed857;
+    color: #333;
+}
+/*banner category*/
+#category_banner{background-color:#333; color:#fff;}
+#category_banner i{color:#fff; width:100px; height:100px; border-radius: 100px; padding: 22px; font-size: 58px; transition: 0.5s;}
+#category_banner .bx-pulse{background: #1abc9c; transition: 0.3s;}
+#category_banner .bx-pulse:hover{color:#1abc9c; background:#fff;}
+#category_banner .bx-line-chart{background: #2ecc71; transition: 0.3s;}
+#category_banner .bx-line-chart:hover{color:#2ecc71; background:#fff;}
+#category_banner .bx-group{background: #3498db; transition: 0.3s;}
+#category_banner .bx-group:hover{color:#3498db; background:#fff;}
+#category_banner .bx-face{background: #9b59b6;   transition: 0.3s;}
+#category_banner .bx-face:hover{color:#9b59b6; background:#fff;}
+#category_banner .bxs-graduation{background: #e67e22; transition: 0.3s;}
+#category_banner .bxs-graduation:hover{color:#e67e22; background:#fff; transition: 0.3s;}
+#category_banner .bxl-baidu{background: #34495e; transition: 0.3s;}
+#category_banner .bxl-baidu:hover{color:#e67e22; background:#fff;}
+
+/*feature slider*/
+.title_header{padding:10px; color:#333; font-weight:500;}
+.items .content{background-color:#fff; color:#333; padding:20px;}
+.raised{column-count: 3; text-align:center;}
+.raised .income{border-right:3px solid #fff000;}
+.raised .goal{border-right:3px solid #fff000;}
+.owl-nav {margin-top:-2px !important;position: absolute;right: 6%;}
+.owl-nav i{font-size: 32px; color:#000;}
+.owl-nav i:hover{font-size: 32px; color: #000; border-radius: 100%; background-color: #FED857;}
+.owl-nav [class*=owl-]{padding: 0px !important; background-color: transparent !important;}
+
+.table-responsive img{width:100px;}
+
+.fundpress-grid-item-content-v2 .fundpress-post-title {
+	font-size:21px !important;
 }

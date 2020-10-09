@@ -50,9 +50,17 @@ class Director_model extends BF_Model
     }
     /*this function used to insert data end*/
     /**
+     * dirctor delete campaign_id and new insert
+     */
+    public function director_delete_insert($campaign_id,$data)
+    {
+        $this->db->delete($this->table_name, array('campaign_id' => $campaign_id)); 
+        return $this->db->insert_batch($this->table_name,$data);
+    }
+    /**
      *
-     * @param Company
-     * @return Company
+     * @param Company dircetor
+     * @return dircetor
      */
     
     public function get_director_by_field($field = NULL , $value = NULL)
@@ -74,6 +82,7 @@ class Director_model extends BF_Model
         return $this->get_director_by_field('campaign_id', $campaign_id);
     }
     
+
     /**
      *
      * @param Campaign User Validation
